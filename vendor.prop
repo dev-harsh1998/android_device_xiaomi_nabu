@@ -287,6 +287,7 @@ ro.opengles.version=196610
 vendor.gralloc.disable_ubwc=0
 
 # Media
+debug.stagefright.c2inputsurface=-1
 vendor.media.omx=0
 
 # OTG
