@@ -145,6 +145,9 @@ dalvik.vm.heapsize=512m
 dalvik.vm.heapstartsize=8m
 dalvik.vm.heaptargetutilization=0.75
 
+# Dex2oat
+dalvik.vm.dex2oat64.enabled=true
+
 # Display
 ro.surface_flinger.protected_contents=true
 ro.surface_flinger.use_color_management=true
