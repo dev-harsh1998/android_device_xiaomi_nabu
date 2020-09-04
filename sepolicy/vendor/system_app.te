@@ -6,3 +6,6 @@ allow system_app vendor_sysfs_battery_supply:file { getattr };
 r_dir_file(system_app, vendor_sysfs_battery_supply)
 # Zygote
 allow system_app zygote:unix_stream_socket { getopt };
+
+# Allow proc page type info
+allow system_app proc_pagetypeinfo:file r_file_perms;
