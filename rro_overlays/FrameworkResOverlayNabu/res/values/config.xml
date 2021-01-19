@@ -327,7 +327,7 @@
         <item>/system/framework/framework.jar</item>
         <item>/system/framework/oat/arm64/services.odex</item>
         <item>/system/framework/services.jar</item>
-        <item>/system/lib64/libsurfaceflinger.so</item>
+        <item>"/system/bin/surfaceflinger"</item>
     </string-array>
 
     <!-- If this is true, long press on power button will be available from the non-interactive state -->
