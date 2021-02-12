@@ -101,4 +101,8 @@
     <string name="refresh_medium">60Hz</string>
     <string name="refresh_high">90Hz</string>
     <string name="refresh_extreme">120Hz</string>
+
+    <!-- Refresh Rate tile -->
+    <string name="refresh_rate_tile_title">Refresh Rate</string>
+
 </resources>
