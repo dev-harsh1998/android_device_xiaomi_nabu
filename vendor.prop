@@ -146,6 +146,7 @@ dalvik.vm.heapstartsize=8m
 dalvik.vm.heaptargetutilization=0.75
 
 # Display
+ro.surface_flinger.protected_contents=true
 ro.surface_flinger.use_color_management=true
 ro.vendor.display.ad=1
 ro.vendor.display.ad.sdr_calib_data=/vendor/etc/sdr_config.cfg
