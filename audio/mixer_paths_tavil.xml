@@ -3212,7 +3212,7 @@
         <ctl name="ADC4 Volume" value="8" />
         <ctl name="RX INT1_1 MIX1 INP0" value="RX2" />
         <ctl name="RX INT2_1 MIX1 INP0" value="RX3" />
-        <ctl name="RX1 Digital Volume" value="81" />
+        <ctl name="RX1 Digital Volume" value="100" />
         <ctl name="RX2 Digital Volume" value="81" />
         <ctl name="ANC OUT HPHL Enable Switch" value="1" />
         <ctl name="ANC OUT HPHR Enable Switch" value="1" />
