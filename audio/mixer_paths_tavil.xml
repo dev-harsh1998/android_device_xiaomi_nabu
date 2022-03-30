@@ -2427,7 +2427,7 @@
         <ctl name="BL Channel Swap" value="Off" />
     </path>
 
-    <path name="hfp-sco-wb">
+   <path name="hfp-sco-wb">
         <path name="hfp-sco" />
     </path>
 
