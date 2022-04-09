@@ -45,7 +45,7 @@ public final class RefreshUtils {
     protected static final int STATE_HIGH = 4;
     protected static final int STATE_EXTREME = 5;
 
-    private static final float REFRESH_STATE_DEFAULT = Constants.DEFAULT_REFRESH_RATE;
+    private static final float REFRESH_STATE_DEFAULT = 120f;
     private static final float REFRESH_STATE_LOW = 30f;
     private static final float REFRESH_STATE_MODERATE = 50f;
     private static final float REFRESH_STATE_MEDIUM = 60f;
@@ -75,8 +75,8 @@ public final class RefreshUtils {
     }
 
    protected void getOldRate(){
-        defaultMaxRate = Settings.System.getFloat(mContext.getContentResolver(), KEY_PEAK_REFRESH_RATE, Constants.DEFAULT_REFRESH_RATE);
-        defaultMinRate = Settings.System.getFloat(mContext.getContentResolver(), KEY_MIN_REFRESH_RATE, Constants.DEFAULT_REFRESH_RATE);
+        defaultMaxRate = Settings.System.getFloat(mContext.getContentResolver(), KEY_PEAK_REFRESH_RATE, REFRESH_STATE_DEFAULT);
+        defaultMinRate = Settings.System.getFloat(mContext.getContentResolver(), KEY_MIN_REFRESH_RATE, REFRESH_STATE_DEFAULT);
     }
 
 
