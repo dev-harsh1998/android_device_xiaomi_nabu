@@ -92,17 +92,17 @@
     <string name="dirac_preset_metal">Metal</string>
     <string name="dirac_preset_bass_booster">Bass Booster</string>
 
+    <!-- Refresh Rate tile -->
+    <string name="refresh_rate_tile_title">Refresh Rate</string>
+
     <!-- Per app maximum refresh rate -->
     <string name="refresh_title">Refresh Rate Profiles</string>
     <string name="refresh_summary">Set a specific refresh rate for each applications</string>
     <string name="refresh_default">Default</string>
-    <string name="refresh_low">30Hz</string>
-    <string name="refresh_moderate">50Hz</string>
-    <string name="refresh_medium">60Hz</string>
-    <string name="refresh_high">90Hz</string>
-    <string name="refresh_extreme">120Hz</string>
-
-    <!-- Refresh Rate tile -->
-    <string name="refresh_rate_tile_title">Refresh Rate</string>
+    <string name="refresh_low">Low (30Hz)</string>
+    <string name="refresh_moderate">Moderate (50Hz)</string>
+    <string name="refresh_standard">Standard (60Hz)</string>
+    <string name="refresh_high">High (90Hz)</string>
+    <string name="refresh_extreme">Smooth (120Hz)</string>
 
 </resources>
