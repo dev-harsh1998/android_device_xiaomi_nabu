@@ -73,10 +73,6 @@ case "$target" in
 	echo 1612800 > /sys/devices/system/cpu/cpufreq/policy7/schedutil/hispeed_freq
 	echo 1 > /sys/devices/system/cpu/cpufreq/policy7/schedutil/pl
 
-	# configure input boost settings
-	echo "0:1382400" > /sys/module/cpu_boost/parameters/input_boost_freq
-	echo 120 > /sys/module/cpu_boost/parameters/input_boost_ms
-
         # setup runtime schedTune
         echo 1 > /dev/stune/foreground/schedtune.prefer_idle
         echo 0 > /dev/stune/foreground/schedtune.boost
