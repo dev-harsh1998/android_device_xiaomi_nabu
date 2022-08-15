@@ -40,6 +40,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         DozeUtils.checkDozeService(context);
         PeripheralUtils.BootResetState(context);
         ThermalUtils.startService(context);
-        RefreshUtils.startService(context);
+        RefreshUtils.initialize(context);
     }
 }
