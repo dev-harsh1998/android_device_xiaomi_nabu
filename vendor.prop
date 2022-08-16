@@ -220,8 +220,8 @@ vendor.gatekeeper.disable_spu=true
 persist.backup.ntpServer=0.pool.ntp.org
 
 # Graphics
-debug.egl.hw=0
-debug.mdpcomp.logs=0
+debug.sf.disable_client_composition_cache=1
+debug.sdm.support_writeback=0
 debug.sf.enable_advanced_sf_phase_offset=1
 debug.sf.disable_backpressure=1
 debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
