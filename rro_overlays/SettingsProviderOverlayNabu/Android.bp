@@ -1,0 +1,6 @@
+runtime_resource_overlay {
+    name: "SettingsProviderOverlayNabu",
+    sdk_version: "current",
+    resource_dirs: ["res"],
+    product_specific: true
+}

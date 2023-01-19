@@ -126,7 +126,7 @@ vendor.qcom.bluetooth.soc=cherokee
 vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera
 
 # Chipset
-ro.soc.manufacturer=Qualcomm
+ro.soc.manufacturer=QTI
 ro.soc.model=SM8150
 
 # Crypto
@@ -164,11 +164,17 @@ vendor.display.enable_optimize_refresh=1
 vendor.display.qdcm.disable_factory_mode=1
 vendor.display.qdcm.mode_combine=1
 
+# Display
+ro.surface_flinger.has_HDR_display=false
+ro.surface_flinger.has_wide_color_display=false
+ro.surface_flinger.use_content_detection_for_refresh_rate=true
+ro.surface_flinger.set_display_power_timer_ms=1000
+ro.surface_flinger.set_idle_timer_ms=80
+ro.surface_flinger.set_touch_timer_ms=200
+ro.surface_flinger.wcg_composition_dataspace=143261696
+
 # DRM
 drm.service.enabled=true
-
-# Fingerprint
-persist.vendor.qfp=false
 
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
@@ -253,6 +259,9 @@ sys.vendor.shutdown.waittime=500
 # USB
 vendor.usb.diag.func.name=diag
 vendor.usb.use_ffs_mtp=0
+
+#QCA1530 detection
+sys.qca1530=detect
 
 # WFD
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true

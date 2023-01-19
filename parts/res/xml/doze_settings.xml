@@ -44,24 +44,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="proximity_sensor"
-        android:title="@string/proximity_sensor_title">
-
-        <SwitchPreference
-            android:key="gesture_hand_wave"
-            android:defaultValue="false"
-            android:icon="@drawable/ic_hand"
-            android:title="@string/hand_wave_gesture_title"
-            android:summary="@string/hand_wave_gesture_summary" />
-
-        <SwitchPreference
-            android:key="gesture_pocket"
-            android:defaultValue="false"
-            android:icon="@drawable/ic_pocket"
-            android:title="@string/pocket_gesture_title"
-            android:summary="@string/pocket_gesture_summary" />
-
-    </PreferenceCategory>
-
 </PreferenceScreen>

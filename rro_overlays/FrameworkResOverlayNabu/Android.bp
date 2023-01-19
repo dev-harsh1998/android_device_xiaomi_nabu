@@ -1,0 +1,7 @@
+runtime_resource_overlay {
+    name: "FrameworkResOverlayNabu",
+    theme: "FrameworkResOverlayNabu",
+    certificate: "platform",
+    sdk_version: "current",
+    product_specific: true
+}

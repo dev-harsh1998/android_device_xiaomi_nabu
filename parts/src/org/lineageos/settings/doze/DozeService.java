@@ -26,13 +26,11 @@ import android.os.IBinder;
 import android.util.Log;
 
 import org.lineageos.settings.sensors.PickupSensor;
-import org.lineageos.settings.sensors.ProximitySensor;
 
 public class DozeService extends Service {
     private static final String TAG = "DozeService";
     private static final boolean DEBUG = false;
 
-    private ProximitySensor mProximitySensor;
     private PickupSensor mPickupSensor;
     private BroadcastReceiver mScreenStateReceiver = new BroadcastReceiver() {
         @Override
@@ -48,7 +46,6 @@ public class DozeService extends Service {
     @Override
     public void onCreate() {
         if (DEBUG) Log.d(TAG, "Creating service");
-        mProximitySensor = new ProximitySensor(this);
         mPickupSensor = new PickupSensor(this);
 
         IntentFilter screenStateFilter = new IntentFilter();
@@ -68,7 +65,6 @@ public class DozeService extends Service {
         if (DEBUG) Log.d(TAG, "Destroying service");
         super.onDestroy();
         this.unregisterReceiver(mScreenStateReceiver);
-        mProximitySensor.disable();
         mPickupSensor.disable();
     }
 
@@ -84,7 +80,6 @@ public class DozeService extends Service {
         }
         if (DozeUtils.isHandwaveGestureEnabled(this) ||
                 DozeUtils.isPocketGestureEnabled(this)) {
-            mProximitySensor.disable();
         }
     }
 
@@ -95,7 +90,6 @@ public class DozeService extends Service {
         }
         if (DozeUtils.isHandwaveGestureEnabled(this) ||
                 DozeUtils.isPocketGestureEnabled(this)) {
-            mProximitySensor.enable();
         }
     }
 }

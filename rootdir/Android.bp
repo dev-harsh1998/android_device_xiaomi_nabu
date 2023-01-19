@@ -53,38 +53,6 @@ sh_binary {
     vendor: true,
 }
 
-// fstab
-soong_config_module_type {
-    name: "xiaomi_msmnile_rootdir_prebuilt_etc",
-    module_type: "prebuilt_etc",
-    config_namespace: "XIAOMI_MSMNILE_ROOTDIR",
-    variables: ["PARTITION_SCHEME"],
-    properties: ["src"],
-}
-
-soong_config_string_variable {
-    name: "PARTITION_SCHEME",
-    values: ["dynamic", "legacy"],
-}
-
-xiaomi_msmnile_rootdir_prebuilt_etc {
-    name: "fstab.qcom",
-    soong_config_variables: {
-        PARTITION_SCHEME: {
-            dynamic: {
-                src: "etc/fstab_dynamic.qcom",
-            },
-            legacy: {
-                src: "etc/fstab_legacy.qcom",
-            },
-            conditions_default: {
-                src: "etc/fstab_dynamic.qcom",
-            },
-        },
-    },
-    vendor: true,
-}
-
 // Init configuration files
 prebuilt_etc {
     name: "init.qcom.power.rc",
