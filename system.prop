@@ -36,6 +36,7 @@ vendor.iop.enable_uxe=0
 # LMKD
 ro.config.low_ram=false
 ro.lmk.log_stats=true
+ro.lmk.use_minfree_levels=true
 
 # Media
 media.settings.xml=/vendor/etc/media_profiles_vendor.xml
