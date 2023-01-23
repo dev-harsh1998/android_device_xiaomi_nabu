@@ -5,21 +5,12 @@
 //
 
 cc_library_static {
-    name: "libinit_nabu",
-    srcs: [
-        "libinit_dalvik_heap.cpp",
-        "libinit_variant.cpp",
-        "libinit_utils.cpp",
-    ],
-    whole_static_libs: ["libbase"],
-    export_include_dirs: ["include"],
-    recovery_available: true,
-}
-
-cc_library_static {
     name: "init_nabu",
-    srcs: ["init_xiaomi_msmnile.cpp"],
-    whole_static_libs: ["libinit_nabu"],
-    include_dirs: ["system/core/init"],
     recovery_available: true,
+    srcs: ["init_nabu.cpp"],
+    shared_libs: ["libbase"],
+    include_dirs: [
+        "system/core/init",
+        "system/libbase/include"
+    ]
 }
