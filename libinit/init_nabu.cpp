@@ -49,6 +49,7 @@ void set_device_properties(const std::string model, const std::string name,
     set_ro_build_prop(props, "marketname", marketname);
   }
   property_override("bluetooth.device.default_name", model.c_str());
+  property_override("vendor.usb.product_string", model.c_str());
 }
 
 void witch_nabu() {
