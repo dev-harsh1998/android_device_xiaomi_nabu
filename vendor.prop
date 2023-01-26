@@ -227,6 +227,7 @@ ro.opengles.version=196610
 debug.sf.enable_egl_image_tracker=1
 vendor.display.use_smooth_motion=1
 vendor.gralloc.disable_ubwc=0
+debug.sf.predict_hwc_composition_strategy=0
 
 # Media
 debug.stagefright.ccodec=1
