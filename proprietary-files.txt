@@ -769,6 +769,16 @@ vendor/lib/libqcodec2.so
 vendor/lib64/libmmosal.so
 vendor/lib64/libqcodec2.so
 
+# Media (sf-HW)
+vendor/lib/libarbitrarybytes.so
+vendor/lib64/libarbitrarybytes.so
+vendor/lib/libOmxSwVdec.so
+vendor/lib64/libOmxSwVdec.so
+vendor/lib/libOmxSwVencMpeg4.so
+vendor/lib64/libOmxSwVencMpeg4.so
+vendor/lib/libstagefrighthw.so
+vendor/lib64/libstagefrighthw.so
+
 # Media configs
 odm/etc/media_profiles_V1_0.xml
 vendor/etc/media_codecs.xml
