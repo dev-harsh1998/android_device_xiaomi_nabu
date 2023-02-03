@@ -25,6 +25,9 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
 
     <protected-broadcast android:name="com.android.systemui.doze.pulse" />
 
@@ -48,6 +51,8 @@
         <service android:name=".doze.DozeService"
                  android:permission="XiaomiDozeService">
         </service>
+
+        <service android:enabled="true" android:name=".touch.Tap2wake" android:permission="XiaomiDozeService" />
 
         <activity
             android:name=".doze.DozeSettingsActivity"

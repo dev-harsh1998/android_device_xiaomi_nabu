@@ -21,8 +21,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.os.UserHandle;
 
 import org.lineageos.settings.doze.DozeUtils;
+import org.lineageos.settings.touch.Tap2wake;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
 
@@ -33,5 +35,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         if (DEBUG) Log.d(TAG, "Received boot completed intent");
         DozeUtils.checkDozeService(context);
+        Intent mIntent = new Intent(context, Tap2wake.class);
+        context.startServiceAsUser(mIntent, UserHandle.CURRENT);
     }
 }

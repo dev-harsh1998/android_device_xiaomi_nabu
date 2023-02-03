@@ -16,9 +16,21 @@ android_app {
 
     static_libs: [
         "org.lineageos.settings.resources",
+        "vendor.xiaomi.hardware.touchfeature-V1.0-java",
     ],
 
     optimize: {
         proguard_flags_files: ["proguard.flags"],
     },
+
+    required: [
+        "privapp-permissions_org.lineageos.settings"
+    ]
+}
+
+prebuilt_etc {
+    name: "privapp-permissions_org.lineageos.settings",
+    sub_dir: "permissions",
+    src: "privapp-permissions_org.lineageos.settings.xml",
+    filename_from_src: true,
 }
