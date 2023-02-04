@@ -1,0 +1,13 @@
+type hal_touchfeature_default, domain;
+hal_server_domain(hal_touchfeature_default, hal_touchfeature)
+
+type hal_touchfeature_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_touchfeature_default)
+
+hal_attribute_hwservice(hal_touchfeature, hal_touchfeature_hwservice)
+
+binder_call(hal_touchfeature_client, hal_touchfeature_server)
+binder_call(devicesettings_app, hal_touchfeature)
+binder_call(hal_touchfeature, devicesettings_app)
+
+allow hal_touchfeature_default touchfeature_device:chr_file rw_file_perms;

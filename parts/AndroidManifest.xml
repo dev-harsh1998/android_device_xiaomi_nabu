@@ -58,5 +58,31 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".stylus.StylusSettingsActivity"
+            android:label="@string/stylus_title"
+            android:theme="@style/Theme.SubSettingsBase">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.connect" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/stylus_summary" />
+        </activity>
+
+        <activity
+            android:name=".keyboard.XiaomiKeyboardSettingsActivity"
+            android:label="@string/keyboard_title"
+            android:theme="@style/Theme.SubSettingsBase">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.connect" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/keyboard_summary" />
+        </activity>
+
     </application>
 </manifest>

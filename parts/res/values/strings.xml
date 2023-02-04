@@ -14,4 +14,16 @@
 <resources>
     <!-- Ambient settings -->
     <string name="ambient_enable">Use Ambient display</string>
+
+    <!-- Xiaomi Stylus -->
+    <string name="stylus_title">Xiaomi Stylus</string>
+    <string name="stylus_summary">Xiaomi Stylus Settings</string>
+    <string name="stylus_switch_title">Enable Xiaomi Stylus</string>
+    <string name="stylus_switch_summary">Enable this settings to use Xiaomi stylus</string>
+
+    <!-- Xiaomi Keyboard -->
+    <string name="keyboard_title">Xiaomi Keyboard</string>
+    <string name="keyboard_summary">Xiaomi Keyboard Settings</string>
+    <string name="keyboard_switch_title">Enable Xiaomi Keyboard</string>
+    <string name="keyboard_switch_summary">Enable this settings to use Xiaomi Keyboard</string>
 </resources>
