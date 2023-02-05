@@ -84,5 +84,17 @@
                        android:resource="@string/keyboard_summary" />
         </activity>
 
+        <activity
+            android:name=".tap2wake.Tap2WakeSettingsActivity"
+            android:label="@string/double_tap_2_wake_title"
+            android:theme="@style/Theme.SubSettingsBase">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.display" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/double_tap_2_wake_switch_summary" />
+        </activity>
     </application>
 </manifest>

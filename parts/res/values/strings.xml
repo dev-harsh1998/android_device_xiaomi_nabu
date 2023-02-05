@@ -26,4 +26,10 @@
     <string name="keyboard_summary">Xiaomi Keyboard Settings</string>
     <string name="keyboard_switch_title">Enable Xiaomi Keyboard</string>
     <string name="keyboard_switch_summary">Enable this settings to use Xiaomi Keyboard</string>
+
+     <!-- Double tap 2 wake -->
+     <string name="double_tap_2_wake_title">Double tap to wake</string>
+     <string name="double_tap_2_wake_summary">Double tap to wake Settings</string>
+     <string name="double_tap_2_wake_switch_title">Enable Double tap to wake</string>
+     <string name="double_tap_2_wake_switch_summary">Enable this settings to use Double tap to wake to wakeup device.</string>
 </resources>
