@@ -11,9 +11,12 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.settings.nabu">
+    package="com.settings.nabu"
+    android:versionCode="1"
+    android:versionName="1.0">
+    <application android:hasCode="false" />
     <overlay
       android:targetPackage="com.android.settings"
       android:isStatic="true"
-      android:priority="850"/>
+      android:priority="1"/>
 </manifest>
