@@ -496,9 +496,6 @@
          this value to 0 so it has no effect. -->
     <integer name="config_defaultRefreshRate">0</integer>
 
-    <!-- default refresh rate in the zone defined by brightness and ambient thresholds -->
-    <integer name="config_defaultRefreshRateInZone">120</integer>
-
     <!-- Screen brightness when dozing. -->
     <integer name="config_screenBrightnessDoze">17</integer>
 

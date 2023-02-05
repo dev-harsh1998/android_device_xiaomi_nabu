@@ -1,5 +1,7 @@
 runtime_resource_overlay {
     name: "SystemUIOverlayNabu",
+    theme: "SystemUIOverlayNabu",
+    certificate: "platform",
     sdk_version: "current",
-    vendor: true
+    product_specific: true
 }
