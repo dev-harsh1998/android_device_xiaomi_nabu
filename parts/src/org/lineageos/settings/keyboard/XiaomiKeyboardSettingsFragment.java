@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Switch;
+import android.util.Log;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -28,6 +29,11 @@ import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
 
 import com.android.settingslib.widget.MainSwitchPreference;
+
+import custom.hardware.hwcontrol.IHwControl;
+import custom.hardware.hwcontrol.HwType;
+import android.os.ServiceManager;
+import android.os.IBinder;
 
 import org.lineageos.settings.R;
 import org.lineageos.settings.utils.FileUtils;
@@ -39,10 +45,8 @@ public class XiaomiKeyboardSettingsFragment extends PreferenceFragment implement
     private static final String TAG = "XiaomiParts";
     public static final String SHARED_KEYBOARD = "shared_keyboard";
     private SwitchPreference mKeyboardPreference;
-    
-    public static final String KEYBOARDPATH = "/sys/devices/platform/soc/soc:xiaomi_keyboard/xiaomi_keyboard_conn_status";
-    public static final String KEYBOARDEN = "enable_keyboard";
-    public static final String KEYBOARDDI = "disable_keyboard";
+    private static final String IHWCONTROL_AIDL_INTERFACE = "custom.hardware.hwcontrol.IHwControl/default";
+    private static IHwControl mHwControl;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -61,18 +65,21 @@ public class XiaomiKeyboardSettingsFragment extends PreferenceFragment implement
     }
 
     private void enableKeyboard(int status) {
-        if (status == 1) {
-            FileUtils.writeLine(KEYBOARDPATH, KEYBOARDEN);
-            SharedPreferences preferences = getActivity().getSharedPreferences(SHARED_KEYBOARD, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt(SHARED_KEYBOARD, status);
-            editor.commit();
+        IBinder binder = ServiceManager.getService(IHWCONTROL_AIDL_INTERFACE);
+        if (binder == null) {
+            Log.e(TAG, "Getting " + IHWCONTROL_AIDL_INTERFACE + " service daemon binder failed!");
         } else {
-            FileUtils.writeLine(KEYBOARDPATH, KEYBOARDDI);
-            SharedPreferences preferences = getActivity().getSharedPreferences(SHARED_KEYBOARD, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt(SHARED_KEYBOARD, status);
-            editor.commit();
+            mHwControl = IHwControl.Stub.asInterface(binder);
+            if (mHwControl == null) {
+                Log.e(TAG, "Getting IHwControl AIDL daemon interface failed!");
+            } else {
+                Log.d(TAG, "Getting IHwControl AIDL interface binding success!");
+            }
+        }
+        try {
+            mHwControl.setHwState(HwType.KEYBOARD, status);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to set keyboard status: " + e);
         }
     }
 }

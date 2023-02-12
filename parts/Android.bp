@@ -16,6 +16,7 @@ android_app {
 
     static_libs: [
         "org.lineageos.settings.resources",
+        "custom.hardware.hwcontrol-java",
         "vendor.xiaomi.hardware.touchfeature-V1.0-java",
     ],
 
