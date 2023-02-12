@@ -5,6 +5,8 @@
 #include <mutex>
 #include <thread>
 
+#include "KeyboardState.h"
+
 namespace aidl::custom::hardware::hwcontrol {
 
 class HwControl : public BnHwControl {

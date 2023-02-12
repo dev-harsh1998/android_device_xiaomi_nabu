@@ -11,6 +11,7 @@ cc_binary {
     ],
     srcs: [
         "HwControl.cpp",
+        "KeyboardState.cpp",
         "service.cpp",
     ],
 }
