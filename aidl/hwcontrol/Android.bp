@@ -1,0 +1,17 @@
+aidl_interface {
+    name: "custom.hardware.hwcontrol",
+    srcs: ["custom/hardware/hwcontrol/*.aidl"],
+    vendor_available: true,
+    unstable: true,
+    backend: {
+        ndk: {
+            enabled: true,
+        },
+        cpp: {
+            enabled: true,
+        },
+        java: {
+            platform_apis: true,
+        },
+    },
+}

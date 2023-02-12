@@ -1,0 +1,16 @@
+cc_binary {
+    name: "custom.hardware.hwcontrol-service",
+    init_rc: ["custom.hardware.hwcontrol.rc"],
+    vintf_fragments: ["custom.hardware.hwcontrol.xml"],
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libbinder_ndk",
+        "libbinder",
+        "custom.hardware.hwcontrol-ndk",
+    ],
+    srcs: [
+        "HwControl.cpp",
+        "service.cpp",
+    ],
+}
