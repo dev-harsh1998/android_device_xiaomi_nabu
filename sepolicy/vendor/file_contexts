@@ -83,6 +83,8 @@
 # Power
 /vendor/bin/hw/android\.hardware\.power-service\.xiaomi-libperfmgr      u:object_r:hal_power_default_exec:s0
 
+/(vendor|system/vendor)/bin/custom\.hardware\.hwcontrol-service         u:object_r:hal_hwcontrol_service_exec:s0
+
 # Sensors
 /dev/akm09970                                                                                                                   u:object_r:hall_device:s0
 /sys/bus/iio/devices                                                                                                            u:object_r:vendor_sysfs_iio:s0
