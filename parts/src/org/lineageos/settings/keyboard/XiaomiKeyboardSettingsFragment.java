@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Switch;
-import android.util.Log;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -30,10 +29,8 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settingslib.widget.MainSwitchPreference;
 
-import custom.hardware.hwcontrol.IHwControl;
 import custom.hardware.hwcontrol.HwType;
-import android.os.ServiceManager;
-import android.os.IBinder;
+import org.lineageos.settings.hwcontrol.HwStateManager;
 
 import org.lineageos.settings.R;
 import org.lineageos.settings.utils.FileUtils;
@@ -42,16 +39,15 @@ public class XiaomiKeyboardSettingsFragment extends PreferenceFragment implement
         OnPreferenceChangeListener {
 
     private static final String KEYBOARD_KEY = "keyboard_switch_key";
-    private static final String TAG = "XiaomiParts";
     public static final String SHARED_KEYBOARD = "shared_keyboard";
+
     private SwitchPreference mKeyboardPreference;
-    private static final String IHWCONTROL_AIDL_INTERFACE = "custom.hardware.hwcontrol.IHwControl/default";
-    private static IHwControl mHwControl;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.keyboard_settings);
         mKeyboardPreference = (SwitchPreference) findPreference(KEYBOARD_KEY);
+
         mKeyboardPreference.setEnabled(true);
         mKeyboardPreference.setOnPreferenceChangeListener(this);
     }
@@ -65,21 +61,13 @@ public class XiaomiKeyboardSettingsFragment extends PreferenceFragment implement
     }
 
     private void enableKeyboard(int status) {
-        IBinder binder = ServiceManager.getService(IHWCONTROL_AIDL_INTERFACE);
-        if (binder == null) {
-            Log.e(TAG, "Getting " + IHWCONTROL_AIDL_INTERFACE + " service daemon binder failed!");
-        } else {
-            mHwControl = IHwControl.Stub.asInterface(binder);
-            if (mHwControl == null) {
-                Log.e(TAG, "Getting IHwControl AIDL daemon interface failed!");
-            } else {
-                Log.d(TAG, "Getting IHwControl AIDL interface binding success!");
-            }
-        }
         try {
-            mHwControl.setHwState(HwType.KEYBOARD, status);
+            HwStateManager.HwState(HwType.KEYBOARD, status);
+            SharedPreferences preferences = getActivity().getSharedPreferences(SHARED_KEYBOARD, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt(SHARED_KEYBOARD, status);
+            editor.commit();
         } catch (Exception e) {
-            Log.e(TAG, "Failed to set keyboard status: " + e);
         }
     }
 }
