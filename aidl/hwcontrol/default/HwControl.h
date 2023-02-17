@@ -6,6 +6,7 @@
 #include <thread>
 
 #include "KeyboardState.h"
+#include "TouchFeatureState.h"
 
 namespace aidl::custom::hardware::hwcontrol {
 
