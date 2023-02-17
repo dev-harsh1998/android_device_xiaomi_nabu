@@ -12,3 +12,6 @@ vendor.xiaomi.hardware.touchfeature::ITouchFeature                              
 
 # NFC
 vendor.nxp.nxpnfc::INxpNfc                                          u:object_r:hal_nfc_hwservice:s0
+
+# Custom HWControl
+custom.hardware.hwcontrol::IHwControl                              u:object_r:hal_hwcontrol_hwservice:s0
