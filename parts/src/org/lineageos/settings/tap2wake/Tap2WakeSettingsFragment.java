@@ -29,7 +29,8 @@ import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
 
-import vendor.xiaomi.hardware.touchfeature.V1_0.ITouchFeature;
+import org.lineageos.settings.hwcontrol.HwStateManager;
+import custom.hardware.hwcontrol.HwType;
 
 import org.lineageos.settings.R;
 
@@ -40,17 +41,11 @@ OnPreferenceChangeListener {
      public static final String SHARED_TAP2WAKE = "shared_tap2wake";
 
      private SwitchPreference mTap2WakePreference;
-     private ITouchFeature mTouchFeature;
 
      @Override
      public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
          addPreferencesFromResource(R.xml.tap2wake_settings);
 
-         try {
-             mTouchFeature = ITouchFeature.getService();
-         } catch (Exception e) {
-             Log.e("TAP2WAKE", "Failed to get ITouchFeature service", e);
-         }
          mTap2WakePreference = (SwitchPreference) findPreference(TAP2WAKE_KEY);
          mTap2WakePreference.setEnabled(true);
          mTap2WakePreference.setOnPreferenceChangeListener(this);
@@ -65,14 +60,12 @@ OnPreferenceChangeListener {
      }
 
      private void enableTap2Wake(int status) {
-         if (mTouchFeature == null)
-             return;
          try {
-             mTouchFeature.setTouchMode(14, status);
-             SharedPreferences preferences = getActivity().getSharedPreferences(SHARED_TAP2WAKE, Context.MODE_PRIVATE);
-             SharedPreferences.Editor editor = preferences.edit();
-             editor.putInt(SHARED_TAP2WAKE, status);
-             editor.commit();
+            HwStateManager.HwState(HwType.TAP2WAKE, status);
+            SharedPreferences preferences = getActivity().getSharedPreferences(SHARED_TAP2WAKE, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt(SHARED_TAP2WAKE, status);
+            editor.commit();
          } catch (Exception e) {
              Log.e("TAP2WAKE", "Failed to set tap2wake mode", e);
          }

@@ -29,7 +29,8 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settingslib.widget.MainSwitchPreference;
 
-import vendor.xiaomi.hardware.touchfeature.V1_0.ITouchFeature;
+import org.lineageos.settings.hwcontrol.HwStateManager;
+import custom.hardware.hwcontrol.HwType;
 
 import org.lineageos.settings.R;
 
@@ -40,16 +41,11 @@ public class StylusSettingsFragment extends PreferenceFragment implements
     public static final String SHARED_STYLUS = "shared_stylus";
 
     private SwitchPreference mStylusPreference;
-    private ITouchFeature mTouchFeature;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.stylus_settings);
 
-        try {
-            mTouchFeature = ITouchFeature.getService();
-        } catch (Exception e) {
-        }
         mStylusPreference = (SwitchPreference) findPreference(STYLUS_KEY);
         mStylusPreference.setEnabled(true);
         mStylusPreference.setOnPreferenceChangeListener(this);
@@ -64,9 +60,8 @@ public class StylusSettingsFragment extends PreferenceFragment implements
     }
 
     private void enableStylus(int status) {
-        if (mTouchFeature == null) return;
         try {
-            mTouchFeature.setTouchMode(20, status);
+            HwStateManager.HwState(HwType.STYLUS, status);
             SharedPreferences preferences = getActivity().getSharedPreferences(SHARED_STYLUS, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt(SHARED_STYLUS, status);
