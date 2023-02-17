@@ -4,7 +4,6 @@ cc_binary {
     vintf_fragments: ["custom.hardware.hwcontrol.xml"],
     shared_libs: [
         "libbase",
-        "liblog",
         "libbinder_ndk",
         "libbinder",
         "custom.hardware.hwcontrol-ndk",
@@ -12,6 +11,7 @@ cc_binary {
     srcs: [
         "HwControl.cpp",
         "KeyboardState.cpp",
+        "TouchFeatureState.cpp",
         "service.cpp",
     ],
 }
