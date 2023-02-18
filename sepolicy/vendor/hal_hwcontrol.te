@@ -1,0 +1,5 @@
+binder_call(hal_hwcontrol_client, hal_hwcontrol_server)
+binder_call(hal_hwcontrol_server, hal_hwcontrol_client)
+binder_call(devicesettings_app, hal_hwcontrol)
+binder_call(hal_hwcontrol, devicesettings_app)
+hal_attribute_hwservice(hal_hwcontrol, hal_hwcontrol_hwservice)
