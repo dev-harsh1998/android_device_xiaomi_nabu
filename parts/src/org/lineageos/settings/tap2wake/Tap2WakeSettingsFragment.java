@@ -19,7 +19,6 @@ package org.lineageos.settings.tap2wake;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Switch;
 
 import androidx.preference.ListPreference;
@@ -67,7 +66,6 @@ OnPreferenceChangeListener {
             editor.putInt(SHARED_TAP2WAKE, status);
             editor.commit();
          } catch (Exception e) {
-             Log.e("TAP2WAKE", "Failed to set tap2wake mode", e);
          }
      }
 }
