@@ -1,3 +1,8 @@
+//
+// Copyright (C) 2023 Harshit Jain <dev-harsh1998@hotmail.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+//
 package org.lineageos.settings.utils;
 
 import android.content.Context;
