@@ -15,7 +15,6 @@ const KeyboardIO kb_state = {
     .enable = "enable_keyboard",
     .disable = "disable_keyboard"
 };
-const std::string TAG="KeyboardState";
 
 int getKeyboardState(void);
 void setKeyboardState(int state);

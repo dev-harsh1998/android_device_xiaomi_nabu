@@ -14,12 +14,12 @@ static void registerAsService(std::shared_ptr<C> service, const char *inst) {
   binder_status_t status =
       AServiceManager_addService(service->asBinder().get(), instance.c_str());
   CHECK(status == STATUS_OK);
-  LOG(INFO) << "Register done for instance " << inst;
+  if (!DISABLE_DEBUG) LOG(INFO) << "Register done for instance " << inst;
 }
 
 int main() {
   ABinderProcess_setThreadPoolMaxThreadCount(8);
-  LOG(INFO) << "Starting HwControl service";
+  if (!DISABLE_DEBUG) LOG(INFO) << "Starting HwControl service";
   registerAsService(ndk::SharedRefBase::make<HwControl>(), "default");
 
   ABinderProcess_joinThreadPool();

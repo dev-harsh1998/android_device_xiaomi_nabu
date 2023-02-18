@@ -8,6 +8,11 @@ cc_binary {
         "libbinder",
         "custom.hardware.hwcontrol-ndk",
     ],
+
+    cflags: [
+        "-DDISABLE_DEBUG=1",
+    ],
+
     srcs: [
         "HwControl.cpp",
         "KeyboardState.cpp",
