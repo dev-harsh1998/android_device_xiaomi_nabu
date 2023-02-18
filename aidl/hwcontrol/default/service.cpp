@@ -1,3 +1,8 @@
+//
+// Copyright (C) 2023 Harshit Jain <dev-harsh1998@hotmail.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+//
 #include <android-base/logging.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
