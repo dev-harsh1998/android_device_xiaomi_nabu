@@ -2,8 +2,6 @@
 #include <sys/ioctl.h>
 #include <android-base/unique_fd.h>
 
-#define TAG "TouchFeatureState"
-
 // TouchFeature device declarations
 #define TOUCH_FEATURE_DEVICE "/dev/xiaomi-touch"
 #define TOUCH_FEATURE_MAGIC 'T'
