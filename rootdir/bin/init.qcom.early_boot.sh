@@ -29,6 +29,10 @@
 
 export PATH=/vendor/bin
 
+# Store soc_id in ro.vendor.qti.soc_id
+soc_id=cat /sys/devices/soc0/soc_id 2> /dev/null
+setprop ro.vendor.qti.soc_id $soc_id
+
 # Set platform variables
 if [ -f /sys/devices/soc0/hw_platform ]; then
     soc_hwplatform=`cat /sys/devices/soc0/hw_platform` 2> /dev/null
