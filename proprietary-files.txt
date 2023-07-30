@@ -492,6 +492,9 @@ vendor/lib64/vendor.display.postproc@1.0.so
 system/lib/vendor.xiaomi.hardware.displayfeature@1.0.so
 system/lib64/vendor.xiaomi.hardware.displayfeature@1.0.so
 
+# Device Features
+product/etc/device_features/nabu.xml
+
 # DPM
 framework/tcmclient.jar
 system_ext/bin/dpmd
