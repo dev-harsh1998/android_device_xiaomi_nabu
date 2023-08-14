@@ -1,10 +1,15 @@
 type hal_hwcontrol_service, domain;
+
+typeattribute hal_hwcontrol_service untrusted_app_visible_halserver_violators;
+
 hal_server_domain(hal_hwcontrol_service, hal_hwcontrol)
 type hal_hwcontrol_service_exec, exec_type, vendor_file_type, vendor_file_type, file_type;
 init_daemon_domain(hal_hwcontrol_service)
 
 binder_call(devicesettings_app, hal_hwcontrol_service)
 binder_call(hal_hwcontrol_service, devicesettings_app)
+
+binder_use(hal_hwcontrol_service)
 
 # Policy for hal_hwcontrol_service
 allow hal_hwcontrol_service sysfs_leds:{ file lnk_file } rw_file_perms;
