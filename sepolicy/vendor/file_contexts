@@ -83,7 +83,9 @@
 # Power
 /vendor/bin/hw/android\.hardware\.power-service\.xiaomi-libperfmgr      u:object_r:hal_power_default_exec:s0
 
-/(vendor|system/vendor)/bin/custom\.hardware\.hwcontrol-service         u:object_r:hal_hwcontrol_service_exec:s0
+/system(/system_ext)?/bin/custom\.hardware\.hwcontrol-service         u:object_r:hal_custom_hwcontrol_default_exec:s0
+
+/sys/devices/platform/soc/soc:xiaomi_keyboard/xiaomi_keyboard_conn_status       u:object_r:vendor_sysfs_keyboard:s0
 
 # Sensors
 /dev/akm09970                                                                                                                   u:object_r:hall_device:s0

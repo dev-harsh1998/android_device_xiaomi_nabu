@@ -1,0 +1,1 @@
+define(`TOUCH_FEATURE_INTERACT', `0x5400')

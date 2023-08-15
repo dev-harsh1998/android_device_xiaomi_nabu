@@ -1,0 +1,14 @@
+type hal_custom_hwcontrol_default, domain, coredomain;
+hal_attribute(custom_hwcontrol)
+
+hal_server_domain(hal_custom_hwcontrol_default, hal_custom_hwcontrol)
+
+type hal_custom_hwcontrol_default_exec, exec_type, system_file_type, file_type;
+init_daemon_domain(hal_custom_hwcontrol_default)
+
+binder_call(hal_custom_hwcontrol_default, servicemanager);
+
+allow hal_custom_hwcontrol_default vendor_sysfs_keyboard:dir { getattr search open };
+allow hal_custom_hwcontrol_default vendor_sysfs_keyboard:{file lnk_file} rw_file_perms;
+allow hal_custom_hwcontrol_default touchfeature_device:chr_file rw_file_perms;
+allowxperm hal_custom_hwcontrol_default touchfeature_device:chr_file ioctl touchfeature_dev_ioctls;

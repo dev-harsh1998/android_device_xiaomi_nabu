@@ -8,6 +8,4 @@ type motor_device, dev_type;
 
 type sound_device, dev_type;
 
-type touchfeature_device, dev_type;
-
 typeattribute system_block_device super_block_device_type;

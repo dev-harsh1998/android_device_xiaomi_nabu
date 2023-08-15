@@ -1,0 +1,2 @@
+type vendor_sysfs_keyboard, fs_type, sysfs_type;
+type touchfeature_device, dev_type;

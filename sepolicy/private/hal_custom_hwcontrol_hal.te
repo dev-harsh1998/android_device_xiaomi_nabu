@@ -1,0 +1,9 @@
+# Binder IPC from client to server
+binder_call(hal_custom_hwcontrol_client, hal_custom_hwcontrol_server)
+
+add_service(hal_custom_hwcontrol_server, hal_custom_hwcontrol_service)
+allow hal_custom_hwcontrol_client hal_custom_hwcontrol_service:service_manager find;
+
+# Allow binder communication with system_app
+binder_call(hal_custom_hwcontrol, system_app)
+binder_call(hal_custom_hwcontrol, devicesettings_app)
