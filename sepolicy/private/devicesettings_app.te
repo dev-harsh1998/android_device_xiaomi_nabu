@@ -23,7 +23,8 @@ binder_call(devicesettings_app, hal_motor)
 binder_call(devicesettings_app, hal_custom_hwcontrol)
 
 # Allow devicesettings_app to read and write to cgroup/sysfs_leds/sysfs_thermal
-allow devicesettings_app sysfs_leds:dir search;
+allow devicesettings_app sysfs_leds:dir r_dir_perms;
+
 #allow devicesettings_app vendor_sysfs_graphics:dir search;
 allow devicesettings_app {
   cgroup
