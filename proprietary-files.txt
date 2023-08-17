@@ -470,7 +470,7 @@ vendor/etc/dsi_k82_42_02_0a_dual_cphy_vid_display_mi.xml
 vendor/etc/qdcm_calib_data_xiaomi_36_02_0b_video_mode_dual_dsi_cphy_panel.xml
 vendor/etc/qdcm_calib_data_xiaomi_42_02_0a_video_mode_dual_dsi_cphy_panel.xml
 
-# Display (SDM) - from LA.UM.9.1.r1-10900-SMxxx0.0
+# Display (DRM) - from LA.UM.9.1.r1-10900-SMxxx0.0
 vendor/lib64/libsdedrm.so|582910d21139781ad9e414c35207584f51e035e2
 
 # Display calibration data
@@ -733,7 +733,7 @@ vendor/lib64/vendor.qti.imsrtpservice@3.0.so
 
 # IRQ balance
 vendor/bin/msm_irqbalance
-vendor/etc/msm_irqbalance.conf
+vendor/etc/msm_irqbalance.conf|0b9fd99126dbd7586e86b7dfa44d02ca
 
 # Keymaster
 vendor/bin/hw/android.hardware.keymaster@4.1-service-qti
