@@ -148,10 +148,6 @@ vendor/lib64/libsoc_helper_jni.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
 
-# Bluetooth (aptX) - PIXEL (Crosshatch)
-system_ext/lib64/libaptXHD_encoder.so
-system_ext/lib64/libaptX_encoder.so
-
 # Charger
 vendor/bin/batterysecret
 vendor/etc/init/init.batterysecret.rc
