@@ -8,7 +8,6 @@ package org.lineageos.settings.hwcontrol;
 
 import custom.hardware.hwcontrol.IHwControl;
 import android.os.ServiceManager;
-import android.os.IBinder;
 import android.util.Log;
 
 import java.io.IOException;
@@ -23,22 +22,15 @@ public class HwStateManager {
     // Private method to get the IHwControl AIDL interface.
     private static void getHwControl() throws IOException {
         if (mHwControl == null) {
-            IBinder binder = ServiceManager.getService(IHWCONTROL_AIDL_INTERFACE);
-            if (binder == null) {
-                if (DEBUG) Log.e(TAG, "Getting " + IHWCONTROL_AIDL_INTERFACE + " service daemon binder failed!");
-            } else {
-                mHwControl = IHwControl.Stub.asInterface(binder);
-                if (mHwControl == null) {
-                    if (DEBUG) Log.e(TAG, "Getting IHwControl AIDL daemon interface failed!");
-                } else {
-                    if (DEBUG) Log.d(TAG, "Getting IHwControl AIDL interface binding success!");
-                }
+            try {
+                mHwControl = IHwControl.Stub.asInterface(
+                        ServiceManager.waitForDeclaredService(IHWCONTROL_AIDL_INTERFACE));
+            } catch (Exception e) {
+                if (DEBUG) Log.e(TAG, "Failed to getHwControl()", e);
             }
-        }
-        if (mHwControl == null) {
-            if (DEBUG) Log.e(TAG, "IHwControl AIDL interface not initialization failed!");
-            // Throw exception here
-            throw new IOException("IHwControl AIDL interface initialization failed!");
+            if (mHwControl == null) {
+                if (DEBUG) Log.e(TAG, "IHwControl AIDL interface not available!");
+            }
         }
     }
 
