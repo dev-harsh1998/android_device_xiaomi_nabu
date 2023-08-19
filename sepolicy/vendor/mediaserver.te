@@ -1,0 +1,4 @@
+allow mediaserver package_native_service:service_manager find;
+allow mediaserver sysfs_msm_subsys:dir search;
+allow mediaserver sysfs_msm_subsys:file r_file_perms;
+allow mediaserver sysfs_msm_subsys:lnk_file r_file_perms;

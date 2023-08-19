@@ -1,1 +1,4 @@
+binder_call(system_app, storaged)
+binder_call(system_app, system_suspend)
+get_prop(system_server, vendor_wfd_sys_debug_prop)
 hal_client_domain(system_app, hal_mlipay)

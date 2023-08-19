@@ -1,0 +1,22 @@
+allow untrusted_app proc_zoneinfo:file r_file_perms;
+allow untrusted_app tmpfs:lnk_file { read };
+allow untrusted_app shell_test_data_file:dir { search };
+allow untrusted_app app_data_file:file { execute };
+allow untrusted_app zygote:unix_stream_socket getopt;
+
+dontaudit untrusted_app_all {
+  sysfs_msm_subsys
+  rootfs
+}:dir {search read};
+
+dontaudit untrusted_app ashmem_device:chr_file open;
+dontaudit untrusted_app proc:file r_file_perms;
+
+dontaudit untrusted_app_all {
+  proc
+  proc_modules
+  proc_net
+  proc_net_tcp_udp
+  proc_tty_drivers
+  serialno_prop
+}:file read;
