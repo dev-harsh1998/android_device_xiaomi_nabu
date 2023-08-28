@@ -35,6 +35,18 @@ on property:vendor.post_boot.parsed=1
     write /dev/blkio/blkio.group_idle 2000
     write /dev/blkio/background/blkio.group_idle 0
 
+    # Setup cpu.shares to throttle background groups (bg ~ 5% sysbg ~ 5% dex2oat ~2.5%)
+    write /dev/cpuctl/background/cpu.shares 1024
+    write /dev/cpuctl/system-background/cpu.shares 1024
+    write /dev/cpuctl/dex2oat/cpu.shares 512
+    write /dev/cpuctl/system/cpu.shares 20480
+    # We only have system and background groups holding tasks and the groups below are empty
+    write /dev/cpuctl/camera-daemon/cpu.shares 20480
+    write /dev/cpuctl/foreground/cpu.shares 20480
+    write /dev/cpuctl/nnapi-hal/cpu.shares 20480
+    write /dev/cpuctl/rt/cpu.shares 20480
+    write /dev/cpuctl/top-app/cpu.shares 20480
+
     # Setting b.L scheduler parameters
     write /proc/sys/kernel/sched_upmigrate "95 95"
     write /proc/sys/kernel/sched_downmigrate "85 85"
