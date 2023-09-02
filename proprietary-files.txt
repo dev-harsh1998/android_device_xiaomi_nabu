@@ -630,6 +630,12 @@ vendor/lib64/libminksocket.so
 system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml
 system_ext/framework/com.android.hotwordenrollment.common.util.jar
 
+# HubUI - from Google Pixel Tablet (TQ3A.230805.001.B1)
+product/etc/appcompat/compat_framework_overrides.xml
+product/etc/permissions/com.google.assistant.hubui.xml
+product/etc/default-permissions/default-permissions_SmartDisplayPrebuilt.xml
+product/priv-app/SmartDisplayPrebuilt/SmartDisplayPrebuilt.apk;PRESIGNED
+
 # IRQ balance
 vendor/bin/msm_irqbalance
 vendor/etc/msm_irqbalance.conf|0b9fd99126dbd7586e86b7dfa44d02ca
