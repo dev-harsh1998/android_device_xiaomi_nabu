@@ -447,6 +447,3 @@ service mi-serial-sh /vendor/bin/init.mi.serial.sh
     oneshot
 on post-fs && property:ro.product.device=nabu
     start mi-serial-sh
-
-    # Enable suspend to RAM
-    write /sys/power/mem_sleep "deep"
