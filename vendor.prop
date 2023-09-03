@@ -169,6 +169,13 @@ ro.vendor.display.ad.hdr_calib_data=/vendor/etc/hdr_config.cfg
 ro.vendor.display.default_fps=60
 ro.vendor.display.sensortype=2
 vendor.display.comp_mask=0
+ro.surface_flinger.has_HDR_display=true
+ro.surface_flinger.has_wide_color_display=true
+ro.surface_flinger.use_content_detection_for_refresh_rate=true
+ro.surface_flinger.set_display_power_timer_ms=1000
+ro.surface_flinger.set_idle_timer_ms=500
+ro.surface_flinger.set_touch_timer_ms=750
+ro.surface_flinger.wcg_composition_dataspace=143261696
 vendor.display.dataspace_saturation_matrix=1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0
 vendor.display.disable_decimation=1
 vendor.display.disable_excl_rect=0
@@ -185,15 +192,6 @@ vendor.display.enable_null_display=0
 vendor.display.enable_optimize_refresh=1
 vendor.display.qdcm.disable_factory_mode=1
 vendor.display.qdcm.mode_combine=1
-
-# Display
-ro.surface_flinger.has_HDR_display=true
-ro.surface_flinger.has_wide_color_display=true
-ro.surface_flinger.use_content_detection_for_refresh_rate=true
-ro.surface_flinger.set_display_power_timer_ms=1000
-ro.surface_flinger.set_idle_timer_ms=500
-ro.surface_flinger.set_touch_timer_ms=750
-ro.surface_flinger.wcg_composition_dataspace=143261696
 
 # Dexopt
 dalvik.vm.dex2oat64.enabled=true

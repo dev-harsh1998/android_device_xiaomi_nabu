@@ -57,8 +57,5 @@ persist.vendor.data.mode=concurrent
 # SSR
 persist.vendor.ssr.restart_level=ALL_ENABLE
 
-# Zygote
-persist.device_config.runtime_native.usap_pool_enabled=true
-
 # Updater
 lineage.updater.uri=https://raw.githubusercontent.com/dev-harsh1998/ota/master/nb.json
