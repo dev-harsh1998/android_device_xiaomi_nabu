@@ -25,16 +25,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-on enable-low-power
-    # Enable PowerHAL hint processing
-    setprop vendor.powerhal.init 1
-
-on property:init.svc.recovery=running
-    trigger enable-low-power
-
 on property:sys.boot_completed=1
-    trigger enable-low-power
-
     # Runtime fs tuning
     write /sys/block/sda/queue/nr_requests 128
     write /sys/block/sda/queue/iostats 1

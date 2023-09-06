@@ -26,6 +26,7 @@ libcvp.so
 libcvp_stub.so
 libcvp_common.so
 libhta_hexagon_runtime.so
+libqti-perfd-client.so
 unnhal-acc-hta.so
 libalhLDC.so
 libalAILDC.so
