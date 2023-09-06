@@ -80,12 +80,12 @@
 # Persist subsystem
 /mnt/vendor/persist/subsys(/.*)?                                        u:object_r:persist_subsys_file:s0
 
-# Power
-/vendor/bin/hw/android\.hardware\.power-service\.xiaomi-libperfmgr      u:object_r:hal_power_default_exec:s0
-
 /system/bin/custom\.hardware\.hwcontrol-service         u:object_r:hal_custom_hwcontrol_default_exec:s0
 
 /sys/devices/platform/soc/soc:xiaomi_keyboard/xiaomi_keyboard_conn_status       u:object_r:vendor_sysfs_keyboard:s0
+
+# Power
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power-service-nabu               u:object_r:hal_power_default_exec:s0
 
 # Sensors
 /dev/akm09970                                                                                                                   u:object_r:hall_device:s0
