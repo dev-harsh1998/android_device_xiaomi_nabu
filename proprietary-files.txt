@@ -445,8 +445,8 @@ vendor/etc/init/vendor.qti.hardware.capabilityconfigstore@1.0-service.rc
 vendor/lib/hw/vendor.qti.hardware.capabilityconfigstore@1.0-impl.so
 vendor/lib64/hw/vendor.qti.hardware.capabilityconfigstore@1.0-impl.so
 
-# Graphics (HDR) - from LA.UM.9.14.r1-21000-LAHAINA.QSSI13.0 (tundra T1SJC33.51-11-2)
-vendor/lib64/libhdr_tm.so|7954c5cd5c0b23fe8d0609361c22d24c59f1448b
+# Graphics (HDR) - from marble.
+vendor/lib64/libhdr_tm.so|70baf4a248eb0011f0a72c0856c46ed7
 
 # Display (SDM)
 vendor/lib64/libdisplayqos.so
