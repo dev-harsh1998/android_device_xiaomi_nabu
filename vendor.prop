@@ -307,6 +307,11 @@ vendor.power.pasr.enabled=false
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.perf-hal.ver=2.2
+ro.vendor.perf.scroll_opt=true
+ro.vendor.perf.scroll_opt.heavy_app=2
+vendor.power.pasr.enabled=false
+vendor.pasr.activemode.enabled=false
 
 # Radio
 persist.data.df.iwlan_mux=9
