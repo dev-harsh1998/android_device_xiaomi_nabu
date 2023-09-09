@@ -16,7 +16,6 @@
 package org.lineageos.settings.refreshrate;
 
 import android.annotation.Nullable;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -26,6 +25,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -99,8 +99,6 @@ public class RefreshSettingsFragment extends PreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        final ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setTitle(getResources().getString(R.string.refresh_title));
         rebuild();
     }
 
@@ -190,14 +188,8 @@ public class RefreshSettingsFragment extends PreferenceFragment
 
     private int getStateDrawable(int state) {
         switch (state) {
-            case RefreshUtils.STATE_LOW:
-                return R.drawable.ic_refresh_30;
-            case RefreshUtils.STATE_MODERATE:
-                return R.drawable.ic_refresh_50;
-            case RefreshUtils.STATE_MEDIUM:
+            case RefreshUtils.STATE_STANDARD:
                 return R.drawable.ic_refresh_60;
-            case RefreshUtils.STATE_HIGH:
-                return R.drawable.ic_refresh_90;
             case RefreshUtils.STATE_EXTREME:
                 return R.drawable.ic_refresh_120;
             case RefreshUtils.STATE_DEFAULT:
@@ -230,10 +222,7 @@ public class RefreshSettingsFragment extends PreferenceFragment
         private final LayoutInflater inflater;
         private final int[] items = {
                 R.string.refresh_default,
-                R.string.refresh_low,
-                R.string.refresh_moderate,
-                R.string.refresh_medium,
-                R.string.refresh_high,
+                R.string.refresh_standard,
                 R.string.refresh_extreme
         };
 
@@ -310,7 +299,6 @@ public class RefreshSettingsFragment extends PreferenceFragment
 
             holder.mode.setAdapter(new ModeAdapter(context));
             holder.mode.setOnItemSelectedListener(this);
-
             holder.title.setText(entry.label);
             holder.title.setOnClickListener(v -> holder.mode.performClick());
             mApplicationsState.ensureIcon(entry);
