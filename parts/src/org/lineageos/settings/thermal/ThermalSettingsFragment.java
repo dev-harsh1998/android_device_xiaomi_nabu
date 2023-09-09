@@ -210,7 +210,7 @@ public class ThermalSettingsFragment extends PreferenceFragment
                 return R.drawable.ic_thermal_streaming;
             case ThermalUtils.STATE_DEFAULT:
             default:
-                return R.drawable.ic_thermal_default;
+                return R.drawable.ic_default;
         }
     }
 

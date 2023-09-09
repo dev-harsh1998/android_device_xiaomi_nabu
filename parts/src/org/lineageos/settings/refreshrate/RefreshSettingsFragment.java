@@ -194,7 +194,7 @@ public class RefreshSettingsFragment extends PreferenceFragment
                 return R.drawable.ic_refresh_120;
             case RefreshUtils.STATE_DEFAULT:
             default:
-                return R.drawable.ic_refresh_default;
+                return R.drawable.ic_default;
         }
     }
 
