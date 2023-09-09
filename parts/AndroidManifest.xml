@@ -147,17 +147,19 @@
         <activity 
             android:name=".refreshrate.RefreshActivity" 
             android:label="@string/refresh_title" 
-            android:exported="true" 
             android:theme="@style/Theme.SubSettingsBase">
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
             </intent-filter>
             <meta-data 
                 android:name="com.android.settings.category" 
-                android:value="com.android.settings.category.ia.display" />
+                android:value="com.android.settings.category.ia.system" />
             <meta-data 
                 android:name="com.android.settings.summary" 
                 android:resource="@string/refresh_summary" />
+            <meta-data
+                android:name="com.android.settings.order"
+                android:value="1" />
         </activity>
 
         <service 
