@@ -1,7 +1,5 @@
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(call is-vendor-board-platform,QCOM),true)
-
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_RELATIVE_PATH := hw
@@ -38,11 +36,6 @@ LOCAL_SRC_FILES += power-msmnile.c
 
 endif # End of board specific list
 
-ifneq ($(TARGET_POWERHAL_MODE_EXT),)
-    LOCAL_CFLAGS += -DMODE_EXT
-    LOCAL_SRC_FILES += ../../../../$(TARGET_POWERHAL_MODE_EXT)
-endif
-
 ifneq ($(TARGET_POWERHAL_SET_INTERACTIVE_EXT),)
     LOCAL_CFLAGS += -DSET_INTERACTIVE_EXT
     LOCAL_SRC_FILES += ../../../../$(TARGET_POWERHAL_SET_INTERACTIVE_EXT)
@@ -64,4 +57,3 @@ LOCAL_VENDOR_MODULE := true
 LOCAL_VINTF_FRAGMENTS := power.xml
 
 include $(BUILD_EXECUTABLE)
-endif

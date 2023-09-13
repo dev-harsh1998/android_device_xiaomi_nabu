@@ -150,7 +150,6 @@ TARGET_BOOTLOADER_BOARD_NAME := nabu
 
 # Power
 TARGET_USES_NON_LEGACY_POWERHAL := true
-TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power/power-mode.cpp
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
