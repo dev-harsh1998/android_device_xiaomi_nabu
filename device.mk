@@ -354,6 +354,10 @@ PRODUCT_PACKAGES += \
     SettingsOverlayNabu \
     FrameworkResOverlayNabu
 
+# RemovePackages
+PRODUCT_PACKAGES += \
+    RemovePackages
+
 # QMI
 PRODUCT_PACKAGES += \
     libjson \
