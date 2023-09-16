@@ -1,9 +1,6 @@
 # radio
 ro.radio.noril=true
 
-# FUSE
-persist.sys.fuse.passthrough.enable=true
-
 # WFD
 persist.debug.wfd.enable=1
 persist.sys.wfd.virtual=0

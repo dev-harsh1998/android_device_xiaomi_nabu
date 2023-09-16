@@ -281,7 +281,7 @@ debug.sf.high_fps_early_phase_offset_ns=-4000000
 debug.sf.high_fps_late_app_phase_offset_ns=1000000
 debug.sf.high_fps_late_sf_phase_offset_ns=-2000000
 debug.sf.hw=0
-debug.sf.auto_latch_unsignaled=1
+debug.sf.auto_latch_unsignaled=0
 persist.demo.hdmirotationlock=false
 persist.sys.sf.color_mode=9
 persist.sys.sf.color_saturation=1.0
@@ -387,6 +387,3 @@ ro.lmk.stall_limit_critical=40
 ro.lmk.psi_scrit_complete_stall_ms=150
 ro.lmk.direct_reclaim_pressure=45
 ro.lmk.reclaim_scan_threshold=0
-
-# FIFO
-sys.use_fifo_ui=1
