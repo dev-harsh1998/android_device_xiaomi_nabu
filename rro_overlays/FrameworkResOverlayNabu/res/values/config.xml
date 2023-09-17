@@ -585,7 +585,7 @@
         <item>com.google.android.apps.photos/.daydream.PhotosDreamService</item>
         <item>com.android.systemui/com.google.android.systemui.lowlightclock.LowLightClockDreamService</item>
     </string-array>
-
+  
     <!-- Power Management: Specifies whether to decouple the auto-suspend state of the
          device from the display on/off state.
          When false, autosuspend_disable() will be called before the display is turned on
