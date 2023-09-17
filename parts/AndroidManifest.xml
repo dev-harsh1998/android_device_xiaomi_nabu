@@ -21,6 +21,10 @@
     android:versionName="1.0"
     android:sharedUserId="android.uid.system">
 
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="30" />
+
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -42,6 +46,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".dirac.DiracActivity"
+            android:label="@string/dirac_title"
+            android:theme="@style/Theme.SubSettingsBase">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.sound" />
+            <meta-data android:name="com.android.settings.summary"
+                       android:resource="@string/dirac_summary" />
+        </activity>
 
         <service android:name=".doze.DozeService"
                  android:exported="true"
@@ -87,6 +104,28 @@
         </activity>
 
         <activity
+            android:name=".thermal.ThermalActivity"
+            android:label="@string/thermal_title"
+            android:icon="@drawable/ic_thermal_settings"
+            android:theme="@style/Theme.SubSettingsBase">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.system" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/thermal_summary" />
+            <meta-data
+                android:name="com.android.settings.order"
+                android:value="1" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@drawable/ic_thermal_settings" />
+        </activity>
+
+        <activity
             android:name=".tap2wake.Tap2WakeSettingsActivity"
             android:label="@string/double_tap_2_wake_title"
             android:exported="false"
@@ -94,10 +133,54 @@
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.icon"
+                       android:resource="@drawable/ic_dt2w" />
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.display" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/double_tap_2_wake_switch_summary" />
         </activity>
+
+        <service
+            android:name=".thermal.ThermalService"
+            android:permission="ThermalService">
+        </service>
+
+        <activity 
+            android:name=".refreshrate.RefreshActivity" 
+            android:label="@string/refresh_title" 
+            android:theme="@style/Theme.SubSettingsBase">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data 
+                android:name="com.android.settings.category" 
+                android:value="com.android.settings.category.ia.system" />
+            <meta-data 
+                android:name="com.android.settings.summary" 
+                android:resource="@string/refresh_summary" />
+            <meta-data
+                android:name="com.android.settings.order"
+                android:value="1" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@drawable/ic_refresh_settings" />
+        </activity>
+
+        <service 
+            android:name=".refreshrate.RefreshService" 
+            android:permission="RefreshService">
+        </service>
+
+        <service
+            android:name=".refreshrate.RefreshTileService"
+            android:icon="@drawable/ic_qs_refresh_rate"
+            android:label="@string/refresh_rate_tile_title"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
     </application>
 </manifest>

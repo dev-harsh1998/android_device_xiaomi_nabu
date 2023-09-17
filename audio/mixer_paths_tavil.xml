@@ -303,8 +303,8 @@
     <!-- RT Proxy Cal end -->
 
     <!-- Incall Recording -->
-    <ctl name="MultiMedia1 Mixer VOC_REC_UL" value="0" />
-    <ctl name="MultiMedia1 Mixer VOC_REC_DL" value="0" />
+    <ctl name="MultiMedia9 Mixer VOC_REC_UL" value="0" />
+    <ctl name="MultiMedia9 Mixer VOC_REC_DL" value="0" />
     <ctl name="MultiMedia8 Mixer VOC_REC_UL" value="0" />
     <ctl name="MultiMedia8 Mixer VOC_REC_DL" value="0" />
     <ctl name="MultiMedia17 Mixer VOC_REC_UL" value="0" />
@@ -375,14 +375,14 @@
     <ctl name="EAR PA Gain" value="G_6_DB" />
     <ctl name="EAR SPKR PA Gain" value="G_DEFAULT" />
 
-    <ctl name="RX0 Digital Volume" value="84" />
-    <ctl name="RX1 Digital Volume" value="84" />
-    <ctl name="RX2 Digital Volume" value="84" />
-    <ctl name="RX3 Digital Volume" value="84" />
-    <ctl name="RX4 Digital Volume" value="84" />
-    <ctl name="RX5 Digital Volume" value="84" />
-    <ctl name="RX6 Digital Volume" value="84" />
-    <ctl name="RX7 Digital Volume" value="84" />
+    <ctl name="RX0 Digital Volume" value="102" />
+    <ctl name="RX1 Digital Volume" value="102" />
+    <ctl name="RX2 Digital Volume" value="102" />
+    <ctl name="RX3 Digital Volume" value="102" />
+    <ctl name="RX4 Digital Volume" value="102" />
+    <ctl name="RX5 Digital Volume" value="102" />
+    <ctl name="RX6 Digital Volume" value="102" />
+    <ctl name="RX7 Digital Volume" value="102" />
     <ctl name="ADC1 Volume" value="8" />
     <ctl name="ADC2 Volume" value="8" />
     <ctl name="ADC3 Volume" value="8" />
@@ -394,8 +394,8 @@
     <ctl name="DEC4 Volume" value="84" />
     <ctl name="DEC5 Volume" value="84" />
     <ctl name="DEC6 Volume" value="84" />
-    <ctl name="DEC7 Volume" value="84" />
-    <ctl name="DEC8 Volume" value="84" />
+    <ctl name="DEC7 Volume" value="92" />
+    <ctl name="DEC8 Volume" value="92" />
 
     <!-- Compander controls -->
     <ctl name="COMP1 Switch" value="1" />
@@ -2222,7 +2222,7 @@
     </path>
 
     <path name="incall-rec-uplink">
-        <ctl name="MultiMedia1 Mixer VOC_REC_UL" value="1" />
+        <ctl name="MultiMedia9 Mixer VOC_REC_UL" value="1" />
     </path>
 
     <path name="incall-rec-uplink bt-sco">
@@ -2274,7 +2274,7 @@
     </path>
 
     <path name="incall-rec-downlink">
-        <ctl name="MultiMedia1 Mixer VOC_REC_DL"  value="1" />
+        <ctl name="MultiMedia9 Mixer VOC_REC_DL"  value="1" />
     </path>
 
     <path name="incall-rec-downlink bt-sco">
@@ -2427,7 +2427,7 @@
         <ctl name="BL Channel Swap" value="Off" />
     </path>
 
-    <path name="hfp-sco-wb">
+   <path name="hfp-sco-wb">
         <path name="hfp-sco" />
     </path>
 
@@ -3212,7 +3212,7 @@
         <ctl name="ADC4 Volume" value="8" />
         <ctl name="RX INT1_1 MIX1 INP0" value="RX2" />
         <ctl name="RX INT2_1 MIX1 INP0" value="RX3" />
-        <ctl name="RX1 Digital Volume" value="81" />
+        <ctl name="RX1 Digital Volume" value="100" />
         <ctl name="RX2 Digital Volume" value="81" />
         <ctl name="ANC OUT HPHL Enable Switch" value="1" />
         <ctl name="ANC OUT HPHR Enable Switch" value="1" />

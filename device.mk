@@ -89,7 +89,7 @@ TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1600
 
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := 420dpi #440 works aswell but do we actually need it?.
 PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
 # Boot control
@@ -138,7 +138,8 @@ PRODUCT_PACKAGES += \
     libsndmonitor \
     libspkrprot \
     libvisualizer \
-    libvolumelistener
+    libvolumelistener \
+    sound_trigger.primary.msmnile
 
 # Audio configs
 PRODUCT_COPY_FILES += \
@@ -337,18 +338,11 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Perf
 PRODUCT_PACKAGES += \
-    libqti-perfd-client
+    vendor.qti.hardware.perf@2.2.vendor
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.xiaomi-libperfmgr
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
-PRODUCT_SOONG_NAMESPACES += \
-    hardware/google/interfaces \
-    hardware/google/pixel
+    android.hardware.power-service-nabu
 
 # Public libraries
 PRODUCT_COPY_FILES += \
@@ -360,6 +354,10 @@ PRODUCT_PACKAGES += \
     SettingsProviderOverlayNabu \
     SettingsOverlayNabu \
     FrameworkResOverlayNabu
+
+# RemovePackages
+PRODUCT_PACKAGES += \
+    RemovePackages
 
 # QMI
 PRODUCT_PACKAGES += \
@@ -386,6 +384,7 @@ PRODUCT_PACKAGES += \
     init.qti.dcvs.sh
 
 PRODUCT_PACKAGES += \
+    init.nabu.perf.rc \
     init.qcom.power.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
@@ -406,6 +405,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
     hardware/xiaomi
+
+# Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@2.0-service.qti
 
 # Trust
 PRODUCT_PACKAGES += \

@@ -12,7 +12,6 @@ ro.charger.disable_init_blank=true
 # Display
 debug.gralloc.gfx_ubwc_disable=0
 debug.sf.enable_hwc_vds=1
-debug.sf.latch_unsignaled=1
 persist.vendor.color.matrix=2
 
 # CNE
@@ -33,9 +32,8 @@ persist.dbg.wfc_avail_ovr=1
 vendor.iop.enable_prefetch_ofr=1
 vendor.iop.enable_uxe=0
 
-# LMKD
+# LOW RAM
 ro.config.low_ram=false
-ro.lmk.log_stats=true
 
 # Media
 media.settings.xml=/vendor/etc/media_profiles_vendor.xml
@@ -56,9 +54,6 @@ persist.vendor.data.mode=concurrent
 
 # SSR
 persist.vendor.ssr.restart_level=ALL_ENABLE
-
-# Zygote
-persist.device_config.runtime_native.usap_pool_enabled=true
 
 # Updater
 lineage.updater.uri=https://raw.githubusercontent.com/dev-harsh1998/ota/master/nb.json

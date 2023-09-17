@@ -1,25 +1,24 @@
 # Audio
 aaudio.hw_burst_min_usec=2000
 aaudio.mmap_exclusive_policy=2
-aaudio.mmap_policy=2
-audio.offload.buffer.size.kb=32
-audio.offload.gapless.enabled=true
-persist.audio.button_jack.profile=volume
-persist.audio.button_jack.switch=0
-persist.audio.fluence.speaker=true
-persist.audio.fluence.voicecall=true
+aaudio.mmap_policy=1
+af.fast_track_multiplier=1
+audio.deep_buffer.media=true
+audio.offload.min.duration.secs=40
+persist.vendor.audio.avs.afe_api_version=2
 persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.tmic.enabled=false
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicecomm=true
-persist.vendor.audio.fluence.voicerec=true
+persist.vendor.audio.fluence.voicerec=false
 persist.vendor.audio.ras.enabled=false
 persist.vendor.audio.ring.filter.mask=0
+persist.vendor.audio.spv3.enable=true
 persist.vendor.audio.voicecall.speaker.stereo=true
+ro.af.client_heap_size_kbyte=7168
 ro.audio.monitorRotation=true
-ro.audio.recording.hd=true
-ro.qc.sdk.audio.fluencetype=none
-ro.qc.sdk.audio.ssr=false
+ro.config.media_vol_steps=25
+ro.config.vc_call_vol_steps=11
 ro.vendor.audio.afe.record=true
 ro.vendor.audio.game.effect=true
 ro.vendor.audio.ring.filter=true
@@ -66,12 +65,52 @@ ro.vendor.audio.vocal.support=true
 ro.vendor.audio.voice.change.support=true
 ro.vendor.audio.voice.volume.boost=manual
 ro.vendor.audio.xiaoaitongxue.aec=true
-tunnel.audio.encode = true
-use.voice.path.for.pcm.voip=true
 vendor.audio.adm.buffering.ms=6
 vendor.audio.dolby.ds2.enabled=false
 vendor.audio.dolby.ds2.hardbypass=false
 vendor.audio.enable.mirrorlink=false
+vendor.audio.feature.a2dp_offload.enable=true
+vendor.audio.feature.afe_proxy.enable=true
+vendor.audio.feature.anc_headset.enable=true
+vendor.audio.feature.audiozoom.enable=false
+vendor.audio.feature.battery_listener.enable=true
+vendor.audio.feature.compr_cap.enable=false
+vendor.audio.feature.compress_in.enable=true
+vendor.audio.feature.compress_meta_data.enable=true
+vendor.audio.feature.compr_voip.enable=false
+vendor.audio.feature.concurrent_capture.enable=false
+vendor.audio.feature.custom_stereo.enable=true
+vendor.audio.feature.deepbuffer_as_primary.enable=false
+vendor.audio.feature.display_port.enable=true
+vendor.audio.feature.dsm_feedback.enable=false
+vendor.audio.feature.dynamic_ecns.enable=false
+vendor.audio.feature.ext_hw_plugin.enable=true
+vendor.audio.feature.external_dsp.enable=false
+vendor.audio.feature.external_speaker_tfa.enable=false
+vendor.audio.feature.external_speaker.enable=false
+vendor.audio.feature.fluence.enable=true
+vendor.audio.feature.fm.enable=true
+vendor.audio.feature.hdmi_edid.enable=true
+vendor.audio.feature.hdmi_passthrough.enable=true
+vendor.audio.feature.hfp.enable=true
+vendor.audio.feature.hifi_audio.enable=false
+vendor.audio.feature.hwdep_cal.enable=false
+vendor.audio.feature.incall_music.enable=true
+vendor.audio.feature.keep_alive.enable=false
+vendor.audio.feature.kpi_optimize.enable=true
+vendor.audio.feature.maxx_audio.enable=false
+vendor.audio.feature.multi_voice_session.enable=true
+vendor.audio.feature.ras.enable=true
+vendor.audio.feature.record_play_concurency.enable=false
+vendor.audio.feature.snd_mon.enable=true
+vendor.audio.feature.spkr_prot.enable=true
+vendor.audio.feature.src_trkn.enable=true
+vendor.audio.feature.ssrec.enable=true
+vendor.audio.feature.usb_offload_burst_mode.enable=true
+vendor.audio.feature.usb_offload_sidetone_volume.enable=false
+vendor.audio.feature.usb_offload.enable=true
+vendor.audio.feature.vbat.enable=true
+vendor.audio.feature.wsa.enable=false
 vendor.audio.flac.sw.decoder.24bit=true
 vendor.audio.hal.boot.timeout.ms=20000
 vendor.audio_hal.in_period_size=144
@@ -168,6 +207,16 @@ ro.vendor.display.ad.hdr_calib_data=/vendor/etc/hdr_config.cfg
 ro.vendor.display.default_fps=60
 ro.vendor.display.sensortype=2
 vendor.display.comp_mask=0
+ro.surface_flinger.has_HDR_display=true
+ro.surface_flinger.has_wide_color_display=true
+ro.surface_flinger.use_content_detection_for_refresh_rate=true
+ro.surface_flinger.set_display_power_timer_ms=1000
+ro.surface_flinger.enable_layer_caching=true
+debug.sf.layer_caching_active_layer_timeout_ms=1000
+ro.surface_flinger.set_idle_timer_ms=500
+ro.surface_flinger.set_touch_timer_ms=1000
+debug.sf.frame_rate_multiple_threshold=120
+ro.surface_flinger.wcg_composition_dataspace=143261696
 vendor.display.dataspace_saturation_matrix=1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0
 vendor.display.disable_decimation=1
 vendor.display.disable_excl_rect=0
@@ -184,15 +233,6 @@ vendor.display.enable_null_display=0
 vendor.display.enable_optimize_refresh=1
 vendor.display.qdcm.disable_factory_mode=1
 vendor.display.qdcm.mode_combine=1
-
-# Display
-ro.surface_flinger.has_HDR_display=false
-ro.surface_flinger.has_wide_color_display=false
-ro.surface_flinger.use_content_detection_for_refresh_rate=true
-ro.surface_flinger.set_display_power_timer_ms=1000
-ro.surface_flinger.set_idle_timer_ms=350
-ro.surface_flinger.set_touch_timer_ms=750
-ro.surface_flinger.wcg_composition_dataspace=143261696
 
 # Dexopt
 dalvik.vm.dex2oat64.enabled=true
@@ -221,18 +261,19 @@ vendor.gatekeeper.disable_spu=true
 persist.backup.ntpServer=0.pool.ntp.org
 
 # Graphics
-debug.egl.hw=0
-debug.mdpcomp.logs=0
+debug.sf.disable_client_composition_cache=1
+debug.sdm.support_writeback=0
 debug.sf.enable_advanced_sf_phase_offset=1
-debug.sf.disable_backpressure=1
+debug.sf.disable_backpressure=0
+debug.sf.enable_gl_backpressure=1
 debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
 debug.sf.high_fps_early_phase_offset_ns=-4000000
 debug.sf.high_fps_late_app_phase_offset_ns=1000000
 debug.sf.high_fps_late_sf_phase_offset_ns=-2000000
 debug.sf.hw=0
-debug.sf.latch_unsignaled=1
+debug.sf.auto_latch_unsignaled=0
 persist.demo.hdmirotationlock=false
-persist.sys.sf.color_mode=0
+persist.sys.sf.color_mode=9
 persist.sys.sf.color_saturation=1.0
 persist.sys.sf.native_mode=2
 debug.sf.treat_170m_as_sRGB=1
@@ -256,6 +297,11 @@ vendor.power.pasr.enabled=false
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.perf-hal.ver=2.2
+ro.vendor.perf.scroll_opt=true
+ro.vendor.perf.scroll_opt.heavy_app=2
+vendor.power.pasr.enabled=false
+vendor.pasr.activemode.enabled=false
 
 # Radio
 persist.data.df.iwlan_mux=9
@@ -317,3 +363,22 @@ wifi.aware.interface=wifi-aware0
 
 # Zygote
 zygote.critical_window.minute=10
+
+# ZRAM writeback
+ro.zram.mark_idle_delay_mins=60
+ro.zram.first_wb_delay_mins=1440
+ro.zram.periodic_wb_delay_hours=24
+
+# LMKD
+ro.lmk.kill_heaviest_task=true
+ro.lmk.use_new_strategy=true
+ro.lmk.enable_watermark_check=true
+ro.lmk.enable_userspace_lmk=true
+ro.lmk.enhance_batch_kill=false
+ro.lmk.super_critical=701
+ro.lmk.filecache_min_kb=153600
+ro.lmk.kill_timeout_ms=50
+ro.lmk.stall_limit_critical=40
+ro.lmk.psi_scrit_complete_stall_ms=150
+ro.lmk.direct_reclaim_pressure=45
+ro.lmk.reclaim_scan_threshold=0
