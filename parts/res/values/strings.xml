@@ -12,9 +12,6 @@
      limitations under the License.
 -->
 <resources>
-    <!-- Ambient settings -->
-    <string name="ambient_enable">Use Ambient display</string>
-
     <!-- Xiaomi Stylus -->
     <string name="stylus_title">Xiaomi Stylus</string>
     <string name="stylus_summary">Xiaomi Stylus Settings</string>

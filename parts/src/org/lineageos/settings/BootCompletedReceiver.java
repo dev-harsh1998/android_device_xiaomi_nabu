@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import org.lineageos.settings.dirac.DiracUtils;
-import org.lineageos.settings.doze.DozeUtils;
 import org.lineageos.settings.utils.PeripheralUtils;
 import org.lineageos.settings.thermal.ThermalUtils;
 import org.lineageos.settings.refreshrate.RefreshUtils;
@@ -37,7 +36,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         if (DEBUG) Log.d(TAG, "Received boot completed intent");
         DiracUtils.initialize(context);
-        DozeUtils.checkDozeService(context);
         PeripheralUtils.BootResetState(context);
         ThermalUtils.startService(context);
         RefreshUtils.initialize(context);
