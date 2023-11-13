@@ -225,6 +225,7 @@ vendor.display.disable_hw_recovery_dump=1
 vendor.display.disable_idle_time_hdr=1
 vendor.display.disable_idle_time_video=1
 vendor.display.disable_inline_rotator=1
+vendor.display.disable_rotator_downscale=1
 vendor.display.disable_scaler=0
 vendor.display.disable_ui_3d_tonemap=1
 vendor.display.enable_default_color_mode=0
