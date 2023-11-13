@@ -606,4 +606,7 @@
 
     <!-- See AmbientSensor.AmbientColorTemperatureSensor. The ambient color temperature sensor name. -->
     <string name="config_displayWhiteBalanceColorTemperatureSensorName">com.google.sensor.color</string>
+
+    <!-- Doze: should the TYPE_PICK_UP_GESTURE sensor be used as a pulse signal. -->
+    <bool name="config_dozePulsePickup">true</bool>
 </resources>
