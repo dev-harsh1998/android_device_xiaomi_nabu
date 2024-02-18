@@ -60,14 +60,6 @@ on init
 on early-fs
     start vold
 
-    # Create a cpuset for camera-specific processes
-    mkdir /dev/cpuset/camera-daemon
-    write /dev/cpuset/camera-daemon/cpus 0-7
-    write /dev/cpuset/camera-daemon/mems 0
-    chown system system /dev/cpuset/camera-daemon
-    chown system system /dev/cpuset/camera-daemon/tasks
-    chmod 0664 /dev/cpuset/camera-daemon/tasks
-
     # Create an stune group for camera-specific processes
     mkdir /dev/stune/camera-daemon
     write /dev/stune/camera-daemon/schedtune.prefer_idle 1
