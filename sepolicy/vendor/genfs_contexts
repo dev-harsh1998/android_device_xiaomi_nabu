@@ -112,6 +112,13 @@ genfscon sysfs /devices/platform/soc/soc:qcom,smp2p-cdsp/wakeup                 
 genfscon sysfs /devices/platform/soc/soc:qcom,smp2p-dsps/wakeup                                                                                    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,smp2p-npu/wakeup                                                                                     u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/soc/soc:qcom,smp2p_sleepstate/wakeup                                                                              u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/890000.i2c/i2c-0/0-0051/power_supply/bq2597x-standalone/wakeup                                                u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/890000.i2c/i2c-0/0-0051/wakeup                                                                                u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pm8150b@2:qcom,usb-pdphy@1700/usbpd/usbpd0/otg_default/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c80000.i2c/i2c-4/4-003b/power_supply/idt/wakeup                                                               u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/c80000.i2c/i2c-4/4-003b/wakeup                                                                                u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:maxim_ds28e16/power_supply/batt_verify/wakeup                                                             u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/soc:maxim_ds28e16_slave/power_supply/batt_verify_slave/wakeup                                                 u:object_r:sysfs_wakeup:s0
 
 # Extcon sysfs
 genfscon sysfs /devices/platform/soc/c440000.qcom,spmi/spmi-0/spmi0-02/c440000.qcom,spmi:qcom,pm8150b@2:qcom,usb-pdphy@1700/extcon                 u:object_r:sysfs_extcon:s0

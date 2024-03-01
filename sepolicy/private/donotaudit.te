@@ -4,5 +4,5 @@ dontaudit odrefresh self:capability kill;
 dontaudit linkerconfig self:capability kill;
 dontaudit zygote self:capability kill;
 dontaudit kernel self:capability sys_admin;
-dontaudit isolated_app content_capture_service:service_manager find;
+dontaudit isolated_app_all content_capture_service:service_manager find;
 dontaudit system_suspend sysfs:dir read;

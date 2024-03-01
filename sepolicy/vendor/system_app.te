@@ -22,3 +22,4 @@ allow system_app zygote:unix_stream_socket getopt;
 get_prop(system_server, vendor_camera_prop)
 
 allow system_app sysfs_thermal:file rw_file_perms;
+allow system_app sysfs_msm_subsys:dir r_dir_perms;

@@ -2,6 +2,19 @@
 audio.soundtrigger.debug.urser_id               u:object_r:vendor_audio_prop:s0
 audio_hal.in_period_size                        u:object_r:vendor_audio_prop:s0
 
+# Bluetooth
+vendor.bt.                                      u:object_r:vendor_bluetooth_prop:s0
+vendor.btstack.                                 u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.bt.                              u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.btstack.                         u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.bt.a2dp.aac_whitelist            u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.bt.a2dp.mac_whitelist            u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.btstack.a2dp_offload_cap         u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.btstack.connect.peer_earbud      u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.btstack.enable.splita2dp         u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.btstack.enable.twsplus           u:object_r:vendor_bluetooth_prop:s0
+persist.vendor.btstack.enable.twsplussho        u:object_r:vendor_bluetooth_prop:s0
+
 # Camera
 camera.                                         u:object_r:vendor_camera_prop:s0
 persist.camera.                                 u:object_r:vendor_camera_prop:s0
