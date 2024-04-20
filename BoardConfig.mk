@@ -8,6 +8,7 @@ DEVICE_PATH := device/xiaomi/nabu
 
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_INCORRECT_PARTITION_IMAGES := true
 
 # Conditionally Inherit GMS makefiles
 ifneq ("$(wildcard vendor/partner_gms/products/gms.mk)", "")
