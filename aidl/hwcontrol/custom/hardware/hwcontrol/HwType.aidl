@@ -5,6 +5,7 @@
 //
 package custom.hardware.hwcontrol;
 
+@VintfStability
 @Backing(type="int")
 enum HwType {
     KEYBOARD,

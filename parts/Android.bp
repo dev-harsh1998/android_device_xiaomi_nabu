@@ -16,7 +16,7 @@ android_app {
 
     static_libs: [
         "org.lineageos.settings.resources",
-        "custom.hardware.hwcontrol-java",
+        "custom.hardware.hwcontrol-V1-java",
     ],
 
     optimize: {

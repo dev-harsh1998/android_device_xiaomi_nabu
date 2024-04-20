@@ -6,8 +6,9 @@
 aidl_interface {
     name: "custom.hardware.hwcontrol",
     srcs: ["custom/hardware/hwcontrol/*.aidl"],
+    owner: "Harshit",
+    stability: "vintf",
     vendor_available: true,
-    unstable: true,
     backend: {
         ndk: {
             enabled: true,
@@ -19,4 +20,12 @@ aidl_interface {
             platform_apis: true,
         },
     },
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+    ],
+    frozen: true,
+
 }

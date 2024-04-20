@@ -11,7 +11,7 @@ cc_binary {
         "libbase",
         "libbinder_ndk",
         "libbinder",
-        "custom.hardware.hwcontrol-ndk",
+        "custom.hardware.hwcontrol-V1-ndk",
     ],
 
     cflags: [
