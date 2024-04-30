@@ -15,6 +15,7 @@ allow devicesettings_app {
   mediametrics_service
   mediaserver_service
   surfaceflinger_service
+  hal_custom_hwcontrol_service
 }:service_manager find;
 
 hal_client_domain(devicesettings_app, hal_motor)
