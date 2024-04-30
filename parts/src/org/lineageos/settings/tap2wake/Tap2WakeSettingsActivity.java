@@ -19,8 +19,7 @@
  import android.os.Bundle;
  
  import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
- import com.android.settingslib.widget.R;
- 
+  
  public class Tap2WakeSettingsActivity extends CollapsingToolbarBaseActivity {
  
      private static final String TAG_TAP2WAKE = "Tap2Wake";
@@ -29,7 +28,7 @@
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
  
-         getFragmentManager().beginTransaction().replace(R.id.content_frame,
+         getFragmentManager().beginTransaction().replace(com.android.settingslib.collapsingtoolbar.R.id.content_frame,
                  new Tap2WakeSettingsFragment(), TAG_TAP2WAKE).commit();
      }
  }

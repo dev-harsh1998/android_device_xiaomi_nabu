@@ -19,7 +19,6 @@ package org.lineageos.settings.stylus;
 import android.os.Bundle;
 
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
-import com.android.settingslib.widget.R;
 
 public class StylusSettingsActivity extends CollapsingToolbarBaseActivity {
 
@@ -29,7 +28,7 @@ public class StylusSettingsActivity extends CollapsingToolbarBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getFragmentManager().beginTransaction().replace(R.id.content_frame,
+        getFragmentManager().beginTransaction().replace(com.android.settingslib.collapsingtoolbar.R.id.content_frame,
                 new StylusSettingsFragment(), TAG_STYLUS).commit();
     }
 }

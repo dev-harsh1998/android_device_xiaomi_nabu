@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/stylus_title">
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="stylus_switch_key"
         android:defaultValue="false"
         android:title="@string/stylus_switch_title"

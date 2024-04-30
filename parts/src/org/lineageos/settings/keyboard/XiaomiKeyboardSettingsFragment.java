@@ -19,15 +19,11 @@ package org.lineageos.settings.keyboard;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Switch;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
-
-import com.android.settingslib.widget.MainSwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import custom.hardware.hwcontrol.HwType;
 import org.lineageos.settings.hwcontrol.HwStateManager;
@@ -41,12 +37,12 @@ public class XiaomiKeyboardSettingsFragment extends PreferenceFragment implement
     private static final String KEYBOARD_KEY = "keyboard_switch_key";
     public static final String SHARED_KEYBOARD = "shared_keyboard";
 
-    private SwitchPreference mKeyboardPreference;
+    private SwitchPreferenceCompat mKeyboardPreference;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.keyboard_settings);
-        mKeyboardPreference = (SwitchPreference) findPreference(KEYBOARD_KEY);
+        mKeyboardPreference = (SwitchPreferenceCompat) findPreference(KEYBOARD_KEY);
 
         mKeyboardPreference.setEnabled(true);
         mKeyboardPreference.setOnPreferenceChangeListener(this);

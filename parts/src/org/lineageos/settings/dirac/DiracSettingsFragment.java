@@ -22,21 +22,20 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Switch;
+import android.widget.CompoundButton;
 import androidx.preference.Preference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import org.lineageos.settings.R;
 
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class DiracSettingsFragment extends PreferenceFragment implements
-        OnPreferenceChangeListener, OnMainSwitchChangeListener {
+        OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
 
 
     private static final String PREF_HEADSET = "dirac_headset_pref";
@@ -48,7 +47,7 @@ public class DiracSettingsFragment extends PreferenceFragment implements
 
     private ListPreference mHeadsetType;
     private ListPreference mPreset;
-    private SwitchPreference mHifi;
+    private SwitchPreferenceCompat mHifi;
 
     private Handler mHandler = new Handler();
 
@@ -69,7 +68,7 @@ public class DiracSettingsFragment extends PreferenceFragment implements
         mPreset = (ListPreference) findPreference(PREF_PRESET);
         mPreset.setOnPreferenceChangeListener(this);
 
-        mHifi = (SwitchPreference) findPreference(PREF_HIFI);
+        mHifi = (SwitchPreferenceCompat) findPreference(PREF_HIFI);
         mHifi.setOnPreferenceChangeListener(this);
 
         boolean hifiEnable = DiracUtils.getHifiMode();
@@ -98,7 +97,7 @@ public class DiracSettingsFragment extends PreferenceFragment implements
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         DiracUtils.setEnabled(isChecked);
         mSwitchBar.setChecked(isChecked);
         if (isChecked){

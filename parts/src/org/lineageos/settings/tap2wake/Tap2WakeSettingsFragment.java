@@ -19,14 +19,11 @@ package org.lineageos.settings.tap2wake;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Switch;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
-import com.android.settingslib.widget.MainSwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import org.lineageos.settings.hwcontrol.HwStateManager;
 import custom.hardware.hwcontrol.HwType;
@@ -39,13 +36,13 @@ OnPreferenceChangeListener {
      private static final String TAP2WAKE_KEY = "tap2wake_switch_key";
      public static final String SHARED_TAP2WAKE = "shared_tap2wake";
 
-     private SwitchPreference mTap2WakePreference;
+     private SwitchPreferenceCompat mTap2WakePreference;
 
      @Override
      public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
          addPreferencesFromResource(R.xml.tap2wake_settings);
 
-         mTap2WakePreference = (SwitchPreference) findPreference(TAP2WAKE_KEY);
+         mTap2WakePreference = (SwitchPreferenceCompat) findPreference(TAP2WAKE_KEY);
          mTap2WakePreference.setEnabled(true);
          mTap2WakePreference.setOnPreferenceChangeListener(this);
      }

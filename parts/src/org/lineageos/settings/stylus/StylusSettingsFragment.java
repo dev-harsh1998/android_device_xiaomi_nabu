@@ -19,15 +19,11 @@ package org.lineageos.settings.stylus;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Switch;
 
-import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
-
-import com.android.settingslib.widget.MainSwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import org.lineageos.settings.hwcontrol.HwStateManager;
 import custom.hardware.hwcontrol.HwType;
@@ -40,13 +36,13 @@ public class StylusSettingsFragment extends PreferenceFragment implements
     private static final String STYLUS_KEY = "stylus_switch_key";
     public static final String SHARED_STYLUS = "shared_stylus";
 
-    private SwitchPreference mStylusPreference;
+    private SwitchPreferenceCompat mStylusPreference;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.stylus_settings);
 
-        mStylusPreference = (SwitchPreference) findPreference(STYLUS_KEY);
+        mStylusPreference = (SwitchPreferenceCompat) findPreference(STYLUS_KEY);
         mStylusPreference.setEnabled(true);
         mStylusPreference.setOnPreferenceChangeListener(this);
     }
