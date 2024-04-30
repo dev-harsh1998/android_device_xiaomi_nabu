@@ -14,8 +14,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
 
 # Conditionally inherit GMS makefiles
-ifneq ("$(wildcard vendor/partner_gms/products/gms.mk)", "")
-$(call inherit-product, vendor/partner_gms/products/gms.mk)
+ifneq ("$(wildcard vendor/gapps/arm64/arm64-vendor.mk)", "")
+$(call inherit-product, vendor/gapps/arm64/arm64-vendor.mk)
 endif
 
 # Shipping API level
