@@ -55,5 +55,13 @@ persist.vendor.data.mode=concurrent
 # SSR
 persist.vendor.ssr.restart_level=ALL_ENABLE
 
+# LogSpamControl
+persist.log.tag.vendor.qti.bluetooth@1.0-ibs_handler=S
+persist.log.tag.ACDB-LOADER=S
+persist.log.tag.ResourcesCompat=S
+persist.log.tag.CVP=S
+persist.log.tag.CamX=S
+persist.log.tag.a2dp_codec=S
+
 # Updater
 lineage.updater.uri=https://raw.githubusercontent.com/dev-harsh1998/ota/master/nb.json
