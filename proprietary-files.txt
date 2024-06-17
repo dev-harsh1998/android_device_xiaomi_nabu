@@ -21,7 +21,6 @@ vendor/lib/soundfx/libasphere.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
-vendor/lib/soundfx/libmisoundfx.so
 vendor/lib/soundfx/libshoebox.so
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
@@ -83,14 +82,12 @@ vendor/lib/rfsa/adsp/misound_res_headphone.bin
 vendor/lib/rfsa/adsp/misound_res_spk.bin
 vendor/lib/rfsa/adsp/misound_res_spk4ch.bin
 vendor/lib/rfsa/adsp/tas25xx_TI_0.bin
-vendor/lib64/rfsa/adsp/libsns_device_mode_skel.so
-vendor/lib64/rfsa/adsp/libsns_low_lat_stream_skel.so
 
 # Audio hardware
 vendor/lib/hw/audio.primary.msmnile.so
+vendor/lib/liba2dpoffload.so
 vendor/lib/hw/vendor.qti.hardware.audiohalext@1.0-impl.so
 vendor/lib/vndk/libxlog.so
-vendor/lib/liba2dpoffload.so
 vendor/lib/libaudio_log_utils.so
 vendor/lib/libaudioroute_ext.so
 vendor/lib/libresampler.so
@@ -337,18 +334,6 @@ vendor/lib64/libcamxswprocessalgo.so
 vendor/lib64/libcamxtintlessalgo.so
 
 # Camera (Configs)
-vendor/etc/camera/104_Meet.png
-vendor/etc/camera/108_NorthernEurope.png
-vendor/etc/camera/109_Rome.png
-vendor/etc/camera/110_BlackGold.png
-vendor/etc/camera/121_BBP.png
-vendor/etc/camera/122_Mysterious.png
-vendor/etc/camera/123_GreenOrange.png
-vendor/etc/camera/124_SummerDay.png
-vendor/etc/camera/125_Latin.png
-vendor/etc/camera/126_Fantasy.png
-vendor/etc/camera/127_DustDream.png
-vendor/etc/camera/128_MongKok.png
 vendor/etc/camera/CFR_para_T.bin
 vendor/etc/camera/CFR_para_UW.bin
 vendor/etc/camera/CFR_para_W.bin
@@ -366,7 +351,6 @@ vendor/etc/camera/bokehParams.json
 vendor/etc/camera/camxoverridesettings.txt
 vendor/etc/camera/eisoverridesettings.txt
 vendor/etc/camera/hdr_ui9_params.config
-vendor/etc/camera/megviifacepp_0_5_2_model
 vendor/etc/camera/mibokeh_712_opencl.bin
 vendor/etc/camera/mibokeh_712_parameter.bin
 vendor/etc/camera/model_back.dlc
@@ -380,6 +364,9 @@ vendor/etc/camera/sceneDetection.xml
 vendor/etc/camera/seg_quantized.dlc
 vendor/etc/camera/sr_params.xml
 vendor/etc/camera/vidhance_calibration
+
+# Camera Megvii
+vendor/etc/camera/megviifacepp_0_5_2_model
 
 # Camera firmware
 vendor/firmware/CAMERA_ICP.elf
@@ -460,16 +447,11 @@ vendor/lib64/libsdmextension.so
 vendor/lib64/libtinyxml2_1.so
 
 # Display (SDM)
-vendor/etc/hbtp/hbtpcfg_sdm855_801s_4k.dat
-vendor/etc/hbtp/loader.cfg
-vendor/etc/hbtp/qtc801s.bin
-vendor/etc/dsi_k82_36_02_0b_dual_cphy_vid_display_mi.xml
-vendor/etc/dsi_k82_42_02_0a_dual_cphy_vid_display_mi.xml
 vendor/etc/qdcm_calib_data_xiaomi_36_02_0b_video_mode_dual_dsi_cphy_panel.xml
 vendor/etc/qdcm_calib_data_xiaomi_42_02_0a_video_mode_dual_dsi_cphy_panel.xml
 
 # Display (DRM) - from LA.UM.9.1.r1-10900-SMxxx0.0
-vendor/lib64/libsdedrm.so|582910d21139781ad9e414c35207584f51e035e2
+vendor/lib64/libsdedrm.so
 
 # Display calibration data
 vendor/etc/hdr_config.cfg
@@ -491,9 +473,6 @@ vendor/lib64/vendor.display.postproc@1.0.so
 # Display Feature
 system/lib/vendor.xiaomi.hardware.displayfeature@1.0.so
 system/lib64/vendor.xiaomi.hardware.displayfeature@1.0.so
-
-# Device Features
-product/etc/device_features/nabu.xml
 
 # DPM
 framework/tcmclient.jar
@@ -552,10 +531,6 @@ vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc
 vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so
 
 # Graphics (Adreno) - from ChinaDev(?)
-vendor/gpu/kbc/sequence_manifest.bin
-vendor/gpu/kbc/unified_kbcs_32.bin
-vendor/gpu/kbc/unified_kbcs_64.bin
-vendor/gpu/kbc/unified_ksqs.bin
 vendor/lib/egl/eglSubDriverAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
@@ -571,8 +546,6 @@ vendor/lib/libadreno_utils.so
 vendor/lib/libc2d30_bltlib.so
 vendor/lib/libgpudataproducer.so
 vendor/lib/libgsl.so
-vendor/lib/libkcl.so
-vendor/lib/libkernelmanager.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
 vendor/lib64/egl/eglSubDriverAndroid.so
@@ -590,8 +563,6 @@ vendor/lib64/libadreno_utils.so
 vendor/lib64/libc2d30_bltlib.so
 vendor/lib64/libgpudataproducer.so
 vendor/lib64/libgsl.so
-vendor/lib64/libkcl.so
-vendor/lib64/libkernelmanager.so
 vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
 
@@ -629,21 +600,9 @@ vendor/firmware/ipa_uc.mdt
 # GNSS
 vendor/lib64/libminksocket.so
 
-# HotwordEnrollment
--product/priv-app/HotwordEnrollmentOKGoogleHEXAGON_WIDEBAND/HotwordEnrollmentOKGoogleHEXAGON_WIDEBAND.apk
--product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk
-system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml
-system_ext/framework/com.android.hotwordenrollment.common.util.jar
-
-# HubUI - from Google Pixel Tablet (TQ3A.230805.001.B1)
-product/etc/appcompat/compat_framework_overrides.xml
-product/etc/permissions/com.google.assistant.hubui.xml
-product/etc/default-permissions/default-permissions_SmartDisplayPrebuilt.xml
-product/priv-app/SmartDisplayPrebuilt/SmartDisplayPrebuilt.apk;PRESIGNED
-
 # IRQ balance
 vendor/bin/msm_irqbalance
-vendor/etc/msm_irqbalance.conf|0b9fd99126dbd7586e86b7dfa44d02ca
+vendor/etc/msm_irqbalance.conf
 
 # Keymaster
 vendor/bin/hw/android.hardware.keymaster@4.1-service-qti
@@ -654,7 +613,6 @@ vendor/lib64/libkeymasterutils.so
 vendor/lib64/libqtikeymaster4.so
 
 # Listen
-vendor/lib/hw/sound_trigger.primary.msmnile.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libcapiv2svacnn.so
 vendor/lib/libcapiv2vop.so
@@ -681,69 +639,23 @@ vendor/lib64/libmmosal.so
 vendor/lib64/libqcodec2.so
 
 # Media (sf-HW)
-vendor/lib/libarbitrarybytes.so
-vendor/lib64/libarbitrarybytes.so
 vendor/lib/libOmxSwVdec.so
 vendor/lib64/libOmxSwVdec.so
 vendor/lib/libOmxSwVencMpeg4.so
 vendor/lib64/libOmxSwVencMpeg4.so
-vendor/lib/libstagefrighthw.so
-vendor/lib64/libstagefrighthw.so
 
 # Media configs
 odm/etc/media_profiles_V1_0.xml
 vendor/etc/media_codecs.xml
 vendor/etc/media_codecs_c2.xml
 vendor/etc/media_codecs_performance.xml
+vendor/etc/media_codecs_system_default.xml
 vendor/etc/media_codecs_vendor.xml
 vendor/etc/media_codecs_vendor_audio.xml
 vendor/etc/media_profiles.xml
 vendor/etc/media_profiles_vendor.xml
 
-# Perf
-system_ext/etc/perf/wlc_model.tflite
-vendor/bin/hw/vendor.qti.hardware.perf@2.2-service
-vendor/etc/lm/AdaptLaunchFeature.xml
-vendor/etc/lm/AppClassifierFeature.xml
-vendor/etc/lm/GameOptimizationFeature.xml
-vendor/etc/perf/thermalboost.conf
-vendor/etc/init/vendor.qti.hardware.perf@2.2-service.rc
-vendor/lib/libperfconfig.so
-vendor/lib/libperfgluelayer.so
-vendor/lib/libperfioctl.so
-vendor/lib/libqti-perfd-client.so
-vendor/lib/libqti-perfd.so
-vendor/lib/libqti-util.so
-vendor/lib64/libperfconfig.so
-vendor/lib64/libperfgluelayer.so
-vendor/lib64/libperfioctl.so
-vendor/lib64/libqti-perfd-client.so
-vendor/lib64/libqti-perfd.so
-vendor/lib64/libqti-util.so
-
-# Perf Configs
-vendor/etc/perf/commonresourceconfigs.xml
-vendor/etc/perf/perfboostsconfig.xml
-vendor/etc/perf/perfconfigstore.xml
-vendor/etc/perf/targetconfig.xml
-vendor/etc/perf/targetresourceconfigs.xml
-vendor/etc/powerhint.xml
-
-# Perf IOP
-system_ext/lib/vendor.qti.hardware.iop@2.0.so
-system_ext/lib64/vendor.qti.hardware.iop@2.0.so
-vendor/bin/hw/vendor.qti.hardware.iop@2.0-service
-vendor/etc/init/vendor.qti.hardware.iop@2.0-service.rc
-vendor/lib/libqti-iopd-client.so
-vendor/lib/vendor.qti.hardware.iop@1.0.so
-vendor/lib/vendor.qti.hardware.iop@2.0.so
-vendor/lib64/libqti-iopd-client.so
-vendor/lib64/vendor.qti.hardware.iop@1.0.so
-vendor/lib64/vendor.qti.hardware.iop@2.0.so
-
 # Sensors
-vendor/bin/hw/vendor.qti.hardware.sensorscalibrate@1.0-service
-vendor/bin/hw/vendor.xiaomi.hardware.citsensorservice@1.1-service
 vendor/bin/init.qcom.sensors.sh
 vendor/bin/sensors.qti
 vendor/bin/sscrpcd
@@ -751,31 +663,24 @@ vendor/etc/init/init.vendor.sensors.rc
 vendor/etc/init/vendor.qti.hardware.sensorscalibrate@1.0-service.rc
 vendor/etc/init/vendor.sensors.qti.rc
 vendor/etc/init/vendor.sensors.sscrpcd.rc
-vendor/etc/init/vendor.xiaomi.hardware.citsensorservice@1.1-service.rc
 vendor/etc/sensors/hals.conf
 vendor/etc/sensors/sns_reg_config
 vendor/etc/sec_config
 vendor/lib64/hw/vendor.qti.hardware.sensorscalibrate@1.0-impl.so
-vendor/lib64/hw/vendor.xiaomi.hardware.citsensorservice@1.1-impl.so
-vendor/lib64/libnanopb.so
 vendor/lib64/libsensorcal.so
 vendor/lib64/libsensorslog.so
 vendor/lib64/libsns_device_mode_stub.so
 vendor/lib64/libsns_fastRPC_util.so
 vendor/lib64/libsns_low_lat_stream_stub.so
-vendor/lib64/libsns_registry_skel.so
 vendor/lib64/libsnsapi.so
 vendor/lib64/libsnsdiaglog.so
 vendor/lib64/libssc.so
 vendor/lib64/libssc_default_listener.so
-vendor/lib64/libssccalapi.so
 vendor/lib64/libultrasound.so
 vendor/lib64/sensors.mius.proximity.so
 vendor/lib64/sensors.ssc.so
 vendor/lib64/sensors.touch.so
 vendor/lib64/vendor.qti.hardware.sensorscalibrate@1.0.so
-vendor/lib64/vendor.xiaomi.hardware.citsensorservice@1.0.so
-vendor/lib64/vendor.xiaomi.hardware.citsensorservice@1.1.so
 
 # Sensors Config
 vendor/etc/sensors/config/adux1050_0.json
@@ -820,7 +725,6 @@ vendor/etc/sensors/config/sns_tilt_sw_disabled.json
 vendor/etc/sensors/config/sns_tilt_sw_enabled.json
 vendor/etc/sensors/config/sns_tilt_to_wake.json
 vendor/etc/sensors/config/tcs3701.json
-vendor/etc/sensors/judge_calibrated.json
 
 # Neural networks
 vendor/bin/hw/android.hardware.neuralnetworks@1.3-service-qti
@@ -1011,19 +915,11 @@ vendor/etc/thermald-devices.conf
 -vendor/lib/libthermalclient.so
 -vendor/lib64/libthermalclient.so
 
-# Thermal Service Client
-system_ext/lib/libthermalclient.qti.so
-system_ext/lib64/libthermalclient.qti.so
-
 # Time services
 -vendor/app/TimeService/TimeService.apk
 vendor/bin/time_daemon
 vendor/etc/init/init.time_daemon.rc
 vendor/lib64/libtime_genoff.so
-
-# Touchscreen (Firmware)
-vendor/firmware/NT36xxx_MP_Setting_Criteria_5953.csv
-vendor/firmware/NT36xxx_MP_Setting_Criteria_5957.csv
 
 # Trusted Execution Environment connector
 vendor/bin/hw/vendor.qti.hardware.qteeconnector@1.0-service
@@ -1062,14 +958,10 @@ vendor/lib64/vendor.qti.hardware.vpp@1.3.so
 vendor/bin/hw/android.hardware.drm@1.3-service.widevine
 vendor/etc/init/android.hardware.drm@1.3-service.widevine.rc
 -vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.3-service.widevine.xml
-vendor/lib/libcppf.so
 vendor/lib64/mediadrm/libwvdrmengine.so
-vendor/lib64/librmp.so
 vendor/lib64/liboemcrypto.so
-vendor/lib64/libbase64.so
 vendor/lib64/libtrustedapploader.so
 vendor/lib64/libwvhidl.so
-vendor/lib64/libwvkeybox.so
 
 # WiFi
 vendor/bin/cnss-daemon

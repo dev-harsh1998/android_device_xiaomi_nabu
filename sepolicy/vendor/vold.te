@@ -1,2 +1,0 @@
-# Allow vold to set read_ahead_kb on /data partition
-allow vold vendor_sysfs_scsi_host:file w_file_perms;

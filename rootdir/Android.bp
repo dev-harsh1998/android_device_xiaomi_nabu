@@ -95,10 +95,3 @@ prebuilt_etc {
     src: "etc/ueventd.qcom.rc",
     vendor: true,
 }
-
-prebuilt_etc {
-    name: "init.nabu.perf.rc",
-    src: "etc/init.nabu.perf.rc",
-    sub_dir: "init",
-    vendor: true,
-}

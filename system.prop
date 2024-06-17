@@ -23,34 +23,11 @@ persist.vendor.dpm.feature=1
 # Fwk detect
 ro.vendor.qti.va_aosp.support=1
 
-# IMS
-persist.dbg.volte_avail_ovr=1
-persist.dbg.vt_avail_ovr=1
-persist.dbg.wfc_avail_ovr=1
-
-# IOP
-vendor.iop.enable_prefetch_ofr=1
-vendor.iop.enable_uxe=0
-
-# LOW RAM
-ro.config.low_ram=false
-
 # Media
 media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 
 # Netflix
 ro.netflix.bsp_rev=Q855-16947-1
-
-# Perf
-ro.vendor.qti.core_ctl_max_cpu=4
-ro.vendor.qti.core_ctl_min_cpu=2
-
-# Radio
-ro.telephony.default_network=33,22
-
-# Netmgr
-persist.vendor.data.iwlan.enable=true
-persist.vendor.data.mode=concurrent
 
 # SSR
 persist.vendor.ssr.restart_level=ALL_ENABLE

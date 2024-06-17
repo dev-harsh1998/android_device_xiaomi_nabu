@@ -1,5 +1,3 @@
-binder_call(system_app, storaged)
-binder_call(system_app, system_suspend)
-binder_call(system_app, hal_custom_hwcontrol)
-get_prop(system_server, vendor_wfd_sys_debug_prop)
+# Allow IFAAService access to Mlipay HAL
 hal_client_domain(system_app, hal_mlipay)
+hal_client_domain(system_app, hal_custom_hwcontrol)

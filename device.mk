@@ -98,20 +98,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
 
-# Adaptive Suspend
-PRODUCT_PROPERTY_OVERRIDES += \
-    suspend.short_suspend_threshold_millis=2000 \
-    suspend.short_suspend_backoff_enabled=true \
-    suspend.max_sleep_time_millis=40000
-
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio@7.0-impl \
-    android.hardware.audio.effect@7.0-impl \
-    android.hardware.audio.service \
-    android.hardware.soundtrigger@2.2-impl
+    android.hardware.audio@6.0-impl \
+    android.hardware.audio.effect@6.0-impl \
+    android.hardware.audio.service
 
 PRODUCT_PACKAGES += \
+    audio.primary.msmnile \
     audio.r_submix.default \
     audio.usb.default
 
@@ -185,11 +179,11 @@ PRODUCT_COPY_FILES += \
 
 # Device-specific settings
 PRODUCT_PACKAGES += \
-    XiaomiParts
+    XiaomiPad5HwCtrl
 
 # Dex
 PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
-PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := speed
 USE_DEX2OAT_DEBUG := false
 
 # Display
@@ -263,10 +257,6 @@ PRODUCT_PACKAGES += \
     libhidltransport.vendor \
     libhwbinder.vendor
 
-# HotwordEnrollement app permissions
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/permissions/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
-
 # IPACM
 PRODUCT_PACKAGES += \
     ipacm \
@@ -323,6 +313,7 @@ PRODUCT_PACKAGES += \
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
@@ -330,13 +321,19 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-# Perf
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.perf@2.2.vendor
-
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-nabu
+    android.hardware.power-service.lineage-libperfmgr \
+    libqti-perfd-client
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/google/interfaces \
+    hardware/google/pixel \
+    hardware/lineage/interfaces/power-libperfmgr \
+    hardware/qcom-caf/common/libqti-perfd-client
 
 # Protobuf
 PRODUCT_PACKAGES += \
@@ -345,13 +342,6 @@ PRODUCT_PACKAGES += \
 # Public libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
-
-# RRO support
-PRODUCT_PACKAGES += \
-    SystemUIOverlayNabu \
-    SettingsProviderOverlayNabu \
-    SettingsOverlayNabu \
-    FrameworkResOverlayNabu
 
 # RemovePackages
 PRODUCT_PACKAGES += \
@@ -383,7 +373,6 @@ PRODUCT_PACKAGES += \
     init.qti.dcvs.sh
 
 PRODUCT_PACKAGES += \
-    init.nabu.perf.rc \
     init.qcom.power.rc \
     init.qcom.rc \
     init.qcom.usb.rc \

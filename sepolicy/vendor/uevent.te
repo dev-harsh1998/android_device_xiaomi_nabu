@@ -1,2 +1,0 @@
-allow ueventd self:capability sys_nice;
-allow ueventd vendor_persist_wcnss_service_file:dir r_dir_perms;

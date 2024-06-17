@@ -19,6 +19,9 @@ $(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
+# Signing keys.
+$(call inherit-product, vendor/harshit/product.mk)
+
 # Inherit device configuration for nabu.
 $(call inherit-product, device/xiaomi/nabu/device.mk)
 
@@ -31,6 +34,6 @@ PRODUCT_MODEL := Xiaomi Pad 5
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="nabu_global-user 12 SKQ1.220303.001 V13.1.4.0.SKXMIXM release-keys"
+    PRIVATE_BUILD_DESC="nabu_global-user 13 RKQ1.200826.002 V816.0.1.0.TKXMIXM release-keys"
 
-BUILD_FINGERPRINT := Xiaomi/nabu_global/nabu:12/RKQ1.200826.002/V13.1.4.0.SKXMIXM:user/release-keys
+BUILD_FINGERPRINT := Xiaomi/nabu_global/nabu:13/RKQ1.200826.002/V816.0.1.0.TKXMIXM:user/release-keys

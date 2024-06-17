@@ -189,51 +189,7 @@ ro.soc.model=SM8150
 ro.crypto.volume.filenames_mode=aes-256-cts
 ro.crypto.dm_default_key.options_format.version=2
 ro.crypto.volume.metadata.method=dm-default-key
-
-# Dalvik
-dalvik.vm.heapgrowthlimit=256m
-dalvik.vm.heapmaxfree=8m
-dalvik.vm.heapminfree=512k
-dalvik.vm.heapsize=512m
-dalvik.vm.heapstartsize=8m
-dalvik.vm.heaptargetutilization=0.75
-
-# Display
-ro.surface_flinger.protected_contents=true
-ro.surface_flinger.use_color_management=true
-ro.vendor.display.ad=1
-ro.vendor.display.ad.sdr_calib_data=/vendor/etc/sdr_config.cfg
-ro.vendor.display.ad.hdr_calib_data=/vendor/etc/hdr_config.cfg
-ro.vendor.display.default_fps=60
-ro.vendor.display.sensortype=2
-vendor.display.comp_mask=0
-ro.surface_flinger.has_HDR_display=true
-ro.surface_flinger.has_wide_color_display=true
-ro.surface_flinger.use_content_detection_for_refresh_rate=true
-ro.surface_flinger.set_display_power_timer_ms=1000
-ro.surface_flinger.enable_layer_caching=true
-debug.sf.layer_caching_active_layer_timeout_ms=1000
-ro.surface_flinger.set_idle_timer_ms=500
-ro.surface_flinger.set_touch_timer_ms=1000
-debug.sf.frame_rate_multiple_threshold=120
-ro.surface_flinger.wcg_composition_dataspace=143261696
-vendor.display.dataspace_saturation_matrix=1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0
-vendor.display.disable_decimation=1
-vendor.display.disable_excl_rect=0
-vendor.display.disable_excl_rect_partial_fb=1
-vendor.display.disable_hw_recovery_dump=1
-vendor.display.disable_idle_time_hdr=1
-vendor.display.disable_idle_time_video=1
-vendor.display.disable_inline_rotator=1
-vendor.display.disable_rotator_downscale=1
-vendor.display.disable_scaler=1
-vendor.display.disable_ui_3d_tonemap=1
-vendor.display.enable_default_color_mode=0
-vendor.display.enable_force_split=1
-vendor.display.enable_null_display=0
-vendor.display.enable_optimize_refresh=1
-vendor.display.qdcm.disable_factory_mode=1
-vendor.display.qdcm.mode_combine=1
+ro.crypto.volume.options=::v2
 
 # Dexopt
 dalvik.vm.dex2oat64.enabled=true
@@ -249,45 +205,82 @@ dalvik.vm.dex2oat64.enabled=true
 dalvik.vm.minidebuginfo=false
 dalvik.vm.dex2oat-minidebuginfo=false
 
+# Dalvik
+dalvik.vm.heapgrowthlimit=256m
+dalvik.vm.heapmaxfree=8m
+dalvik.vm.heapminfree=512k
+dalvik.vm.heapsize=512m
+dalvik.vm.heapstartsize=8m
+dalvik.vm.heaptargetutilization=0.75
+
+# Display
+persist.sys.sf.color_mode=9
+persist.sys.sf.color_saturation=1.0
+persist.sys.sf.native_mode=2
+ro.surface_flinger.enable_frame_rate_override=false
+ro.surface_flinger.has_HDR_display=true
+ro.surface_flinger.has_wide_color_display=true
+ro.surface_flinger.protected_contents=true
+ro.surface_flinger.use_color_management=true
+ro.surface_flinger.wcg_composition_dataspace=143261696
+ro.surface_flinger.use_content_detection_for_refresh_rate=true
+ro.surface_flinger.set_display_power_timer_ms=1000
+ro.surface_flinger.set_idle_timer_ms=80
+ro.surface_flinger.set_touch_timer_ms=200
+ro.vendor.display.ad=1
+ro.vendor.display.ad.sdr_calib_data=/vendor/etc/sdr_config.cfg
+ro.vendor.display.ad.hdr_calib_data=/vendor/etc/hdr_config.cfg
+ro.vendor.display.default_fps=60
+ro.vendor.display.sensortype=2
+vendor.display.comp_mask=0
+vendor.display.dataspace_saturation_matrix=1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0
+vendor.display.disable_decimation=1
+vendor.display.disable_excl_rect=0
+vendor.display.disable_excl_rect_partial_fb=1
+vendor.display.disable_hw_recovery_dump=1
+vendor.display.disable_inline_rotator=1
+vendor.display.disable_scaler=0
+vendor.display.disable_ui_3d_tonemap=1
+vendor.display.enable_default_color_mode=0
+vendor.display.enable_force_split=1
+vendor.display.enable_null_display=0
+vendor.display.enable_optimize_refresh=1
+vendor.display.qdcm.disable_factory_mode=1
+vendor.display.qdcm.mode_combine=1
+
 # DRM
 drm.service.enabled=true
+
+# Fingerprint
+persist.vendor.qfp=false
 
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
-# FUSE passthrough
+# FUSE
 persist.sys.fuse.passthrough.enable=true
 
 # Gatekeeper
 vendor.gatekeeper.disable_spu=true
 
-# GPS
-persist.backup.ntpServer=0.pool.ntp.org
-
 # Graphics
+debug.egl.hw=0
+debug.mdpcomp.logs=0
+debug.sf.auto_latch_unsignaled=0
 debug.sf.disable_client_composition_cache=1
-debug.sdm.support_writeback=0
 debug.sf.enable_advanced_sf_phase_offset=1
-debug.sf.disable_backpressure=0
 debug.sf.enable_gl_backpressure=1
-debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
+debug.sf.enable_transaction_tracing=false
+debug.sf.high_fps_early_gl_phase_offset_ns=-4000000
 debug.sf.high_fps_early_phase_offset_ns=-4000000
 debug.sf.high_fps_late_app_phase_offset_ns=1000000
-debug.sf.high_fps_late_sf_phase_offset_ns=-2000000
+debug.sf.high_fps_late_sf_phase_offset_ns=-4000000
 debug.sf.hw=0
-debug.sf.auto_latch_unsignaled=0
-persist.demo.hdmirotationlock=false
-persist.sys.sf.color_mode=9
-persist.sys.sf.color_saturation=1.0
-persist.sys.sf.native_mode=2
 debug.sf.treat_170m_as_sRGB=1
 ro.hardware.egl=adreno
 ro.hardware.vulkan=adreno
 ro.opengles.version=196610
-debug.sf.enable_egl_image_tracker=1
-vendor.display.use_smooth_motion=1
 vendor.gralloc.disable_ubwc=0
-debug.sf.predict_hwc_composition_strategy=0
 
 # Media
 debug.stagefright.ccodec=1
@@ -301,20 +294,12 @@ vendor.power.pasr.enabled=false
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
-ro.vendor.perf-hal.ver=2.2
-ro.vendor.perf.scroll_opt=true
-ro.vendor.perf.scroll_opt.heavy_app=2
-vendor.power.pasr.enabled=false
-vendor.pasr.activemode.enabled=false
 
 # Sensors
 persist.vendor.sensors.enable.mag_filter=true
 
 # Shutdown
 sys.vendor.shutdown.waittime=500
-
-# Skia
-renderthread.skia.reduceopstasksplitting=true
 
 # USB
 vendor.usb.diag.func.name=diag
@@ -326,9 +311,6 @@ vendor.usb.rndis.func.name=gsi
 vendor.usb.use_ffs_mtp=0
 vendor.usb.use_gadget_hal=0
 
-#QCA1530 detection
-sys.qca1530=detect
-
 # WFD
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.max_virtual_display_dimension=4096
@@ -339,11 +321,6 @@ wifi.aware.interface=wifi-aware0
 
 # Zygote
 zygote.critical_window.minute=10
-
-# ZRAM writeback
-ro.zram.mark_idle_delay_mins=60
-ro.zram.first_wb_delay_mins=1440
-ro.zram.periodic_wb_delay_hours=24
 
 # LMKD
 ro.lmk.kill_heaviest_task=true

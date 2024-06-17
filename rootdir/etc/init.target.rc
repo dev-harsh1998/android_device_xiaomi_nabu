@@ -31,10 +31,6 @@ on early-init
     write /proc/sys/kernel/sched_boost 1
     symlink /data/tombstones /tombstones
 
-on early-init
-    # Start audio adsp rpc daemon at early init stage
-    start vendor.audioadsprpcd_audiopd
-
 on init
     write /dev/stune/foreground/schedtune.sched_boost_no_override 1
     write /dev/stune/top-app/schedtune.sched_boost_no_override 1
@@ -56,16 +52,10 @@ on init
     chmod 0666 /sys/class/leds/led:torch_0/brightness
     chmod 0666 /sys/class/leds/led:switch_0/brightness
 
+    chmod 0666 /dev/uhid
+
 on early-fs
     start vold
-
-    # Create an stune group for camera-specific processes
-    mkdir /dev/stune/camera-daemon
-    write /dev/stune/camera-daemon/schedtune.prefer_idle 1
-    write /dev/stune/camera-daemon/schedtune.boost 0
-    chown system system /dev/stune/camera-daemon
-    chown system system /dev/stune/camera-daemon/tasks
-    chmod 0664 /dev/stune/camera-daemon/tasks
 
 on fs
     start hwservicemanager
@@ -147,6 +137,17 @@ on boot
     chown system system /sys/class/drm/card0-DSI-1/doze_backlight
     start rmt_storage
     start rfs_access
+    write /dev/cpuset/top-app/cpus 0-3
+    write /dev/cpuset/audio-app/cpus 1-2
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 0-3
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-7
+    write /dev/cpuset/foreground/boost/cpus 0-7
+    write /dev/cpuset/background/cpus 0-7
+    write /dev/cpuset/system-background/cpus 0-7
 
     chown system system /sys/class/thermal/thermal_message/sconfig
 
@@ -215,7 +216,7 @@ on property:init.svc.vendor.per_mgr=running
 on property:sys.shutdown.requested=*
     stop vendor.per_proxy
 
-on property:init.svc.vendor.charger=running
+on charger
     mkdir /mnt/vendor/persist
     chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist

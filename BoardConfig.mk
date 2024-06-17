@@ -131,10 +131,6 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_BOARD_PLATFORM := msmnile
 TARGET_BOOTLOADER_BOARD_NAME := nabu
 
-# Power
-TARGET_USES_NON_LEGACY_POWERHAL := true
-TARGET_USES_INTERACTION_BOOST := true
-
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/product.prop
@@ -152,10 +148,11 @@ TARGET_USERIMAGES_USE_F2FS := true
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # Security patch level
-VENDOR_SECURITY_PATCH := 2023-01-01
+VENDOR_SECURITY_PATCH := 2024-03-01
 
 # Sepolicy
 include device/qcom/sepolicy_vndr/SEPolicy.mk
+include device/lineage/sepolicy/libperfmgr/sepolicy.mk
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor

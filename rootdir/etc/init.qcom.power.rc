@@ -25,13 +25,60 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+on enable-low-power
+    # Enable PowerHAL hint processing
+    setprop vendor.powerhal.init 1
+
+on property:init.svc.recovery=running
+    trigger enable-low-power
+
 on property:sys.boot_completed=1
+    trigger enable-low-power
+
     # Runtime fs tuning
     write /sys/block/sda/queue/nr_requests 128
     write /sys/block/sda/queue/iostats 1
 
+    # Block layer tuning: discard chunk size up to 128MB
+    # Otherwise, contiguous discards can be merged
+    write /sys/block/sda/queue/discard_max_bytes 134217728
+
+    # Back to default VM settings
+    write /proc/sys/vm/dirty_expire_centisecs 3000
+    write /proc/sys/vm/dirty_background_ratio 10
+
+    # Setup runtime cpusets
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-3,5-6
+    write /dev/cpuset/background/cpus 0-1
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/restricted/cpus 0-3
+
+    # Setup runtime blkio
+    # value for group_idle is us
+    write /dev/blkio/blkio.weight 1000
+    write /dev/blkio/background/blkio.weight 200
+    write /dev/blkio/blkio.group_idle 2000
+    write /dev/blkio/background/blkio.group_idle 0
+
+on early-init
+    # configure governor settings
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor schedutil
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 20000
+
+    # configure governor settings for big cluster
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor schedutil
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us 20000
+
+    # configure governor settings for big big CPU
+    write /sys/devices/system/cpu/cpu7/cpufreq/scaling_governor schedutil
+    write /sys/devices/system/cpu/cpu7/cpufreq/schedutil/up_rate_limit_us 500
+    write /sys/devices/system/cpu/cpu7/cpufreq/schedutil/down_rate_limit_us 20000
+
 on init
-    # Boot time cpusets
+    # Boot time cpuset and stune
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/foreground/cpus 0-7
     write /dev/cpuset/background/cpus 0-5

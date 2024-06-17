@@ -1,17 +1,6 @@
 allow init same_process_hal_file:file execute;
 
-allow init proc_last_kmsg:file {
-  r_file_perms
-  setattr
-};
-
-allow init self:qipcrtr_socket { create getattr read setopt write };
 allow init adsprpcd_file:file mounton;
 allow init touchfeature_device:chr_file rw_file_perms;
-allow init vendor_persist_sensors_file:file rw_file_perms;
-allow init vendor_sysfs_graphics:file rw_file_perms;
-allow init vendor_sysfs_keyboard:file { setattr getattr rw_file_perms };
+allow init vendor_sysfs_keyboard:file setattr;
 allowxperm init touchfeature_device:chr_file ioctl touchfeature_dev_ioctls;
-
-# Allow init to set read_ahead_kb on /data partition
-allow init vendor_sysfs_scsi_host:file w_file_perms;
