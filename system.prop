@@ -17,6 +17,10 @@ persist.vendor.color.matrix=2
 # Fwk detect
 ro.vendor.qti.va_aosp.support=1
 
+# LMKD
+ro.lmk.kill_heaviest_task=true
+ro.lmk.kill_timeout_ms=15
+
 # Media
 media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 
