@@ -365,6 +365,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     RemovePackages
 
+# QPR3 missing libs
+PRODUCT_PACKAGES += \
+    libcurl.vendor \
+    libjsoncpp.vendor \
+    libsqlite.vendor \
+    libpng.vendor
+
 # QMI
 PRODUCT_PACKAGES += \
     libjson \
