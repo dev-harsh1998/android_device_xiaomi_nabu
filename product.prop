@@ -16,7 +16,3 @@ use.voice.path.for.pcm.voip=true
 
 # radio
 ro.radio.noril=true
-
-# WFD
-persist.debug.wfd.enable=1
-persist.sys.wfd.virtual=0
