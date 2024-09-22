@@ -10,5 +10,7 @@ binder_call(hal_custom_hwcontrol_default, servicemanager);
 
 allow hal_custom_hwcontrol_default vendor_sysfs_keyboard:dir { getattr search open };
 allow hal_custom_hwcontrol_default vendor_sysfs_keyboard:{file lnk_file} rw_file_perms;
+allow hal_custom_hwcontrol_default sysfs_touchpanel:dir { getattr search open };              
+allow hal_custom_hwcontrol_default sysfs_touchpanel:{file lnk_file} rw_file_perms;
 allow hal_custom_hwcontrol_default touchfeature_device:chr_file rw_file_perms;
 allowxperm hal_custom_hwcontrol_default touchfeature_device:chr_file ioctl touchfeature_dev_ioctls;

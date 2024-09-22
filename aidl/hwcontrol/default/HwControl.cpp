@@ -52,11 +52,11 @@ namespace aidl::custom::hardware::hwcontrol {
             if (!DISABLE_DEBUG) LOG(INFO) << TAG << ": " << "setHwState: Keyboard state set to: " << state;
             break;
         case HwType::STYLUS:
-            setTouchFeatureState(TOUCH_FEATURE_STYLUS, state);
+            setTouchPanelState(TOUCH_FEATURE_STYLUS, state);
             if (!DISABLE_DEBUG) LOG(INFO) << TAG << ": " << "setHwState: Stylus state set to: " << state;
             break;
         case HwType::TAP2WAKE:
-            setTouchFeatureState(TOUCH_FEATURE_TAP2WAKE, state);
+            setTouchPanelState(TOUCH_FEATURE_TAP2WAKE, state);
             if (!DISABLE_DEBUG) LOG(INFO) << TAG << ": " << "setHwState: Tap2Wake state set to: " << state;
             break;
         default:

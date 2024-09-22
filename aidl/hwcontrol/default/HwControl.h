@@ -11,7 +11,7 @@
 #include <thread>
 
 #include "KeyboardState.h"
-#include "TouchFeatureState.h"
+#include "TouchPanelState.h"
 
 namespace aidl::custom::hardware::hwcontrol {
 

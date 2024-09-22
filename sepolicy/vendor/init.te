@@ -3,4 +3,5 @@ allow init same_process_hal_file:file execute;
 allow init adsprpcd_file:file mounton;
 allow init touchfeature_device:chr_file rw_file_perms;
 allow init vendor_sysfs_keyboard:file setattr;
+allow init sysfs_touchpanel:file setattr;
 allowxperm init touchfeature_device:chr_file ioctl touchfeature_dev_ioctls;

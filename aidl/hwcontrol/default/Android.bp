@@ -21,7 +21,7 @@ cc_binary {
     srcs: [
         "HwControl.cpp",
         "KeyboardState.cpp",
-        "TouchFeatureState.cpp",
+        "TouchPanelState.cpp",
         "service.cpp",
     ],
 }
