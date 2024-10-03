@@ -13,6 +13,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 # Inherit Window Extensions
 $(call inherit-product, $(SRC_TARGET_DIR)/product/window_extensions.mk)
 
+# Enable project quotas and casefolding for emulated storage without sdcardfs
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
 # Conditionally inherit GMS makefiles
 ifneq ("$(wildcard vendor/gapps/arm64/arm64-vendor.mk)", "")
 $(call inherit-product, vendor/gapps/arm64/arm64-vendor.mk)
