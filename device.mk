@@ -363,10 +363,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
 
-# RemovePackages
-PRODUCT_PACKAGES += \
-    RemovePackages
-
 # QPR3 missing libs
 PRODUCT_PACKAGES += \
     libcurl.vendor \
