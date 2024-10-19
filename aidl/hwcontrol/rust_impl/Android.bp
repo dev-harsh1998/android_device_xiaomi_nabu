@@ -1,0 +1,20 @@
+//
+// Copyright (C) 2024 Harshit Jain <dev-harsh1998@hotmail.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+rust_binary {
+    name: "custom.hardware.hwcontrol-service",
+    vintf_fragments: ["custom.hardware.hwcontrol.xml"],
+    init_rc: ["custom.hardware.hwcontrol.rc"],
+    srcs: [
+        "src/main.rs",
+    ],
+    prefer_rlib: true,
+    rustlibs: [
+        "libbinder_rs",
+        "liblog_rust",
+        "liblogger",
+        "custom.hardware.hwcontrol-V1-rust",
+    ],
+}

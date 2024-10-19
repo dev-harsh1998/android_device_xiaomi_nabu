@@ -1,0 +1,18 @@
+#
+# Copyright (C) 2024 Harshit Jain <dev-harsh1998@hotmail.com>
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+on init
+    chown system system /sys/devices/platform/soc/soc:xiaomi_keyboard/xiaomi_keyboard_conn_status
+    chmod 0664 /sys/devices/platform/soc/soc:xiaomi_keyboard/xiaomi_keyboard_conn_status
+    chown system system /sys/touchpanel/pen
+    chmod 0644 /sys/touchpanel/pen
+    chown system system /sys/touchpanel/double_tap
+    chmod 0644 /sys/touchpanel/double_tap
+
+service vendor.hw-aidl-rs /system/bin/custom.hardware.hwcontrol-service
+    class hal
+    user system
+    group system input uhid 

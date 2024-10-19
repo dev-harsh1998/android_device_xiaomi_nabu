@@ -1,0 +1,6 @@
+<manifest version="1.0" type="framework">
+   <hal format="aidl">
+       <name>custom.hardware.hwcontrol</name>
+       <fqname>IHwControl/default</fqname>
+   </hal>
+</manifest>
