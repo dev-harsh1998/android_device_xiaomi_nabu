@@ -148,6 +148,8 @@ on boot
     write /dev/cpuset/foreground/boost/cpus 0-7
     write /dev/cpuset/background/cpus 0-7
     write /dev/cpuset/system-background/cpus 0-7
+    chown system system /sys/touchpanel/pen_gen2_force
+    chmod 0644 /sys/touchpanel/pen_gen2_force
 
     chown system system /sys/class/thermal/thermal_message/sconfig
 
@@ -174,6 +176,12 @@ on boot
     setprop sys.usb.configfs 1
 
     write /sys/block/sda/queue/wbt_lat_usec 75000
+
+on property:persist.mi_pen.gen=2
+    write /sys/touchpanel/pen_gen2_force 1
+
+on property:persist.mi_pen.gen=1
+    write /sys/touchpanel/pen_gen2_force 0
 
 on property:vendor.display.lcd_density=560
    setprop dalvik.vm.heapgrowthlimit 256m

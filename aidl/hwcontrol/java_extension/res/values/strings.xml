@@ -17,6 +17,8 @@
     <string name="stylus_summary">Xiaomi Stylus Settings</string>
     <string name="stylus_switch_title">Enable Xiaomi Stylus</string>
     <string name="stylus_switch_summary">Enable this settings to use Xiaomi stylus</string>
+    <string name="stylus_gen_switch_title">Enable Xiaomi Stylus Gen2 support</string>
+    <string name="stylus_gen_switch_summary">Enables support for gen2 pen, should be toggled before turning on Stylus toggle above, once gen2 support is enabled, turn the screen off and turn it back on in 5-10 seconds.</string>
 
     <!-- Xiaomi Keyboard -->
     <string name="keyboard_title">Xiaomi Keyboard</string>

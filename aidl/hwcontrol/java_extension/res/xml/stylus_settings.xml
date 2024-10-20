@@ -24,4 +24,10 @@
         android:title="@string/stylus_switch_title"
         android:summary="@string/stylus_switch_summary"/>
 
+    <SwitchPreferenceCompat
+        android:key="stylus_gen_switch_key"
+        android:defaultValue="false"
+        android:title="@string/stylus_gen_switch_title"
+        android:summary="@string/stylus_gen_switch_summary"/>     
+
 </PreferenceScreen>

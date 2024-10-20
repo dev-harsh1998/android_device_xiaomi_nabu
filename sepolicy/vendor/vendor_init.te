@@ -3,6 +3,7 @@ set_prop(vendor_init, vendor_alarm_boot_prop)
 set_prop(vendor_init, vendor_bluetooth_prop)
 set_prop(vendor_init, vendor_camera_prop)
 set_prop(vendor_init, vendor_video_prop)
+get_prop(vendor_init, mi_pen_gen_prop)
 
 allow vendor_init {
   proc_dirty
@@ -10,6 +11,7 @@ allow vendor_init {
 }:file w_file_perms;
 
 allow vendor_init block_device:lnk_file setattr;
+allow vendor_init sysfs_touchpanel:file rw_file_perms;
 
 # Allow vendor_init to set IPA device node permissions
 allow vendor_init vendor_ipa_dev:file create_file_perms;

@@ -4,4 +4,6 @@ allow init adsprpcd_file:file mounton;
 allow init touchfeature_device:chr_file rw_file_perms;
 allow init vendor_sysfs_keyboard:file setattr;
 allow init sysfs_touchpanel:file setattr;
+allow init sysfs_touchpanel:file rw_file_perms;
 allowxperm init touchfeature_device:chr_file ioctl touchfeature_dev_ioctls;
+get_prop(init, mi_pen_gen_prop)
