@@ -19,9 +19,6 @@ renderthread.skia.reduceopstasksplitting=false
 # Fwk detect
 ro.vendor.qti.va_aosp.support=1
 
-# Media
-media.settings.xml=/vendor/etc/media_profiles_vendor.xml
-
 # Netflix
 ro.netflix.bsp_rev=Q855-16947-1
 
