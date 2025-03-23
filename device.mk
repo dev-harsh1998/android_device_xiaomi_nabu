@@ -27,6 +27,9 @@ $(warning Enabling Viper4Android audio effect.)
 $(call inherit-product, packages/apps/ViPER4AndroidFX/config.mk)
 endif
 
+# Symlinks
+$(call inherit-product, device/xiaomi/nabu/symlink/targets.mk)
+
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 30
 
