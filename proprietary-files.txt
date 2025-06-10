@@ -173,7 +173,7 @@ vendor/lib64/camera/fdconfigpreviewlite.bin
 vendor/lib64/camera/fdconfigvideo.bin
 vendor/lib64/camera/fdconfigvideolite.bin
 vendor/lib64/hw/camera.qcom.so
-vendor/lib64/hw/com.qti.chi.override.so;DISABLE_CHECKELF
+vendor/lib64/hw/com.qti.chi.override.so
 vendor/lib64/libFaceGrade.so
 vendor/lib64/libHalSuperSensorServer.so
 vendor/lib64/libMegviiFacepp-0.5.2.so
@@ -210,7 +210,7 @@ vendor/lib64/libmialgo_sd.so
 vendor/lib64/libmialgo_utils.so
 vendor/lib64/libmialgo_video_colourkeeping.so
 vendor/lib64/libmialgo_video_seg.so
-vendor/lib64/libmialgoengine.so;DISABLE_CHECKELF
+vendor/lib64/libmialgoengine.so
 vendor/lib64/libmiai_portraitsupernight.so
 vendor/lib64/libmibokeh_712.so
 vendor/lib64/libmibokeh_845_video.so
@@ -777,7 +777,7 @@ vendor/lib64/vendor.qti.ims.rcsconfig@1.1.so
 
 # Snapdragon Computer Vision Engine
 vendor/lib/libfastcvdsp_stub.so
--vendor/lib/libfastcvopt.so
+vendor/lib/libfastcvopt.so
 vendor/lib/libscveCommon.so
 vendor/lib/libscveCommon_stub.so
 vendor/lib/libscveObjectSegmentation.so
@@ -785,7 +785,7 @@ vendor/lib/libscveObjectSegmentation_stub.so
 vendor/lib/libscveObjectTracker.so
 vendor/lib/libscveObjectTracker_stub.so
 vendor/lib64/libfastcvdsp_stub.so
--vendor/lib64/libfastcvopt.so
+vendor/lib64/libfastcvopt.so
 vendor/lib64/libscveCommon.so
 vendor/lib64/libscveCommon_stub.so
 vendor/lib64/libscveObjectSegmentation.so
