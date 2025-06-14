@@ -4,6 +4,15 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
+// fstab file
+prebuilt_etc {
+    name: "fstab.qcom",
+    src: "etc/fstab.qcom",
+    vendor: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+}
+
 // Init scripts
 sh_binary {
     name: "init.class_main.sh",
@@ -86,6 +95,13 @@ prebuilt_etc {
     src: "etc/init.qcom.usb.rc",
     sub_dir: "init/hw",
     vendor: true,
+}
+
+prebuilt_etc {
+    name: "init.recovery.qcom.rc",
+    src: "etc/init.recovery.qcom.rc",
+    sub_dir: "init",
+    recovery: true,
 }
 
 prebuilt_etc {
