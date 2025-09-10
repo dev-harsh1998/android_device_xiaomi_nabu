@@ -99,6 +99,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml \
     $(LOCAL_PATH)/configs/android-removed-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android-removed-permissions.xml
 
+# Add external hardware midi support
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/android.hardware.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.midi.xml
+
 # Device is a Tablet
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 TARGET_SCREEN_HEIGHT := 2560
