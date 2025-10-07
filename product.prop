@@ -19,3 +19,6 @@ ro.radio.noril=true
 
 # Media
 ro.odm.build.media_performance_class=30
+
+# eBPF
+ro.bpf.kver_override=5.4.186
