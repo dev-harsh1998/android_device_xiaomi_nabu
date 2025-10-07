@@ -1,3 +1,6 @@
+# Animation override
+persist.sys.activity_anim_perf_override=true
+
 # Audio
 audio.offload.min.duration.secs=30
 persist.vendor.audio.hac.enable=false
