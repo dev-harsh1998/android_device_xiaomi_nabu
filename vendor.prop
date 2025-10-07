@@ -271,6 +271,7 @@ debug.sf.auto_latch_unsignaled=0
 debug.sf.latch_unsignaled=1
 debug.sf.disable_backpressure=1
 debug.sf.disable_client_composition_cache=1
+ro.surface_flinger.supports_background_blur=1
 debug.sf.enable_advanced_sf_phase_offset=1
 debug.sf.enable_gl_backpressure=0
 debug.sf.enable_transaction_tracing=false
