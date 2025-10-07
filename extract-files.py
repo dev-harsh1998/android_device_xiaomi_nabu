@@ -44,6 +44,8 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace('.*seclabel u:r:batterysecret:s0\n', ''),
     'vendor/etc/init/init.mi_thermald.rc': blob_fixup()
         .regex_replace('.*seclabel u:r:mi_thermald:s0\n', ''),
+    'vendor/etc/seccomp_policy/vendor.qti.hardware.dsp.policy': blob_fixup()
+        .add_line_if_missing('madvise: 1'),
     'vendor/lib/hw/audio.primary.nabu.so': blob_fixup()
         .binary_regex_replace(
             b'/vendor/lib/liba2dpoffload.so',
