@@ -308,7 +308,7 @@
       "PowerHint": "SUSTAINED_PERFORMANCE",
       "Node": "GPUMaxFreq",
       "Duration": 0,
-      "Value": "585000000"
+      "Value": "675000000"
     },
     {
       "PowerHint": "INTERACTION",
@@ -470,7 +470,7 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "GPUMinFreq",
       "Duration": 0,
-      "Value": "427000000"
+      "Value": "585000000"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
