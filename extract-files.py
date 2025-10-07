@@ -49,6 +49,8 @@ blob_fixups: blob_fixups_user_type = {
             b'/vendor/lib/liba2dpoffload.so',
             b'liba2dpoffload_nabu.so\x00\x00\x00\x00\x00\x00\x00',
         ),
+    ('vendor/lib/hw/audio.primary.nabu.so', 'vendor/lib/libaudioroute_ext.so'): blob_fixup()
+        .replace_needed('libaudioroute.so', 'libaudioroute-v34.so'),
     'vendor/lib64/camera/components/com.qti.node.watermark.so': blob_fixup()
         .add_needed("libpiex_shim.so"),
     ('vendor/lib64/mediadrm/libwvdrmengine.so', 'vendor/lib64/libwvhidl.so'): blob_fixup()
