@@ -375,6 +375,9 @@ PRODUCT_PACKAGES += \
 # init
 $(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):init_nabu)
 
+# Recovery
+$(call soong_config_set_bool,recovery,target_recovery_uses_qti_drm,true)
+
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.qcom \
