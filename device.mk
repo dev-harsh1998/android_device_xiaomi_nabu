@@ -281,6 +281,9 @@ PRODUCT_PACKAGES += \
     ipacm \
     IPACM_cfg.xml
 
+# Kernel
+PRODUCT_ENABLE_UFFD_GC := true
+
 # Keylayout
 PRODUCT_PACKAGES += \
     sm8150-tavil-snd-card_Button_Jack.kl
