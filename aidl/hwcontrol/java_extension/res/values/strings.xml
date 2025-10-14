@@ -14,21 +14,21 @@
 <resources>
     <!-- Xiaomi Stylus -->
     <string name="stylus_title">Xiaomi Stylus</string>
-    <string name="stylus_summary">Xiaomi Stylus Settings</string>
-    <string name="stylus_switch_title">Enable Xiaomi Stylus</string>
-    <string name="stylus_switch_summary">Enable this settings to use Xiaomi stylus</string>
-    <string name="stylus_gen_switch_title">Enable Xiaomi Stylus Gen2 support</string>
-    <string name="stylus_gen_switch_summary">Enables support for gen2 pen, should be toggled before turning on Stylus toggle above, once gen2 support is enabled, turn the screen off and turn it back on in 5-10 seconds.</string>
+    <string name="stylus_summary">Configure stylus support and generation</string>
+    <string name="stylus_switch_title">Enable stylus</string>
+    <string name="stylus_switch_summary">Enable support for Xiaomi stylus</string>
+    <string name="stylus_gen_switch_title">Generation 2 support</string>
+    <string name="stylus_gen_switch_summary">Enable before activating stylus. Requires screen off/on cycle to apply</string>
 
     <!-- Xiaomi Keyboard -->
     <string name="keyboard_title">Xiaomi Keyboard</string>
-    <string name="keyboard_summary">Xiaomi Keyboard Settings</string>
-    <string name="keyboard_switch_title">Enable Xiaomi Keyboard</string>
-    <string name="keyboard_switch_summary">Enable this settings to use Xiaomi Keyboard</string>
+    <string name="keyboard_summary">Configure keyboard attachment support</string>
+    <string name="keyboard_switch_title">Enable keyboard</string>
+    <string name="keyboard_switch_summary">Enable support for Xiaomi keyboard attachment</string>
 
-     <!-- Double tap 2 wake -->
-     <string name="double_tap_2_wake_title">Double tap to wake</string>
-     <string name="double_tap_2_wake_summary">Double tap to wake Settings</string>
-     <string name="double_tap_2_wake_switch_title">Enable Double tap to wake</string>
-     <string name="double_tap_2_wake_switch_summary">Enable this settings to use Double tap to wake to wakeup device.</string>
+    <!-- Double tap to wake -->
+    <string name="double_tap_2_wake_title">Double tap to wake</string>
+    <string name="double_tap_2_wake_summary">Wake device by double tapping the screen</string>
+    <string name="double_tap_2_wake_switch_title">Enable double tap to wake</string>
+    <string name="double_tap_2_wake_switch_summary">Allow waking device by double tapping the screen</string>
 </resources>

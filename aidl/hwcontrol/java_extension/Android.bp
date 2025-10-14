@@ -1,7 +1,6 @@
 android_app {
     name: "XiaomiPad5HwCtrl",
-
-    srcs: ["src/**/*.java"],
+    srcs: [ "src/**/*.kt" ],
     resource_dirs: ["res"],
     certificate: "platform",
     platform_apis: true,
@@ -11,6 +10,7 @@ android_app {
     static_libs: [
         "custom.hardware.hwcontrol-V1-java",
         "org.lineageos.settings.resources",
+        "androidx.preference_preference",
     ],
 
     required: [
