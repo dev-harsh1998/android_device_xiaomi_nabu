@@ -32,7 +32,6 @@ $(call inherit-product, device/xiaomi/nabu/device.mk)
 
 # crDroid build flag
 TARGET_ENABLE_BLUR := true
-TARGET_EXCLUDES_AUDIOFX := true
 
 PRODUCT_NAME := lineage_$(DEVICE_CODENAME)
 PRODUCT_DEVICE := nabu

@@ -125,6 +125,9 @@ BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := $(ALL_PARTITIONS)
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
+# This would get enabled based on the build flag WITH_GMS & WITHOUT_RESERVED_SIZE.
+-include vendor/lineage/config/BoardConfigReservedSize.mk
+
 # Platform
 BOARD_VENDOR := xiaomi
 QCOM_BOARD_PLATFORMS += msmnile
