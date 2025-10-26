@@ -134,6 +134,12 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default
 
+# Audio Amplifier & tools
+PRODUCT_PACKAGES += \
+    audio_amplifier.qcom \
+    tinyplay \
+    tinymix
+
 PRODUCT_PACKAGES += \
     liba2dpoffload \
     libaudiopreprocessing \

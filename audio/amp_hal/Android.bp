@@ -1,0 +1,38 @@
+//
+// SPDX-FileCopyrightText: 2025 Harshit Jain
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_shared {
+    name: "audio_amplifier.qcom",
+    relative_install_path: "hw",
+    vendor: true,
+    owner: "qti",
+
+    srcs: [
+        "mi_CS35L41_amp.c",
+    ],
+
+    include_dirs: [
+        "external/tinyalsa/include",
+        "external/tinycompress/include",
+        "system/media/audio_route/include",
+        "system/media/audio_utils/include",
+        "hardware/qcom-caf/sm8150/audio/hal",
+        "hardware/qcom-caf/sm8150/audio/hal/audio_extn",
+        "hardware/qcom-caf/sm8150/audio/hal/msm8974",
+    ],
+
+    header_libs: [
+        "libhardware_headers",
+        "qti_kernel_headers",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "libdl",
+        "libhardware",
+        "liblog",
+        "libtinyalsa",
+    ],
+}
