@@ -134,10 +134,21 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default
 
+# Audio Amplifier.
 PRODUCT_PACKAGES += \
+    audio_amplifier.qcom
+
+# Audio debug tools, no need in release builds.
+PRODUCT_PACKAGES_DEBUG += \
+    tinycap2 \
+    tinymix2 \
+    tinypcminfo2 \
+    tinyplay2
+
+PRODUCT_PACKAGES += \
+    audioadsprpcd \
     liba2dpoffload \
     libaudiopreprocessing \
-    libbatterylistener \
     libbundlewrapper \
     libcomprcapture \
     libdownmix \
@@ -154,12 +165,14 @@ PRODUCT_PACKAGES += \
     libsndmonitor \
     libspkrprot \
     libvisualizer \
+    libssrec \
     libvolumelistener
 
 # Audio configs
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
 
+# Audio policy configs
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml \
