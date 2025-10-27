@@ -101,7 +101,8 @@
  typedef enum {
      AMP_STATE_UNINITIALIZED = 0,
      AMP_STATE_IDLE = 1,
-     AMP_STATE_ACTIVE = 2
+     AMP_STATE_ACTIVE = 2,
+     AMP_STATE_DSP_ERROR = 3
  } cs35l41_amp_state_t;
  
  /* Main amplifier device structure */
@@ -110,6 +111,13 @@
      struct mixer* mixer;                /* ALSA mixer handle */
      cs35l41_amp_state_t state;          /* Current amplifier state */
      bool amplifiers_configured;         /* Track if amplifiers have been configured */
+     uint32_t last_devices;              /* Cache last configured device mask to prevent redundant reconfigurations */
+     bool last_enable_state;             /* Cache last enable/disable state */
+     struct timeval last_operation_time; /* Time of last enable/disable operation */
+     bool dsp_error_state;               /* Track DSP error state */
+     int dsp_error_count;                /* Count of DSP errors for diagnostics */
+     bool dsp_health_cached;             /* Cache DSP health check result */
+     struct timeval dsp_health_check_time; /* Time of last DSP health check */
  } cs35l41_amp_device_t;
  
  /* Global device instance */
@@ -118,6 +126,10 @@
  /* Logging rate limiting to prevent log spam */
  static struct timeval g_last_log_time = {0, 0};
  #define LOG_RATE_LIMIT_MS 2000  /* 2 seconds */
+ 
+ /* Forward declarations */
+ static int cs35l41_format_ctl_name(const char* base_name, const char* channel,
+                                    char* buf_out, size_t buf_size);
  
  /**
   * Check if logging should occur based on rate limit
@@ -136,6 +148,120 @@
      }
  
      return false;
+ }
+ 
+ /**
+  * Check DSP status for a specific channel to detect error states
+  * @param channel Channel name (TL, TR, BL, BR)
+  * @return 0 if DSP is healthy, negative error code if in error state
+  */
+ static int cs35l41_check_dsp_status(const char* channel) {
+     char ctl_name[CS35L41_CTL_NAME_MAX_LEN];
+     struct mixer_ctl* ctl;
+     int ret;
+     int firmware_state;
+ 
+     if (!channel || !g_cs35l41_device || !g_cs35l41_device->mixer) {
+         return -EINVAL;
+     }
+ 
+     /* Check DSP firmware status */
+     ret = cs35l41_format_ctl_name(CS35L41_CTL_DSP_FIRMWARE, channel,
+                                   ctl_name, sizeof(ctl_name));
+     if (ret < 0) {
+         return ret;
+     }
+ 
+     ctl = mixer_get_ctl_by_name(g_cs35l41_device->mixer, ctl_name);
+     if (!ctl) {
+         /* Control not found - assume DSP is not available/in error */
+         return -ENODEV;
+     }
+ 
+     /* Try to read current firmware state - if this fails, DSP might be crashed */
+     firmware_state = mixer_ctl_get_value(ctl, 0);
+     if (firmware_state < 0) {
+         ALOGE("%s: Failed to read DSP firmware state for %s: %d", __func__, channel, firmware_state);
+         return -EIO;
+     }
+ 
+     /* DSP firmware should be loaded and running */
+     ALOGV("%s: DSP firmware state for %s: %d", __func__, channel, firmware_state);
+     return 0;
+ }
+ 
+ /**
+  * Validate DSP health across all channels before amplifier operations
+  * Uses intelligent caching to avoid excessive DSP status checks
+  * @return true if DSP is healthy, false if in error state
+  */
+ static bool cs35l41_is_dsp_healthy(void) {
+     struct timeval current_time;
+     long time_diff_ms;
+     int error_count = 0;
+ 
+     if (!g_cs35l41_device) {
+         return false;
+     }
+ 
+     /* Check if we can use cached DSP health result */
+     gettimeofday(&current_time, NULL);
+     time_diff_ms = (current_time.tv_sec - g_cs35l41_device->dsp_health_check_time.tv_sec) * 1000 +
+                    (current_time.tv_usec - g_cs35l41_device->dsp_health_check_time.tv_usec) / 1000;
+ 
+     /* Use cached result if check was recent (within 5 seconds) */
+     if (time_diff_ms < 5000 && time_diff_ms >= 0) {
+         ALOGV("%s: Using cached DSP health result: %s (checked %ldms ago)",
+               __func__, g_cs35l41_device->dsp_health_cached ? "healthy" : "error", time_diff_ms);
+         return g_cs35l41_device->dsp_health_cached;
+     }
+ 
+     /* If we're in persistent error state, extend cache time and return cached result */
+     if (g_cs35l41_device->dsp_error_state && g_cs35l41_device->dsp_error_count > 5) {
+         ALOGW("%s: DSP in persistent error state (%d errors), extending cache time",
+               __func__, g_cs35l41_device->dsp_error_count);
+         g_cs35l41_device->dsp_health_check_time = current_time;
+         g_cs35l41_device->dsp_health_cached = false;
+         return false;
+     }
+ 
+     ALOGV("%s: Performing fresh DSP health check (last check %ldms ago)", __func__, time_diff_ms);
+ 
+     /* Perform fresh DSP status check for all channels */
+     for (int i = 0; i < MAX_CS35L41_AMPS; i++) {
+         int ret = cs35l41_check_dsp_status(CS35L41_AMP_CHANNELS[i]);
+         if (ret < 0) {
+             error_count++;
+             ALOGW("%s: DSP error detected on %s channel: %d",
+                   __func__, CS35L41_AMP_CHANNELS[i], ret);
+         }
+     }
+ 
+     /* Update DSP error state and cache result */
+     if (error_count > 0) {
+         if (!g_cs35l41_device->dsp_error_state) {
+             ALOGE("%s: DSP errors detected on %d/%d channels - entering error state",
+                   __func__, error_count, MAX_CS35L41_AMPS);
+             g_cs35l41_device->dsp_error_state = true;
+             g_cs35l41_device->state = AMP_STATE_DSP_ERROR;
+         }
+         g_cs35l41_device->dsp_error_count++;
+         g_cs35l41_device->dsp_health_cached = false;
+     } else {
+         if (g_cs35l41_device->dsp_error_state) {
+             /* DSP recovered */
+             ALOGI("%s: DSP recovered from error state", __func__);
+             g_cs35l41_device->dsp_error_state = false;
+             g_cs35l41_device->dsp_error_count = 0;
+             g_cs35l41_device->state = AMP_STATE_IDLE;
+         }
+         g_cs35l41_device->dsp_health_cached = true;
+     }
+ 
+     /* Update cache timestamp */
+     g_cs35l41_device->dsp_health_check_time = current_time;
+ 
+     return g_cs35l41_device->dsp_health_cached;
  }
  
  /**
@@ -189,13 +315,35 @@
          return -ENOENT;
      }
  
-     ret = mixer_ctl_set_value(ctl, 0, value);
-     if (ret < 0) {
-         ALOGE("%s: Failed to set '%s' to %d: %d", __func__, ctl_name, value, ret);
-         return ret;
+     /* Check if this is a multimedia mixer control that needs both stereo channels set */
+     bool is_multimedia_mixer = (strstr(ctl_name, "Audio Mixer MultiMedia") != NULL);
+ 
+     if (is_multimedia_mixer) {
+         /* Set both stereo channels for multimedia mixers */
+         ret = mixer_ctl_set_value(ctl, 0, value);
+         if (ret < 0) {
+             ALOGE("%s: Failed to set '%s' channel 0 to %d: %d", __func__, ctl_name, value, ret);
+             return ret;
+         }
+ 
+         ret = mixer_ctl_set_value(ctl, 1, value);
+         if (ret < 0) {
+             ALOGE("%s: Failed to set '%s' channel 1 to %d: %d", __func__, ctl_name, value, ret);
+             return ret;
+         }
+ 
+         ALOGV("%s: Set '%s' = %d (both stereo channels)", __func__, ctl_name, value);
+     } else {
+         /* Set single channel for other controls */
+         ret = mixer_ctl_set_value(ctl, 0, value);
+         if (ret < 0) {
+             ALOGE("%s: Failed to set '%s' to %d: %d", __func__, ctl_name, value, ret);
+             return ret;
+         }
+ 
+         ALOGV("%s: Set '%s' = %d", __func__, ctl_name, value);
      }
  
-     ALOGV("%s: Set '%s' = %d", __func__, ctl_name, value);
      return 0;
  }
  
@@ -264,6 +412,15 @@
      ret = cs35l41_mixer_set_enum(ctl_name, "Protection");
      if (ret < 0) {
          ALOGE("%s: Failed to set Protection firmware for %s", __func__, channel);
+         /* Mark DSP as in error state on critical firmware failure */
+         if (g_cs35l41_device) {
+             g_cs35l41_device->dsp_error_state = true;
+             g_cs35l41_device->dsp_error_count++;
+             g_cs35l41_device->state = AMP_STATE_DSP_ERROR;
+             /* Invalidate cache to force fresh check next time */
+             g_cs35l41_device->dsp_health_cached = false;
+             memset(&g_cs35l41_device->dsp_health_check_time, 0, sizeof(g_cs35l41_device->dsp_health_check_time));
+         }
          return ret;
      }
  
@@ -300,6 +457,12 @@
      }
  
      ALOGI("%s: Configuring %s amplifier", __func__, channel);
+ 
+     /* Verify DSP is accessible before configuration */
+     if (!cs35l41_is_dsp_healthy()) {
+         ALOGE("%s: DSP in error state - skipping %s amplifier configuration", __func__, channel);
+         return -EIO;
+     }
  
      /* Step 1: Load DSP firmware */
      ret = cs35l41_load_dsp_firmware(channel);
@@ -782,8 +945,19 @@
          return -ENODEV;
      }
  
-     ALOGI("%s: Setting output devices to 0x%x (prev state: %d)",
-           __func__, devices, g_cs35l41_device->state);
+     /* Only skip if this is truly a redundant call with no state change needed */
+     bool devices_changed = (g_cs35l41_device->last_devices != devices);
+     bool needs_initial_config = !g_cs35l41_device->amplifiers_configured;
+ 
+     if (!devices_changed && !needs_initial_config && g_cs35l41_device->state != AMP_STATE_UNINITIALIZED) {
+         ALOGV("%s: Devices unchanged (0x%x), skipping amplifier reconfiguration (state: %d)",
+               __func__, devices, g_cs35l41_device->state);
+         /* Still need to ensure multimedia mixers are properly configured for this device */
+         return cs35l41_configure_for_devices(devices);
+     }
+ 
+     ALOGI("%s: Setting output devices to 0x%x (prev: 0x%x, state: %d)",
+           __func__, devices, g_cs35l41_device->last_devices, g_cs35l41_device->state);
  
      /* Configure amplifiers based on active devices */
      int ret = cs35l41_configure_for_devices(devices);
@@ -791,6 +965,9 @@
          ALOGE("%s: Failed to configure for devices 0x%x: %d", __func__, devices, ret);
          return ret;
      }
+ 
+     /* Cache the configured device mask to prevent redundant reconfigurations */
+     g_cs35l41_device->last_devices = devices;
  
      ALOGI("%s: Successfully configured for devices 0x%x (new state: %d)",
            __func__, devices, g_cs35l41_device->state);
@@ -816,6 +993,8 @@
                                               uint32_t devices, bool enable) {
      int ret;
      int failed_count = 0;
+     struct timeval current_time;
+     long time_diff_ms;
  
      if (!g_cs35l41_device) {
          ALOGE("%s: Device not initialized", __func__);
@@ -827,8 +1006,28 @@
          return -ENODEV;
      }
  
-     ALOGI("%s: devices=0x%x, enable=%d, state=%d",
-           __func__, devices, enable, g_cs35l41_device->state);
+     /* Check for redundant operations to prevent rapid disable/enable cycles */
+     gettimeofday(&current_time, NULL);
+     time_diff_ms = (current_time.tv_sec - g_cs35l41_device->last_operation_time.tv_sec) * 1000 +
+                    (current_time.tv_usec - g_cs35l41_device->last_operation_time.tv_usec) / 1000;
+ 
+     /* Skip redundant operations within 500ms window for same device and enable state */
+     if (g_cs35l41_device->last_devices == devices &&
+         g_cs35l41_device->last_enable_state == enable &&
+         time_diff_ms < 500 && time_diff_ms >= 0) {
+         ALOGV("%s: Skipping redundant operation - devices=0x%x, enable=%d, last_op=%ldms ago",
+               __func__, devices, enable, time_diff_ms);
+         return 0;
+     }
+ 
+     ALOGI("%s: devices=0x%x, enable=%d, state=%d, last_op=%ldms ago",
+           __func__, devices, enable, g_cs35l41_device->state, time_diff_ms);
+ 
+     /* Check DSP health before attempting amplifier operations */
+     if (enable && !cs35l41_is_dsp_healthy()) {
+         ALOGE("%s: DSP is in error state - refusing to enable amplifiers", __func__);
+         return -EIO;
+     }
  
      if (enable) {
          /* Enable all amplifier channels synchronously */
@@ -842,6 +1041,13 @@
          }
  
          if (failed_count < MAX_CS35L41_AMPS) {
+             /* Enable multimedia mixers for QUAT_TDM_RX_0 routing */
+             ret = cs35l41_enable_all_multimedia_mixers();
+             if (ret < 0) {
+                 ALOGE("%s: Failed to enable multimedia mixers: %d", __func__, ret);
+                 /* Continue - amplifiers are already enabled */
+             }
+ 
              g_cs35l41_device->state = AMP_STATE_ACTIVE;
              ALOGI("%s: Amplifiers enabled (%d/%d channels OK)",
                    __func__, MAX_CS35L41_AMPS - failed_count, MAX_CS35L41_AMPS);
@@ -860,10 +1066,22 @@
              }
          }
  
+         /* Disable multimedia mixers for QUAT_TDM_RX_0 routing */
+         ret = cs35l41_disable_all_multimedia_mixers();
+         if (ret < 0) {
+             ALOGE("%s: Failed to disable multimedia mixers: %d", __func__, ret);
+             /* Continue - amplifiers are already disabled */
+         }
+ 
          g_cs35l41_device->state = AMP_STATE_IDLE;
          ALOGI("%s: Amplifiers disabled (%d/%d channels OK)",
                __func__, MAX_CS35L41_AMPS - failed_count, MAX_CS35L41_AMPS);
      }
+ 
+     /* Update cached values for future optimizations */
+     g_cs35l41_device->last_devices = devices;
+     g_cs35l41_device->last_enable_state = enable;
+     g_cs35l41_device->last_operation_time = current_time;
  
      return 0;
  }
@@ -1006,6 +1224,13 @@
      dev->mixer = NULL;
      dev->state = AMP_STATE_UNINITIALIZED;
      dev->amplifiers_configured = false;
+     dev->last_devices = 0;
+     dev->last_enable_state = false;
+     memset(&dev->last_operation_time, 0, sizeof(dev->last_operation_time));
+     dev->dsp_error_state = false;
+     dev->dsp_error_count = 0;
+     dev->dsp_health_cached = true; /* Initially assume healthy */
+     memset(&dev->dsp_health_check_time, 0, sizeof(dev->dsp_health_check_time));
  
      /* Set global device handle */
      g_cs35l41_device = dev;
