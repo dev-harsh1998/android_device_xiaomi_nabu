@@ -55,7 +55,7 @@
  #define CS35L41_CTL_MAIN_AMP_ENABLE     "Main AMP Enable Switch"
  #define CS35L41_CTL_ASPRX1_SLOT_POS     "ASPRX1 Slot Position"
  
- /* Hardware configuration values for CS35L41 */
+ /* Hardware configuration values optimized for CS35L41 */
  #define CS35L41_VPBR_CONFIG_VALUE       33575688    /* VPBR brown-out protection configuration */
  #define CS35L41_NOISE_GATE_VALUE        16245       /* Hardware noise gate threshold */
  #define CS35L41_AMP_PCM_GAIN_VALUE      18          /* Amplifier PCM gain in dB */
@@ -578,6 +578,227 @@
  }
  
  /* ============================================================================
+  * Device-Aware Audio Routing Implementation
+  * ============================================================================
+  */
+ 
+ /* Comprehensive audio device masks for proper routing decisions */
+ #define CS35L41_BLUETOOTH_A2DP_DEVICES (AUDIO_DEVICE_OUT_BLUETOOTH_A2DP | \
+                                        AUDIO_DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES | \
+                                        AUDIO_DEVICE_OUT_BLUETOOTH_A2DP_SPEAKER)
+ 
+ #define CS35L41_BLUETOOTH_SCO_DEVICES  (AUDIO_DEVICE_OUT_BLUETOOTH_SCO | \
+                                        AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET | \
+                                        AUDIO_DEVICE_OUT_BLUETOOTH_SCO_CARKIT)
+ 
+ #define CS35L41_ALL_BLUETOOTH_DEVICES  (CS35L41_BLUETOOTH_A2DP_DEVICES | \
+                                        CS35L41_BLUETOOTH_SCO_DEVICES)
+ 
+ #define CS35L41_SPEAKER_DEVICES        (AUDIO_DEVICE_OUT_SPEAKER | \
+                                        AUDIO_DEVICE_OUT_SPEAKER_SAFE)
+ 
+ #define CS35L41_WIRED_DEVICES          (AUDIO_DEVICE_OUT_WIRED_HEADSET | \
+                                        AUDIO_DEVICE_OUT_WIRED_HEADPHONE | \
+                                        AUDIO_DEVICE_OUT_LINE)
+ 
+ #define CS35L41_USB_DEVICES            (AUDIO_DEVICE_OUT_USB_DEVICE | \
+                                        AUDIO_DEVICE_OUT_USB_HEADSET | \
+                                        AUDIO_DEVICE_OUT_USB_ACCESSORY)
+ 
+ /**
+  * Enable all CS35L41 multimedia mixer controls
+  * @return 0 on success, negative error code on failure
+  */
+ static int cs35l41_enable_all_multimedia_mixers(void) {
+     int ret;
+     int failed_count = 0;
+ 
+     ALOGD("%s: Enabling all CS35L41 multimedia mixers", __func__);
+ 
+     /* Enable all multimedia tracks for CS35L41 amplifier */
+     for (size_t i = 0; i < CS35L41_MULTIMEDIA_TRACKS_COUNT; i++) {
+         ret = cs35l41_mixer_set_int(CS35L41_MULTIMEDIA_TRACKS[i], 1);
+         if (ret < 0) {
+             ALOGE("%s: Failed to enable %s: %d", __func__,
+                   CS35L41_MULTIMEDIA_TRACKS[i], ret);
+             failed_count++;
+         } else {
+             ALOGV("%s: Enabled %s", __func__, CS35L41_MULTIMEDIA_TRACKS[i]);
+         }
+     }
+ 
+     if (failed_count > 0) {
+         ALOGW("%s: %d/%zu mixer controls failed to enable",
+               __func__, failed_count, CS35L41_MULTIMEDIA_TRACKS_COUNT);
+     }
+ 
+     return (failed_count == CS35L41_MULTIMEDIA_TRACKS_COUNT) ? -EIO : 0;
+ }
+ 
+ /**
+  * Disable all CS35L41 multimedia mixer controls
+  * @return 0 on success, negative error code on failure
+  */
+ static int cs35l41_disable_all_multimedia_mixers(void) {
+     int ret;
+     int failed_count = 0;
+ 
+     ALOGD("%s: Disabling all CS35L41 multimedia mixers", __func__);
+ 
+     /* Disable all multimedia tracks for CS35L41 amplifier */
+     for (size_t i = 0; i < CS35L41_MULTIMEDIA_TRACKS_COUNT; i++) {
+         ret = cs35l41_mixer_set_int(CS35L41_MULTIMEDIA_TRACKS[i], 0);
+         if (ret < 0) {
+             ALOGE("%s: Failed to disable %s: %d", __func__,
+                   CS35L41_MULTIMEDIA_TRACKS[i], ret);
+             failed_count++;
+         } else {
+             ALOGV("%s: Disabled %s", __func__, CS35L41_MULTIMEDIA_TRACKS[i]);
+         }
+     }
+ 
+     if (failed_count > 0) {
+         ALOGW("%s: %d/%zu mixer controls failed to disable",
+               __func__, failed_count, CS35L41_MULTIMEDIA_TRACKS_COUNT);
+     }
+ 
+     return (failed_count == CS35L41_MULTIMEDIA_TRACKS_COUNT) ? -EIO : 0;
+ }
+ 
+ /**
+  * Configure CS35L41 amplifiers based on output devices
+  * This prevents dual-output when Bluetooth is active
+  *
+  * @param devices Current output device mask
+  * @return 0 on success, negative error code on failure
+  */
+ static int cs35l41_configure_for_devices(uint32_t devices) {
+     int ret = 0;
+     bool bluetooth_active = (devices & CS35L41_ALL_BLUETOOTH_DEVICES) != 0;
+     bool speaker_active = (devices & CS35L41_SPEAKER_DEVICES) != 0;
+     bool wired_active = (devices & CS35L41_WIRED_DEVICES) != 0;
+     bool usb_active = (devices & CS35L41_USB_DEVICES) != 0;
+     bool other_active = wired_active || usb_active;
+ 
+     ALOGI("%s: devices=0x%x, bt=%d, spk=%d, wired=%d, usb=%d",
+           __func__, devices, bluetooth_active, speaker_active, wired_active, usb_active);
+ 
+     if (bluetooth_active && !speaker_active) {
+         /* Bluetooth-only: Disable CS35L41 amplifiers completely */
+         ALOGI("%s: Bluetooth-only mode - disabling CS35L41", __func__);
+ 
+         ret = cs35l41_disable_all_multimedia_mixers();
+         if (ret < 0) {
+             ALOGE("%s: Failed to disable multimedia mixers: %d", __func__, ret);
+             return ret;
+         }
+ 
+         /* Disable amplifier channels */
+         for (int i = 0; i < MAX_CS35L41_AMPS; i++) {
+             int channel_ret = cs35l41_disable_amp_channel(CS35L41_AMP_CHANNELS[i]);
+             if (channel_ret < 0) {
+                 ALOGE("%s: Failed to disable channel %s: %d",
+                       __func__, CS35L41_AMP_CHANNELS[i], channel_ret);
+                 ret = channel_ret; /* Keep trying other channels */
+             }
+         }
+ 
+         if (ret == 0) {
+             g_cs35l41_device->state = AMP_STATE_IDLE;
+         }
+ 
+     } else if (speaker_active) {
+         /* Speaker mode (with or without other devices): Enable CS35L41 */
+         ALOGI("%s: Speaker mode - enabling CS35L41", __func__);
+ 
+         /* Enable amplifier channels first */
+         for (int i = 0; i < MAX_CS35L41_AMPS; i++) {
+             int channel_ret = cs35l41_enable_amp_channel(CS35L41_AMP_CHANNELS[i]);
+             if (channel_ret < 0) {
+                 ALOGE("%s: Failed to enable channel %s: %d",
+                       __func__, CS35L41_AMP_CHANNELS[i], channel_ret);
+                 ret = channel_ret; /* Keep trying other channels */
+             }
+         }
+ 
+         /* Enable multimedia mixers */
+         int mixer_ret = cs35l41_enable_all_multimedia_mixers();
+         if (mixer_ret < 0) {
+             ALOGE("%s: Failed to enable multimedia mixers: %d", __func__, mixer_ret);
+             ret = mixer_ret;
+         }
+ 
+         if (ret == 0) {
+             g_cs35l41_device->state = AMP_STATE_ACTIVE;
+         }
+ 
+         /* Log warning for dual output scenario */
+         if (bluetooth_active) {
+             ALOGW("%s: Dual output detected - both speaker and Bluetooth active", __func__);
+         }
+ 
+     } else if (other_active) {
+         /* Wired/USB devices: Disable CS35L41 to avoid conflicts */
+         ALOGI("%s: Wired/USB mode - disabling CS35L41", __func__);
+ 
+         ret = cs35l41_disable_all_multimedia_mixers();
+         if (ret == 0) {
+             g_cs35l41_device->state = AMP_STATE_IDLE;
+         }
+ 
+     } else {
+         /* No relevant devices or unknown configuration: Disable everything */
+         ALOGI("%s: No active devices or unknown config - disabling CS35L41", __func__);
+ 
+         ret = cs35l41_disable_all_multimedia_mixers();
+         if (ret == 0) {
+             g_cs35l41_device->state = AMP_STATE_IDLE;
+         }
+     }
+ 
+     return ret;
+ }
+ 
+ /**
+  * Set output devices - Handle device routing changes
+  * This is the main function that prevents Bluetooth+Speaker dual output
+  *
+  * Called by AudioFlinger when output device routing changes.
+  * Must complete synchronously and handle all device combinations properly.
+  *
+  * @param device Amplifier device handle (unused)
+  * @param devices Current output device mask from AudioFlinger
+  * @return 0 on success, negative error code on failure
+  */
+ static int cs35l41_amp_set_output_devices(UNUSED struct amplifier_device* device,
+                                           uint32_t devices) {
+     if (!g_cs35l41_device) {
+         ALOGE("%s: Device not initialized", __func__);
+         return -ENODEV;
+     }
+ 
+     if (!g_cs35l41_device->mixer) {
+         ALOGE("%s: Mixer not initialized", __func__);
+         return -ENODEV;
+     }
+ 
+     ALOGI("%s: Setting output devices to 0x%x (prev state: %d)",
+           __func__, devices, g_cs35l41_device->state);
+ 
+     /* Configure amplifiers based on active devices */
+     int ret = cs35l41_configure_for_devices(devices);
+     if (ret < 0) {
+         ALOGE("%s: Failed to configure for devices 0x%x: %d", __func__, devices, ret);
+         return ret;
+     }
+ 
+     ALOGI("%s: Successfully configured for devices 0x%x (new state: %d)",
+           __func__, devices, g_cs35l41_device->state);
+ 
+     return 0;
+ }
+ 
+ /* ============================================================================
   * Android Audio Amplifier HAL Interface Implementation
   * ============================================================================
   */
@@ -644,15 +865,6 @@
                __func__, MAX_CS35L41_AMPS - failed_count, MAX_CS35L41_AMPS);
      }
  
-     return 0;
- }
- 
- /**
-  * Set parameters - Not used for CS35L41
-  */
- static int cs35l41_amp_set_parameters(UNUSED struct amplifier_device* device,
-                                       UNUSED struct str_parms* parms) {
-     /* No parameter handling required for CS35L41 */
      return 0;
  }
  
@@ -776,7 +988,7 @@
  
      /* Set amplifier HAL interface functions */
      dev->amp_dev.set_input_devices = NULL;
-     dev->amp_dev.set_output_devices = NULL;
+     dev->amp_dev.set_output_devices = cs35l41_amp_set_output_devices;
      dev->amp_dev.enable_input_devices = NULL;
      dev->amp_dev.enable_output_devices = cs35l41_amp_enable_output_devices;
      dev->amp_dev.input_stream_standby = NULL;
@@ -784,7 +996,7 @@
      dev->amp_dev.set_mode = NULL;
      dev->amp_dev.input_stream_start = NULL;
      dev->amp_dev.output_stream_start = NULL;
-     dev->amp_dev.set_parameters = cs35l41_amp_set_parameters;
+     dev->amp_dev.set_parameters = NULL;
      dev->amp_dev.in_set_parameters = NULL;
      dev->amp_dev.out_set_parameters = NULL;
      dev->amp_dev.set_feedback = NULL;
