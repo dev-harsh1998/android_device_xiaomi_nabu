@@ -14,8 +14,13 @@
  * by vendor mixer paths and QCOM primary HAL.
  */
 
- #define LOG_TAG "audio_amplifier_cs35l41_minimal"
+ #define LOG_TAG "audio_amplifier_cs35l41_xiaomi"
 
+ /* Debug logging control - set to 1 to enable verbose logging, 0 for minimal logging */
+ #ifndef CS35L41_DEBUG
+ #define CS35L41_DEBUG 1
+ #endif
+ 
  #include <errno.h>
  #include <hardware/audio_amplifier.h>
  #include <hardware/hardware.h>
@@ -27,6 +32,26 @@
  #include <tinyalsa/asoundlib.h>
  
  #define UNUSED __attribute__((unused))
+ 
+ /*
+  * Debug logging macros - only enabled when CS35L41_DEBUG=1
+  * Used for verbose debugging
+  */
+ #if CS35L41_DEBUG
+     #define ALOGD_DBG(...) ALOGD(__VA_ARGS__)
+     #define ALOGV_DBG(...) ALOGV(__VA_ARGS__)
+ #else
+     #define ALOGD_DBG(...) ((void)0)
+     #define ALOGV_DBG(...) ((void)0)
+ #endif
+ 
+ /*
+  * Critical logging macros
+  * Used for errors, warnings, and important operational status
+  */
+ #define ALOGE_CRIT(...) ALOGE(__VA_ARGS__)  /* Always log errors */
+ #define ALOGW_CRIT(...) ALOGW(__VA_ARGS__)  /* Always log warnings */
+ #define ALOGI_CRIT(...) ALOGI(__VA_ARGS__)  /* Always log critical info */
  
  /* CS35L41 Hardware Configuration */
  #define MAX_CS35L41_AMPS 4
@@ -40,7 +65,6 @@
  /* Only controls not handled by mixer paths */
  #define CS35L41_AMP_ENABLE "AMP Enable"
  #define CS35L41_DSP_FIRMWARE "DSP1 Firmware"
- #define CS35L41_MAIN_AMP_ENABLE "Main AMP Enable Switch"
  
  /* Amplifier states */
  typedef enum {
@@ -78,24 +102,24 @@
      struct mixer_ctl* ctl;
  
      if (!g_amp_device || !g_amp_device->mixer || !name) {
-         ALOGE("%s: Invalid parameters - device=%p, mixer=%p, name=%p",
+         ALOGE_CRIT("%s: Invalid parameters - device=%p, mixer=%p, name=%p",
                __func__, g_amp_device, g_amp_device ? g_amp_device->mixer : NULL, name);
          return -EINVAL;
      }
  
-     ALOGV("%s: Setting control '%s' = %d", __func__, name, value);
+     ALOGV_DBG("%s: Setting control '%s' = %d", __func__, name, value);
  
      ctl = mixer_get_ctl_by_name(g_amp_device->mixer, name);
      if (!ctl) {
-         ALOGW("%s: Control '%s' not found in mixer", __func__, name);
+         ALOGW_CRIT("%s: Control '%s' not found in mixer", __func__, name);
          return -ENOENT;
      }
  
      int ret = mixer_ctl_set_value(ctl, 0, value);
      if (ret < 0) {
-         ALOGE("%s: Failed to set '%s' = %d: %s (%d)", __func__, name, value, strerror(-ret), ret);
+         ALOGE_CRIT("%s: Failed to set '%s' = %d: %s (%d)", __func__, name, value, strerror(-ret), ret);
      } else {
-         ALOGD("%s: Successfully set '%s' = %d", __func__, name, value);
+         ALOGD_DBG("%s: Successfully set '%s' = %d", __func__, name, value);
      }
  
      return ret;
@@ -114,12 +138,12 @@
      int healthy_count = 0;
  
      if (!g_amp_device) {
-         ALOGE("%s: Device not initialized", __func__);
+         ALOGE_CRIT("%s: Device not initialized", __func__);
          return false;
      }
  
      if (!g_amp_device->mixer) {
-         ALOGE("%s: Mixer not initialized", __func__);
+         ALOGE_CRIT("%s: Mixer not initialized", __func__);
          return false;
      }
  
@@ -129,36 +153,36 @@
                  (current_time.tv_usec - g_amp_device->last_health_check.tv_usec) / 1000;
  
      if (time_diff < 5000 && time_diff >= 0) {
-         ALOGV("%s: Using cached DSP health result: %s (checked %ldms ago)",
+         ALOGV_DBG("%s: Using cached DSP health result: %s (checked %ldms ago)",
                __func__, g_amp_device->dsp_healthy ? "healthy" : "unhealthy", time_diff);
          return g_amp_device->dsp_healthy;
      }
  
-     ALOGI("%s: Performing DSP health check (last check %ldms ago, error_count=%d)",
+     ALOGI_CRIT("%s: Performing DSP health check (last check %ldms ago, error_count=%d)",
            __func__, time_diff, g_amp_device->error_count);
  
      /* Check DSP firmware state for all channels */
      for (int i = 0; i < MAX_CS35L41_AMPS; i++) {
          if (format_control_name(CS35L41_CHANNELS[i], CS35L41_DSP_FIRMWARE,
                                 control_name, sizeof(control_name)) < 0) {
-             ALOGE("%s: Failed to format control name for %s", __func__, CS35L41_CHANNELS[i]);
+             ALOGE_CRIT("%s: Failed to format control name for %s", __func__, CS35L41_CHANNELS[i]);
              continue;
          }
  
-         ALOGV("%s: Checking DSP firmware for %s (%s)", __func__, CS35L41_CHANNELS[i], control_name);
+         ALOGV_DBG("%s: Checking DSP firmware for %s (%s)", __func__, CS35L41_CHANNELS[i], control_name);
  
          ctl = mixer_get_ctl_by_name(g_amp_device->mixer, control_name);
          if (!ctl) {
-             ALOGW("%s: DSP control '%s' not found for %s", __func__, control_name, CS35L41_CHANNELS[i]);
+             ALOGW_CRIT("%s: DSP control '%s' not found for %s", __func__, control_name, CS35L41_CHANNELS[i]);
              continue;
          }
  
          firmware_state = mixer_ctl_get_value(ctl, 0);
          if (firmware_state >= 0) {
              healthy_count++;
-             ALOGV("%s: %s DSP firmware state: %d (healthy)", __func__, CS35L41_CHANNELS[i], firmware_state);
+             ALOGV_DBG("%s: %s DSP firmware state: %d (healthy)", __func__, CS35L41_CHANNELS[i], firmware_state);
          } else {
-             ALOGE("%s: DSP error on %s channel: firmware_state=%d", __func__, CS35L41_CHANNELS[i], firmware_state);
+             ALOGE_CRIT("%s: DSP error on %s channel: firmware_state=%d", __func__, CS35L41_CHANNELS[i], firmware_state);
          }
      }
  
@@ -168,14 +192,14 @@
  
      if (!g_amp_device->dsp_healthy) {
          g_amp_device->error_count++;
-         ALOGE("%s: DSP health check failed: %d/%d channels healthy, error_count=%d",
+         ALOGE_CRIT("%s: DSP health check failed: %d/%d channels healthy, error_count=%d",
                __func__, healthy_count, MAX_CS35L41_AMPS, g_amp_device->error_count);
      } else {
          if (g_amp_device->error_count > 0) {
-             ALOGI("%s: DSP recovered from error state (was %d errors)", __func__, g_amp_device->error_count);
+             ALOGI_CRIT("%s: DSP recovered from error state (was %d errors)", __func__, g_amp_device->error_count);
              g_amp_device->error_count = 0;
          } else {
-             ALOGI("%s: DSP health check passed: all %d channels healthy", __func__, MAX_CS35L41_AMPS);
+             ALOGI_CRIT("%s: DSP health check passed: all %d channels healthy", __func__, MAX_CS35L41_AMPS);
          }
      }
  
@@ -192,36 +216,28 @@
      int ret;
  
      if (!channel) {
-         ALOGE("%s: Invalid channel parameter", __func__);
+         ALOGE_CRIT("%s: Invalid channel parameter", __func__);
          return -EINVAL;
      }
  
-     ALOGD("%s: %s amplifier channel %s", __func__, enable ? "Enabling" : "Disabling", channel);
+     ALOGD_DBG("%s: %s amplifier channel %s", __func__, enable ? "Enabling" : "Disabling", channel);
  
      /* Physical amplifier enable/disable */
      if (format_control_name(channel, CS35L41_AMP_ENABLE,
                             control_name, sizeof(control_name)) >= 0) {
          ret = set_mixer_control(control_name, enable ? 1 : 0);
          if (ret < 0) {
-             ALOGE("%s: Failed to %s %s physical amplifier: %d", __func__,
+             ALOGE_CRIT("%s: Failed to %s %s physical amplifier: %d", __func__,
                    enable ? "enable" : "disable", channel, ret);
              return ret;
          }
      } else {
-         ALOGE("%s: Failed to format AMP Enable control name for %s", __func__, channel);
+         ALOGE_CRIT("%s: Failed to format AMP Enable control name for %s", __func__, channel);
          return -EINVAL;
      }
  
-     /* Main amplifier enable - ensure it's set when enabling */
-     if (enable && format_control_name(channel, CS35L41_MAIN_AMP_ENABLE,
-                                      control_name, sizeof(control_name)) >= 0) {
-         ret = set_mixer_control(control_name, 1);
-         if (ret < 0) {
-             ALOGW("%s: Failed to enable %s main amplifier (non-critical): %d", __func__, channel, ret);
-         }
-     }
  
-     ALOGD("%s: %s %s amplifier", __func__, enable ? "Enabled" : "Disabled", channel);
+     ALOGD_DBG("%s: %s %s amplifier", __func__, enable ? "Enabled" : "Disabled", channel);
      return 0;
  }
  
@@ -232,11 +248,11 @@
      int ret = 0;
      int failed_count = 0;
  
-     ALOGI("%s: Enabling all CS35L41 amplifiers (current state: %d)",
+     ALOGI_CRIT("%s: Enabling all CS35L41 amplifiers (current state: %d)",
            __func__, g_amp_device ? g_amp_device->state : -1);
  
      if (!check_dsp_health()) {
-         ALOGE("%s: DSP unhealthy - refusing to enable amplifiers", __func__);
+         ALOGE_CRIT("%s: DSP unhealthy - refusing to enable amplifiers", __func__);
          if (g_amp_device) {
              g_amp_device->state = AMP_STATE_ERROR;
          }
@@ -246,7 +262,7 @@
      for (int i = 0; i < MAX_CS35L41_AMPS; i++) {
          int channel_ret = control_amp_channel(CS35L41_CHANNELS[i], true);
          if (channel_ret < 0) {
-             ALOGE("%s: Failed to enable %s amplifier: %d", __func__, CS35L41_CHANNELS[i], channel_ret);
+             ALOGE_CRIT("%s: Failed to enable %s amplifier: %d", __func__, CS35L41_CHANNELS[i], channel_ret);
              failed_count++;
              ret = channel_ret;
          }
@@ -254,14 +270,14 @@
  
      if (failed_count == 0) {
          g_amp_device->state = AMP_STATE_ACTIVE;
-         ALOGI("%s: All amplifiers enabled successfully (%d/%d)", __func__, MAX_CS35L41_AMPS, MAX_CS35L41_AMPS);
+         ALOGI_CRIT("%s: All amplifiers enabled successfully (%d/%d)", __func__, MAX_CS35L41_AMPS, MAX_CS35L41_AMPS);
      } else if (failed_count < MAX_CS35L41_AMPS) {
          g_amp_device->state = AMP_STATE_ACTIVE;
-         ALOGW("%s: Partial amplifier enable: %d/%d succeeded, %d failed",
+         ALOGW_CRIT("%s: Partial amplifier enable: %d/%d succeeded, %d failed",
                __func__, MAX_CS35L41_AMPS - failed_count, MAX_CS35L41_AMPS, failed_count);
      } else {
          g_amp_device->state = AMP_STATE_ERROR;
-         ALOGE("%s: All amplifiers failed to enable (%d/%d failed)", __func__, failed_count, MAX_CS35L41_AMPS);
+         ALOGE_CRIT("%s: All amplifiers failed to enable (%d/%d failed)", __func__, failed_count, MAX_CS35L41_AMPS);
          return -EIO;
      }
      return ret;
@@ -273,12 +289,12 @@
  static int disable_all_amplifiers(void) {
      int failed_count = 0;
  
-     ALOGI("%s: Disabling all CS35L41 amplifiers (current state: %d)",
+     ALOGI_CRIT("%s: Disabling all CS35L41 amplifiers (current state: %d)",
            __func__, g_amp_device ? g_amp_device->state : -1);
  
      for (int i = 0; i < MAX_CS35L41_AMPS; i++) {
          if (control_amp_channel(CS35L41_CHANNELS[i], false) < 0) {
-             ALOGE("%s: Failed to disable %s amplifier", __func__, CS35L41_CHANNELS[i]);
+             ALOGE_CRIT("%s: Failed to disable %s amplifier", __func__, CS35L41_CHANNELS[i]);
              failed_count++;
          }
      }
@@ -286,9 +302,9 @@
      g_amp_device->state = AMP_STATE_IDLE;
  
      if (failed_count == 0) {
-         ALOGI("%s: All amplifiers disabled successfully (%d/%d)", __func__, MAX_CS35L41_AMPS, MAX_CS35L41_AMPS);
+         ALOGI_CRIT("%s: All amplifiers disabled successfully (%d/%d)", __func__, MAX_CS35L41_AMPS, MAX_CS35L41_AMPS);
      } else {
-         ALOGW("%s: Partial amplifier disable: %d/%d succeeded, %d failed",
+         ALOGW_CRIT("%s: Partial amplifier disable: %d/%d succeeded, %d failed",
                __func__, MAX_CS35L41_AMPS - failed_count, MAX_CS35L41_AMPS, failed_count);
      }
      return 0;
@@ -301,22 +317,22 @@
  static int cs35l41_enable_output_devices(UNUSED struct amplifier_device* device,
                                          UNUSED uint32_t devices, bool enable) {
      if (!g_amp_device) {
-         ALOGE("%s: Amplifier device not initialized", __func__);
+         ALOGE_CRIT("%s: Amplifier device not initialized", __func__);
          return -ENODEV;
      }
  
      if (!g_amp_device->mixer) {
-         ALOGE("%s: Mixer not initialized", __func__);
+         ALOGE_CRIT("%s: Mixer not initialized", __func__);
          return -ENODEV;
      }
  
-     ALOGI("%s: Amplifiers %s requested for devices=0x%x", __func__, enable ? "enable" : "disable", devices);
-     ALOGD("%s: Current HAL state: %d, DSP healthy: %s, error count: %d", __func__,
+     ALOGI_CRIT("%s: Amplifiers %s requested for devices=0x%x", __func__, enable ? "enable" : "disable", devices);
+     ALOGD_DBG("%s: Current HAL state: %d, DSP healthy: %s, error count: %d", __func__,
            g_amp_device->state, g_amp_device->dsp_healthy ? "yes" : "no", g_amp_device->error_count);
  
      int ret = enable ? enable_all_amplifiers() : disable_all_amplifiers();
  
-     ALOGI("%s: Amplifier operation %s, result: %s (%d)", __func__,
+     ALOGI_CRIT("%s: Amplifier operation %s, result: %s (%d)", __func__,
            enable ? "enable" : "disable", ret == 0 ? "success" : "failed", ret);
  
      return ret;
@@ -325,34 +341,34 @@
  static int cs35l41_calibrate(UNUSED struct amplifier_device* device,
                              UNUSED void* adev) {
      if (!g_amp_device) {
-         ALOGE("%s: Amplifier device not initialized", __func__);
+         ALOGE_CRIT("%s: Amplifier device not initialized", __func__);
          return -ENODEV;
      }
  
-     ALOGI("%s: Starting CS35L41 quad amplifier initialization", __func__);
-     ALOGD("%s: Note: Firmware loading and configuration handled by vendor mixer paths", __func__);
+     ALOGI_CRIT("%s: Starting CS35L41 quad amplifier initialization", __func__);
+     ALOGD_DBG("%s: Note: Firmware loading and configuration handled by vendor mixer paths", __func__);
  
      /* Open mixer for hardware control */
-     ALOGD("%s: Opening mixer card %d for hardware control", __func__, CS35L41_MIXER_CARD);
+     ALOGD_DBG("%s: Opening mixer card %d for hardware control", __func__, CS35L41_MIXER_CARD);
      g_amp_device->mixer = mixer_open(CS35L41_MIXER_CARD);
      if (!g_amp_device->mixer) {
-         ALOGE("%s: Failed to open mixer card %d", __func__, CS35L41_MIXER_CARD);
+         ALOGE_CRIT("%s: Failed to open mixer card %d", __func__, CS35L41_MIXER_CARD);
          g_amp_device->state = AMP_STATE_ERROR;
          return -ENODEV;
      }
-     ALOGI("%s: Mixer card %d opened successfully", __func__, CS35L41_MIXER_CARD);
+     ALOGI_CRIT("%s: Mixer card %d opened successfully", __func__, CS35L41_MIXER_CARD);
  
      /* Verify DSP health after mixer paths have configured everything */
-     ALOGD("%s: Verifying DSP firmware health (should be loaded by mixer paths)", __func__);
+     ALOGD_DBG("%s: Verifying DSP firmware health (should be loaded by mixer paths)", __func__);
      if (!check_dsp_health()) {
-         ALOGE("%s: DSP health check failed during initialization", __func__);
-         ALOGE("%s: This likely means vendor mixer paths didn't configure firmware properly", __func__);
+         ALOGE_CRIT("%s: DSP health check failed during initialization", __func__);
+         ALOGE_CRIT("%s: This likely means vendor mixer paths didn't configure firmware properly", __func__);
          g_amp_device->state = AMP_STATE_ERROR;
          return -EIO;
      }
  
      g_amp_device->state = AMP_STATE_IDLE;
-     ALOGI("%s: CS35L41 quad amplifier initialization complete (state: %d, error count: %d)",
+     ALOGI_CRIT("%s: CS35L41 quad amplifier initialization complete (state: %d, error count: %d)",
            __func__, g_amp_device->state, g_amp_device->error_count);
  
      return 0;
@@ -365,21 +381,21 @@
      cs35l41_device_t* dev = (cs35l41_device_t*)device;
  
      if (!dev) {
-         ALOGE("%s: Invalid device parameter", __func__);
+         ALOGE_CRIT("%s: Invalid device parameter", __func__);
          return -EINVAL;
      }
  
-     ALOGI("%s: Closing CS35L41 amplifier device (state: %d)", __func__, dev->state);
+     ALOGI_CRIT("%s: Closing CS35L41 amplifier device (state: %d)", __func__, dev->state);
  
      /* Disable amplifiers before closing */
      if (dev->mixer && dev->state == AMP_STATE_ACTIVE) {
-         ALOGD("%s: Disabling active amplifiers before closing", __func__);
+         ALOGD_DBG("%s: Disabling active amplifiers before closing", __func__);
          disable_all_amplifiers();
      }
  
      /* Close mixer */
      if (dev->mixer) {
-         ALOGD("%s: Closing mixer handle", __func__);
+         ALOGD_DBG("%s: Closing mixer handle", __func__);
          mixer_close(dev->mixer);
          dev->mixer = NULL;
      }
@@ -388,7 +404,7 @@
      free(dev);
      g_amp_device = NULL;
  
-     ALOGI("%s: CS35L41 amplifier device closed successfully", __func__);
+     ALOGI_CRIT("%s: CS35L41 amplifier device closed successfully", __func__);
      return 0;
  }
  
@@ -399,21 +415,21 @@
                                hw_device_t** device) {
      cs35l41_device_t* dev;
  
-     ALOGI("%s: Opening minimal Xiaomi CS35L41 amplifier HAL", __func__);
+     ALOGI_CRIT("%s: Opening minimal Xiaomi CS35L41 amplifier HAL", __func__);
  
      if (strcmp(name, AMPLIFIER_HARDWARE_INTERFACE) != 0) {
-         ALOGE("%s: Invalid interface name: %s (expected: %s)", __func__, name, AMPLIFIER_HARDWARE_INTERFACE);
+         ALOGE_CRIT("%s: Invalid interface name: %s (expected: %s)", __func__, name, AMPLIFIER_HARDWARE_INTERFACE);
          return -EINVAL;
      }
  
      if (g_amp_device) {
-         ALOGE("%s: Device already opened", __func__);
+         ALOGE_CRIT("%s: Device already opened", __func__);
          return -EBUSY;
      }
  
      dev = calloc(1, sizeof(cs35l41_device_t));
      if (!dev) {
-         ALOGE("%s: Failed to allocate device structure", __func__);
+         ALOGE_CRIT("%s: Failed to allocate device structure", __func__);
          return -ENOMEM;
      }
  
@@ -448,7 +464,7 @@
      g_amp_device = dev;
      *device = (hw_device_t*)dev;
  
-     ALOGI("%s: Minimal CS35L41 amplifier HAL opened successfully (state: %d)", __func__, dev->state);
+     ALOGI_CRIT("%s: Minimal CS35L41 amplifier HAL opened successfully (state: %d)", __func__, dev->state);
      return 0;
  }
  
@@ -468,4 +484,4 @@
          .author = "Harshit Jain",
          .methods = &cs35l41_module_methods,
      },
- };
+ }; 
