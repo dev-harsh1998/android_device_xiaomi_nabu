@@ -484,4 +484,4 @@
          .author = "Harshit Jain",
          .methods = &cs35l41_module_methods,
      },
- }; 
+ };
