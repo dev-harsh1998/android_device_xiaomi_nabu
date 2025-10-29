@@ -134,11 +134,16 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default
 
-# Audio Amplifier & tools
+# Audio Amplifier.
 PRODUCT_PACKAGES += \
-    audio_amplifier.qcom \
-    tinyplay \
-    tinymix
+    audio_amplifier.qcom
+
+# Audio debug tools, no need in release builds.
+PRODUCT_PACKAGES_DEBUG += \
+    tinycap2 \
+    tinymix2 \
+    tinypcminfo2 \
+    tinyplay2
 
 PRODUCT_PACKAGES += \
     audioadsprpcd \
