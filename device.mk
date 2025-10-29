@@ -141,6 +141,7 @@ PRODUCT_PACKAGES += \
     tinymix
 
 PRODUCT_PACKAGES += \
+    audioadsprpcd \
     liba2dpoffload \
     libaudiopreprocessing \
     libbatterylistener \

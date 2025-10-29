@@ -1,9 +1,7 @@
 # All unpinned blobs below are extracted from nabu_global-user 12 RKQ1.200826.002 V13.1.3.0.SKXMIXM release-keys
 
 # ADSP
-vendor/bin/adsprpcd
 vendor/bin/dspservice
-vendor/etc/init/vendor.qti.adsprpc-service.rc
 vendor/etc/init/vendor.qti.hardware.dsp@1.0-service.rc
 vendor/etc/seccomp_policy/vendor.qti.hardware.dsp.policy
 vendor/lib/libadsp_default_listener.so
