@@ -160,6 +160,7 @@ PRODUCT_PACKAGES += \
     libsndmonitor \
     libspkrprot \
     libvisualizer \
+    libssrec \
     libvolumelistener
 
 # Audio configs
