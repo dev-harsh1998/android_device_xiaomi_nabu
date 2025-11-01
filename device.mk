@@ -140,9 +140,9 @@ PRODUCT_PACKAGES += \
 
 # Audio debug tools, no need in release builds.
 PRODUCT_PACKAGES_DEBUG += \
-    tinycap2 \
+    tinycap \
     tinymix2 \
-    tinypcminfo2 \
+    tinypcminfo \
     tinyplay2
 
 PRODUCT_PACKAGES += \
