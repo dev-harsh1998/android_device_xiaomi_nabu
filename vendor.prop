@@ -221,6 +221,7 @@ vendor.gatekeeper.disable_spu=true
 debug.egl.hw=0
 debug.hwui.renderer=skiagl
 debug.renderengine.backend=skiaglthreaded
+debug.hwui.skia_atrace_enabled=false
 debug.mdpcomp.logs=0
 debug.sf.latch_unsignaled=1
 debug.sf.disable_backpressure=1
