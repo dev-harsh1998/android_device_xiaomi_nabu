@@ -95,10 +95,10 @@
     <ctl name="RT_PROXY_1_TX SetCalMode" value="CAL_MODE_NONE" />
 
     <!-- Audio Input Controls -->
-    <ctl name="ADC1 Volume" value="8" />
-    <ctl name="ADC2 Volume" value="8" />
-    <ctl name="ADC3 Volume" value="8" />
-    <ctl name="ADC4 Volume" value="8" />
+    <ctl name="ADC1 Volume" value="10" />
+    <ctl name="ADC2 Volume" value="9" />
+    <ctl name="ADC3 Volume" value="10" />
+    <ctl name="ADC4 Volume" value="9" />
     <ctl name="AUDIO_REF_EC_UL1 MUX" value="None" />
     <ctl name="AUDIO_REF_EC_UL10 MUX" value="None" />
     <ctl name="EC Reference Channels" value="Zero"/>
@@ -118,7 +118,7 @@
     <ctl name="TR PCM Source" value="ASP" />
     <ctl name="TR ASPTX Ref" value="None" />
     <ctl name="TR PCM Soft Ramp" value="4ms" />
-    <ctl name="TR AMP PCM Gain" value="18" />
+    <ctl name="TR AMP PCM Gain" value="19" />
     <ctl name="TR ASP TX1 Source" value="DSPTX1" />
     <ctl name="TR ASP TX2 Source" value="Zero" />
     <ctl name="TR ASP TX3 Source" value="Zero" />
@@ -135,7 +135,7 @@
     <ctl name="TR Boost Target Voltage" value="0" />
     <ctl name="TR Fast Use Case Delta File" value="PA-UR-music.txt"/>
     <ctl name="TR Fast Use Case Switch Enable" value="1"/>
-    <ctl name="TR Digital PCM Volume"  value="817"/>
+    <ctl name="TR Digital PCM Volume"  value="882"/>
     <ctl name="TR Channel Swap" value="On" />
     <ctl name="TR VPBR Config" value="33575688" />
     <ctl name="TR Noise Gate Config" value="16245" />
@@ -147,7 +147,7 @@
     <ctl name="TL PCM Source" value="ASP" />
     <ctl name="TL ASPTX Ref" value="None" />
     <ctl name="TL PCM Soft Ramp" value="4ms" />
-    <ctl name="TL AMP PCM Gain" value="18" />
+    <ctl name="TL AMP PCM Gain" value="19" />
     <ctl name="TL ASP TX1 Source" value="DSPTX1" />
     <ctl name="TL ASP TX2 Source" value="Zero" />
     <ctl name="TL ASP TX3 Source" value="Zero" />
@@ -164,7 +164,7 @@
     <ctl name="TL Boost Target Voltage" value="0" />
     <ctl name="TL Fast Use Case Delta File" value="PA-UL-music.txt"/>
     <ctl name="TL Fast Use Case Switch Enable" value="1"/>
-    <ctl name="TL Digital PCM Volume"  value="817"/>
+    <ctl name="TL Digital PCM Volume"  value="882"/>
     <ctl name="TL Channel Swap" value="Off" />
     <ctl name="TL VPBR Config" value="33575688" />
     <ctl name="TL Noise Gate Config" value="16245" />
@@ -176,7 +176,7 @@
     <ctl name="BR PCM Source" value="ASP" />
     <ctl name="BR ASPTX Ref" value="None" />
     <ctl name="BR PCM Soft Ramp" value="4ms" />
-    <ctl name="BR AMP PCM Gain" value="18" />
+    <ctl name="BR AMP PCM Gain" value="19" />
     <ctl name="BR ASP TX1 Source" value="DSPTX1" />
     <ctl name="BR ASP TX2 Source" value="Zero" />
     <ctl name="BR ASP TX3 Source" value="Zero" />
@@ -193,7 +193,7 @@
     <ctl name="BR Boost Target Voltage" value="0" />
     <ctl name="BR Fast Use Case Delta File" value="PA-BR-music.txt"/>
     <ctl name="BR Fast Use Case Switch Enable" value="1"/>
-    <ctl name="BR Digital PCM Volume"  value="817"/>
+    <ctl name="BR Digital PCM Volume"  value="882"/>
     <ctl name="BR Channel Swap" value="On" />
     <ctl name="BR VPBR Config" value="33575688" />
     <ctl name="BR Noise Gate Config" value="16245" />
@@ -205,7 +205,7 @@
     <ctl name="BL PCM Source" value="ASP" />
     <ctl name="BL ASPTX Ref" value="None" />
     <ctl name="BL PCM Soft Ramp" value="4ms" />
-    <ctl name="BL AMP PCM Gain" value="18" />
+    <ctl name="BL AMP PCM Gain" value="19" />
     <ctl name="BL ASP TX1 Source" value="DSPTX1" />
     <ctl name="BL ASP TX2 Source" value="Zero" />
     <ctl name="BL ASP TX3 Source" value="Zero" />
@@ -222,7 +222,7 @@
     <ctl name="BL Boost Target Voltage" value="0" />
     <ctl name="BL Fast Use Case Delta File" value="PA-BL-music.txt"/>
     <ctl name="BL Fast Use Case Switch Enable" value="1"/>
-    <ctl name="BL Digital PCM Volume"  value="817"/>
+    <ctl name="BL Digital PCM Volume"  value="882"/>
     <ctl name="BL Channel Swap" value="Off" />
     <ctl name="BL VPBR Config" value="33575688" />
     <ctl name="BL Noise Gate Config" value="16245" />
@@ -1910,7 +1910,7 @@
     <!-- Specific Microphone Device Paths -->
     <path name="handset-mic-qrd">
         <path name="dmic3" />
-        <ctl name="DEC7 Volume" value="84" />
+        <ctl name="DEC7 Volume" value="94" />
     </path>
 
     <path name="back-mic">
@@ -1928,7 +1928,7 @@
 
     <path name="speaker-mic-qrd">
         <path name="dmic1" />
-        <ctl name="DEC7 Volume" value="84" />
+        <ctl name="DEC7 Volume" value="94" />
     </path>
 
     <path name="bt-sco-mic">
@@ -1940,8 +1940,8 @@
 
     <!-- Recording Volume Control -->
     <path name="record-vol">
-        <ctl name="ADC1 Volume" value="20" />
-        <ctl name="ADC3 Volume" value="20" />
+        <ctl name="ADC1 Volume" value="22" />
+        <ctl name="ADC3 Volume" value="22" />
     </path>
 
     <!-- ================================================================== -->
@@ -2346,7 +2346,7 @@
         <ctl name="CDC_IF TX4 MUX" value="DEC4" />
         <ctl name="ADC MUX4" value="AMIC" />
         <ctl name="AMIC MUX4" value="ADC1" />
-        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="ADC1 Volume" value="10" />
     </path>
 
     <!-- Xiaomi-specific ultrasound paths -->
@@ -2369,7 +2369,7 @@
         <ctl name="CDC_IF TX4 MUX" value="DEC4" />
         <ctl name="ADC MUX4" value="AMIC" />
         <ctl name="AMIC MUX4" value="ADC1" />
-        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="ADC1 Volume" value="10" />
     </path>
 
     <!-- ================================================================== -->
@@ -2399,7 +2399,7 @@
         <ctl name="TR AMP PCM Gain"  value="18" />
         <ctl name="TR PCM Source"  value="ASP" />
         <ctl name="TR ASPRX1 Slot Position"  value="4" />
-        <ctl name="TR Digital PCM Volume"  value="817"/>
+        <ctl name="TR Digital PCM Volume"  value="882"/>
     </path>
 
     <path name="speaker-tl">
@@ -2410,7 +2410,7 @@
         <ctl name="TL AMP PCM Gain"  value="18" />
         <ctl name="TL PCM Source"  value="ASP" />
         <ctl name="TL ASPRX1 Slot Position"  value="4" />
-        <ctl name="TL Digital PCM Volume"  value="817"/>
+        <ctl name="TL Digital PCM Volume"  value="882"/>
     </path>
 
     <path name="speaker-br">
@@ -2421,7 +2421,7 @@
         <ctl name="BR AMP PCM Gain"  value="18" />
         <ctl name="BR PCM Source"  value="ASP" />
         <ctl name="BR ASPRX1 Slot Position"  value="4" />
-        <ctl name="BR Digital PCM Volume"  value="817"/>
+        <ctl name="BR Digital PCM Volume"  value="882"/>
     </path>
 
     <path name="speaker-bl">
@@ -2432,7 +2432,7 @@
         <ctl name="BL AMP PCM Gain"  value="18" />
         <ctl name="BL PCM Source"  value="ASP" />
         <ctl name="BL ASPRX1 Slot Position"  value="4" />
-        <ctl name="BL Digital PCM Volume"  value="817"/>
+        <ctl name="BL Digital PCM Volume"  value="882"/>
     </path>
 
     <!-- Speaker Variants -->
@@ -2521,31 +2521,31 @@
         <ctl name="CDC_IF TX6 MUX" value="DEC6" />
         <ctl name="ADC MUX6" value="AMIC" />
         <ctl name="AMIC MUX6" value="ADC1" />
-        <ctl name="ADC1 Volume" value="5" />
+        <ctl name="ADC1 Volume" value="7" />
     </path>
 
     <path name="voice-dmic-ef">
         <path name="dmic-endfire" />
-        <ctl name="ADC1 Volume" value="12" />
-        <ctl name="ADC3 Volume" value="12" />
+        <ctl name="ADC1 Volume" value="13" />
+        <ctl name="ADC3 Volume" value="13" />
     </path>
 
     <path name="voice-speaker-dmic-ef">
         <path name="speaker-dmic-endfire" />
-        <ctl name="ADC1 Volume" value="6" />
-        <ctl name="ADC3 Volume" value="6" />
+        <ctl name="ADC1 Volume" value="7" />
+        <ctl name="ADC3 Volume" value="7" />
     </path>
 
     <path name="headset-mic">
         <path name="amic2" />
         <ctl name="External AMIC2 Mux" value="default" />
-        <ctl name="ADC2 Volume" value="6" />
-        <ctl name="DEC1 Volume" value="84" />
+        <ctl name="ADC2 Volume" value="7" />
+        <ctl name="DEC1 Volume" value="94" />
     </path>
 
     <path name="voice-headset-mic">
         <path name="headset-mic" />
-        <ctl name="ADC2 Volume" value="12" />
+        <ctl name="ADC2 Volume" value="13" />
     </path>
 
     <!-- Dual MIC devices -->
@@ -2559,14 +2559,14 @@
         <ctl name="ADC MUX8" value="AMIC" />
         <ctl name="AMIC MUX8" value="ADC1" />
         <ctl name="SLIM_0_TX Channels" value="Two" />
-        <ctl name="ADC3 Volume" value="8" />
-        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="ADC3 Volume" value="10" />
+        <ctl name="ADC1 Volume" value="10" />
     </path>
 
     <path name="handset-stereo-dmic-ef">
         <path name="handset-dmic-endfire" />
-        <ctl name="ADC3 Volume" value="9" />
-        <ctl name="ADC1 Volume" value="9" />
+        <ctl name="ADC3 Volume" value="10" />
+        <ctl name="ADC1 Volume" value="10" />
     </path>
 
     <path name="speaker-dmic-endfire">
@@ -2579,8 +2579,8 @@
         <ctl name="ADC MUX8" value="AMIC" />
         <ctl name="AMIC MUX8" value="ADC1" />
         <ctl name="SLIM_0_TX Channels" value="Two" />
-        <ctl name="ADC3 Volume" value="6" />
-        <ctl name="ADC1 Volume" value="6" />
+        <ctl name="ADC3 Volume" value="7" />
+        <ctl name="ADC1 Volume" value="7" />
     </path>
 
     <!-- Alias for handset DMIC endfire expected by QCOM HAL mapping -->
@@ -2611,15 +2611,15 @@
 
     <path name="handset-three-mic">
         <path name="three-mic" />
-        <ctl name="DEC5 Volume" value="84" />
-        <ctl name="DEC6 Volume" value="84" />
-        <ctl name="DEC8 Volume" value="84" />
+        <ctl name="DEC5 Volume" value="94" />
+        <ctl name="DEC6 Volume" value="94" />
+        <ctl name="DEC8 Volume" value="94" />
     </path>
 
     <path name="speaker-three-mic">
         <path name="three-mic" />
-        <ctl name="DEC5 Volume" value="80" />
-        <ctl name="DEC6 Volume" value="80" />
+        <ctl name="DEC5 Volume" value="90" />
+        <ctl name="DEC6 Volume" value="90" />
         <ctl name="DEC8 Volume" value="80" />
     </path>
 
@@ -2642,10 +2642,10 @@
         <ctl name="DMIC MUX7" value="DMIC3" />
         <ctl name="DMIC MUX8" value="DMIC5" />
         <ctl name="SLIM_0_TX Channels" value="Four" />
-        <ctl name="DEC5 Volume" value="78" />
-        <ctl name="DEC6 Volume" value="78" />
-        <ctl name="DEC7 Volume" value="78" />
-        <ctl name="DEC8 Volume" value="78" />
+        <ctl name="DEC5 Volume" value="87" />
+        <ctl name="DEC6 Volume" value="87" />
+        <ctl name="DEC7 Volume" value="87" />
+        <ctl name="DEC8 Volume" value="87" />
     </path>
 
     <!-- AMIC2 path definition for headset microphone -->
@@ -2707,7 +2707,7 @@
     <path name="sidetone-iir-headphones">
         <ctl name="IIR0 Enable Band1" value="1" />
         <ctl name="IIR0 INP0 MUX" value="DEC6" />
-        <ctl name="IIR0 INP0 Volume" value="54" />
+        <ctl name="IIR0 INP0 Volume" value="60" />
         <ctl name="RX INT1 MIX2 INP" value="SRC0" />
         <ctl name="RX INT2 MIX2 INP" value="SRC0" />
         <ctl name="COMP1 Switch" value="0" />
@@ -2721,7 +2721,7 @@
         <ctl name="IIR0 Enable Band2" value="1" />
         <ctl name="IIR0 Enable Band3" value="1" />
         <ctl name="IIR0 INP0 MUX" value="DEC6" />
-        <ctl name="IIR0 INP0 Volume" value="60" />
+        <ctl name="IIR0 INP0 Volume" value="67" />
     </path>
 
     <!-- IIR Band Coefficients for Basic EQ -->
@@ -2749,8 +2749,8 @@
         <ctl name="ADC MUX8" value="AMIC" />
         <ctl name="AMIC MUX8" value="ADC1" />
         <ctl name="SLIM_0_TX Channels" value="Two" />
-        <ctl name="ADC3 Volume" value="8" />
-        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="ADC3 Volume" value="10" />
+        <ctl name="ADC1 Volume" value="10" />
 	</path>
 
 </mixer>
