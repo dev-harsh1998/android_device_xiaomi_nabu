@@ -27,11 +27,6 @@
     <!-- Custom Stereo Global Control -->
     <ctl name="Set Custom Stereo OnOff" value="0" />
 
-    <!-- Enhanced SLIM_0_TX Configuration -->
-    <ctl name="SLIM_0_TX Format" value="S16_LE" />
-    <ctl name="SLIM_0_TX SampleRate" value="KHZ_48" />
-    <ctl name="SLIM_0_TX Channels" value="One" />
-
     <!-- NEW: USB AUDIO INTERFACE CONFIGURATION (From Tavil) -->
     <!-- USB Audio Mixer Resets -->
     <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia1" value="0" />
@@ -315,25 +310,6 @@
     <ctl name="Audio Stream 27 Channel Mix Cfg" value="2 2 8192 8192 8192 8192" />
     <ctl name="Audio Stream 28 Channel Mix Cfg" value="2 2 8192 8192 8192 8192" />
     <ctl name="Audio Stream 43 Channel Mix Cfg" value="2 2 8192 8192 8192 8192" />
-
-    <!-- ================================================================== -->
-    <!-- BUILT-IN MICROPHONE BASE DEVICE PATH -->
-    <!-- Essential for proper Audio HAL device mapping -->
-    <!-- ================================================================== -->
-
-    <!-- Built-in Microphone Base Device Path -->
-    <path name="builtin-mic">
-        <ctl name="AIF1_CAP Mixer SLIM TX6" value="1"/>
-        <ctl name="SLIM_0_TX Channels" value="One" />
-        <ctl name="SLIM_0_TX Format" value="S16_LE" />
-        <ctl name="SLIM_0_TX SampleRate" value="KHZ_48" />
-        <ctl name="CDC_IF TX6 MUX" value="DEC6" />
-        <ctl name="ADC MUX6" value="AMIC" />
-        <ctl name="AMIC MUX6" value="ADC1" />
-        <ctl name="IIR0 INP0 MUX" value="DEC6" />
-        <ctl name="ADC1 Volume" value="8" />
-        <ctl name="DEC6 Volume" value="84" />
-    </path>
 
     <!-- ================================================================== -->
     <!-- AUDIO PLAYBACK PATHS (Original Working + New Features) -->
@@ -1705,17 +1681,8 @@
     <!-- AUDIO RECORDING PATHS (Essential for Microphone Support) -->
     <!-- ================================================================== -->
 
-    <!-- Basic Audio Recording with proper device mapping -->
+    <!-- Basic Audio Recording -->
     <path name="audio-record">
-        <ctl name="MultiMedia1 Mixer SLIM_0_TX" value="1" />
-        <ctl name="SLIM_0_TX Format" value="S16_LE" />
-        <ctl name="SLIM_0_TX SampleRate" value="KHZ_48" />
-        <ctl name="SLIM_0_TX Channels" value="One" />
-    </path>
-
-    <!-- Built-in microphone audio recording -->
-    <path name="audio-record builtin-mic">
-        <path name="builtin-mic" />
         <ctl name="MultiMedia1 Mixer SLIM_0_TX" value="1" />
     </path>
 
@@ -1739,17 +1706,8 @@
         <ctl name="MultiMedia1 Mixer SLIM_8_TX" value="1" />
     </path>
 
-    <!-- Compressed Audio Recording with proper device mapping -->
+    <!-- Compressed Audio Recording -->
     <path name="audio-record-compress">
-        <ctl name="MultiMedia8 Mixer SLIM_0_TX" value="1" />
-        <ctl name="SLIM_0_TX Format" value="S16_LE" />
-        <ctl name="SLIM_0_TX SampleRate" value="KHZ_48" />
-        <ctl name="SLIM_0_TX Channels" value="One" />
-    </path>
-
-    <!-- Built-in microphone compressed recording -->
-    <path name="audio-record-compress builtin-mic">
-        <path name="builtin-mic" />
         <ctl name="MultiMedia8 Mixer SLIM_0_TX" value="1" />
     </path>
 
@@ -1769,17 +1727,8 @@
         <ctl name="MultiMedia8 Mixer USB_AUDIO_TX" value="1" />
     </path>
 
-    <!-- Low Latency Recording with proper device mapping -->
+    <!-- Low Latency Recording -->
     <path name="low-latency-record">
-        <ctl name="MultiMedia8 Mixer SLIM_0_TX" value="1" />
-        <ctl name="SLIM_0_TX Format" value="S16_LE" />
-        <ctl name="SLIM_0_TX SampleRate" value="KHZ_48" />
-        <ctl name="SLIM_0_TX Channels" value="One" />
-    </path>
-
-    <!-- Built-in microphone low latency recording -->
-    <path name="low-latency-record builtin-mic">
-        <path name="builtin-mic" />
         <ctl name="MultiMedia8 Mixer SLIM_0_TX" value="1" />
     </path>
 
@@ -2542,9 +2491,28 @@
         <ctl name= "IIR0 INP0 MUX" value= "DEC5" />
     </path>
 
-    <!-- Handset Microphone - mapped to builtin-mic -->
     <path name="handset-mic">
-        <path name="builtin-mic" />
+        <ctl name= "AIF1_CAP Mixer SLIM TX6" value= "1" />
+        <ctl name= "CDC_IF TX6 MUX" value= "DEC6" />
+        <ctl name= "ADC MUX6" value= "AMIC" />
+        <ctl name= "AMIC MUX6" value= "ADC1" />
+        <ctl name= "IIR0 INP0 MUX" value= "DEC6" />
+        <ctl name= "AIF1_CAP Mixer SLIM TX5" value= "1" />
+        <ctl name= "SLIM_0_TX Channels" value= "Two" />
+        <ctl name= "CDC_IF TX5 MUX" value= "DEC5" />
+        <ctl name= "ADC MUX5" value= "AMIC" />
+        <ctl name= "AMIC MUX5" value= "ADC3" />
+        <ctl name= "IIR0 INP0 MUX" value= "DEC5" />
+    </path>
+
+    <!-- Voice Recording Microphone Path - Uses handset-mic configuration -->
+    <path name="voice-rec-mic">
+        <path name="handset-mic" />
+    </path>
+
+    <!-- Built-in Microphone Path - Uses handset-mic configuration -->
+    <path name="builtin-mic">
+        <path name="handset-mic" />
     </path>
 
     <path name="speaker-mic">
