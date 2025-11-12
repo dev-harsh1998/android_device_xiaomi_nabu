@@ -118,7 +118,7 @@
     <ctl name="TR PCM Source" value="ASP" />
     <ctl name="TR ASPTX Ref" value="None" />
     <ctl name="TR PCM Soft Ramp" value="4ms" />
-    <ctl name="TR AMP PCM Gain" value="19" />
+    <ctl name="TR AMP PCM Gain" value="18" />
     <ctl name="TR ASP TX1 Source" value="DSPTX1" />
     <ctl name="TR ASP TX2 Source" value="Zero" />
     <ctl name="TR ASP TX3 Source" value="Zero" />
@@ -135,7 +135,7 @@
     <ctl name="TR Boost Target Voltage" value="0" />
     <ctl name="TR Fast Use Case Delta File" value="PA-UR-music.txt"/>
     <ctl name="TR Fast Use Case Switch Enable" value="1"/>
-    <ctl name="TR Digital PCM Volume"  value="882"/>
+    <ctl name="TR Digital PCM Volume"  value="847"/>
     <ctl name="TR Channel Swap" value="On" />
     <ctl name="TR VPBR Config" value="33575688" />
     <ctl name="TR Noise Gate Config" value="16245" />
@@ -147,7 +147,7 @@
     <ctl name="TL PCM Source" value="ASP" />
     <ctl name="TL ASPTX Ref" value="None" />
     <ctl name="TL PCM Soft Ramp" value="4ms" />
-    <ctl name="TL AMP PCM Gain" value="19" />
+    <ctl name="TL AMP PCM Gain" value="18" />
     <ctl name="TL ASP TX1 Source" value="DSPTX1" />
     <ctl name="TL ASP TX2 Source" value="Zero" />
     <ctl name="TL ASP TX3 Source" value="Zero" />
@@ -164,7 +164,7 @@
     <ctl name="TL Boost Target Voltage" value="0" />
     <ctl name="TL Fast Use Case Delta File" value="PA-UL-music.txt"/>
     <ctl name="TL Fast Use Case Switch Enable" value="1"/>
-    <ctl name="TL Digital PCM Volume"  value="882"/>
+    <ctl name="TL Digital PCM Volume"  value="847"/>
     <ctl name="TL Channel Swap" value="Off" />
     <ctl name="TL VPBR Config" value="33575688" />
     <ctl name="TL Noise Gate Config" value="16245" />
@@ -176,7 +176,7 @@
     <ctl name="BR PCM Source" value="ASP" />
     <ctl name="BR ASPTX Ref" value="None" />
     <ctl name="BR PCM Soft Ramp" value="4ms" />
-    <ctl name="BR AMP PCM Gain" value="19" />
+    <ctl name="BR AMP PCM Gain" value="18" />
     <ctl name="BR ASP TX1 Source" value="DSPTX1" />
     <ctl name="BR ASP TX2 Source" value="Zero" />
     <ctl name="BR ASP TX3 Source" value="Zero" />
@@ -193,7 +193,7 @@
     <ctl name="BR Boost Target Voltage" value="0" />
     <ctl name="BR Fast Use Case Delta File" value="PA-BR-music.txt"/>
     <ctl name="BR Fast Use Case Switch Enable" value="1"/>
-    <ctl name="BR Digital PCM Volume"  value="882"/>
+    <ctl name="BR Digital PCM Volume"  value="847"/>
     <ctl name="BR Channel Swap" value="On" />
     <ctl name="BR VPBR Config" value="33575688" />
     <ctl name="BR Noise Gate Config" value="16245" />
@@ -205,7 +205,7 @@
     <ctl name="BL PCM Source" value="ASP" />
     <ctl name="BL ASPTX Ref" value="None" />
     <ctl name="BL PCM Soft Ramp" value="4ms" />
-    <ctl name="BL AMP PCM Gain" value="19" />
+    <ctl name="BL AMP PCM Gain" value="18" />
     <ctl name="BL ASP TX1 Source" value="DSPTX1" />
     <ctl name="BL ASP TX2 Source" value="Zero" />
     <ctl name="BL ASP TX3 Source" value="Zero" />
@@ -222,7 +222,7 @@
     <ctl name="BL Boost Target Voltage" value="0" />
     <ctl name="BL Fast Use Case Delta File" value="PA-BL-music.txt"/>
     <ctl name="BL Fast Use Case Switch Enable" value="1"/>
-    <ctl name="BL Digital PCM Volume"  value="882"/>
+    <ctl name="BL Digital PCM Volume"  value="847"/>
     <ctl name="BL Channel Swap" value="Off" />
     <ctl name="BL VPBR Config" value="33575688" />
     <ctl name="BL Noise Gate Config" value="16245" />
@@ -2399,7 +2399,7 @@
         <ctl name="TR AMP PCM Gain"  value="18" />
         <ctl name="TR PCM Source"  value="ASP" />
         <ctl name="TR ASPRX1 Slot Position"  value="4" />
-        <ctl name="TR Digital PCM Volume"  value="882"/>
+        <ctl name="TR Digital PCM Volume"  value="847"/>
     </path>
 
     <path name="speaker-tl">
@@ -2410,7 +2410,7 @@
         <ctl name="TL AMP PCM Gain"  value="18" />
         <ctl name="TL PCM Source"  value="ASP" />
         <ctl name="TL ASPRX1 Slot Position"  value="4" />
-        <ctl name="TL Digital PCM Volume"  value="882"/>
+        <ctl name="TL Digital PCM Volume"  value="847"/>
     </path>
 
     <path name="speaker-br">
@@ -2421,7 +2421,7 @@
         <ctl name="BR AMP PCM Gain"  value="18" />
         <ctl name="BR PCM Source"  value="ASP" />
         <ctl name="BR ASPRX1 Slot Position"  value="4" />
-        <ctl name="BR Digital PCM Volume"  value="882"/>
+        <ctl name="BR Digital PCM Volume"  value="847"/>
     </path>
 
     <path name="speaker-bl">
@@ -2432,7 +2432,7 @@
         <ctl name="BL AMP PCM Gain"  value="18" />
         <ctl name="BL PCM Source"  value="ASP" />
         <ctl name="BL ASPRX1 Slot Position"  value="4" />
-        <ctl name="BL Digital PCM Volume"  value="882"/>
+        <ctl name="BL Digital PCM Volume"  value="847"/>
     </path>
 
     <!-- Speaker Variants -->
