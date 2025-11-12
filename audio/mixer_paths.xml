@@ -2566,17 +2566,9 @@
     </path>
 
     <path name="speaker-dmic-endfire">
-        <ctl name="AIF1_CAP Mixer SLIM TX7" value="1" />
-        <ctl name="AIF1_CAP Mixer SLIM TX8" value="1" />
-        <ctl name="CDC_IF TX7 MUX" value="DEC7" />
-        <ctl name="ADC MUX7" value="AMIC" />
-        <ctl name="AMIC MUX7" value="ADC3" />
-        <ctl name="CDC_IF TX8 MUX" value="DEC8" />
-        <ctl name="ADC MUX8" value="AMIC" />
-        <ctl name="AMIC MUX8" value="ADC1" />
-        <ctl name="SLIM_0_TX Channels" value="Two" />
-        <ctl name="ADC3 Volume" value="7" />
-        <ctl name="ADC1 Volume" value="7" />
+        <path name="handset-mic" />
+        <ctl name="ADC1 Volume" value="8" />
+        <ctl name="ADC3 Volume" value="8" />
     </path>
 
     <!-- Alias for handset DMIC endfire expected by QCOM HAL mapping -->
