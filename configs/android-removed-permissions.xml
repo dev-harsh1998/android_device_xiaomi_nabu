@@ -14,4 +14,5 @@
 <permissions>
     <!-- Disable support for hardware we don't support -->
     <unavailable-feature name="android.software.telecom" />
+    <unavailable-feature name="android.hardware.location.gps" />
 </permissions>
