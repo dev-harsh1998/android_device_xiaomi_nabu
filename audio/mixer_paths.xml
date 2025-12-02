@@ -2452,6 +2452,10 @@
 
     <path name="voice-speaker-stereo">
         <path name="speaker" />
+        <ctl name="TR Fast Use Case Delta File" value="TR-voice.txt"/>
+        <ctl name="TL Fast Use Case Delta File" value="TL-voice.txt"/>
+        <ctl name="BR Fast Use Case Delta File" value="BR-voice.txt"/>
+        <ctl name="BL Fast Use Case Delta File" value="BL-voice.txt"/>
     </path>
 
     <path name="voice-speaker-protected">
