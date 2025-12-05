@@ -252,6 +252,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor
 
+# Display Settings
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
