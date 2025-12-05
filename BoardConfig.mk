@@ -41,6 +41,7 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 
 # Art
 WITH_DEXPREOPT_DEBUG_INFO := false
+DEX_PREOPT_DEFAULT := generate-vdex-and-image
 USE_DEX2OAT_DEBUG := false
 
 # Audio
