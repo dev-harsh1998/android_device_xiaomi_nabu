@@ -256,7 +256,9 @@ PRODUCT_PACKAGES += \
 
 # Display Settings
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml
+    $(LOCAL_PATH)/configs/display_settings.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display_settings.xml \
+    $(LOCAL_PATH)/configs/display_id_4630946480857061761.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630946480857061761.xml \
+    $(LOCAL_PATH)/configs/display_id_4630946545580055169.xml:$(TARGET_COPY_OUT_VENDOR)/etc/displayconfig/display_id_4630946545580055169.xml
 
 # DRM
 PRODUCT_PACKAGES += \
