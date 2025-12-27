@@ -12,8 +12,6 @@
             <nits>500</nits>
         </point>
     </screenBrightnessMap>
-    <ambientLightHorizonLong>3000</ambientLightHorizonLong>
-    <ambientLightHorizonShort>1000</ambientLightHorizonShort>
     <screenBrightnessRampFastDecrease>0.06</screenBrightnessRampFastDecrease>
     <screenBrightnessRampFastIncrease>0.06</screenBrightnessRampFastIncrease>
     <screenBrightnessRampSlowDecrease>0.04</screenBrightnessRampSlowDecrease>
