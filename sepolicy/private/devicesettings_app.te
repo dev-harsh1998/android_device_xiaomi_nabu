@@ -32,3 +32,7 @@ binder_call(devicesettings_app, hal_motor)
 binder_call(hal_motor, devicesettings_app)
 binder_call(devicesettings_app, hal_custom_hwcontrol)
 set_prop(devicesettings_app, mi_pen_gen_prop)
+
+# Allow reading pen charging status from idt power supply
+allow devicesettings_app sysfs_battery_supply:dir r_dir_perms;
+allow devicesettings_app sysfs_battery_supply:file r_file_perms;

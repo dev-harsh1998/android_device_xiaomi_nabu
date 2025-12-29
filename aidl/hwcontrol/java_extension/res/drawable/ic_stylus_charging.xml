@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?android:attr/colorControlNormal">
+    <!-- Stylus body -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M9.75,20.85C11.53,20.15 11.14,18.22 10.24,17C9.35,15.75 8.12,14.89 6.88,14.06C6,13.5 5.19,12.8 4.54,11.97C3.88,11.14 3.38,10.12 3.37,9.09C3.35,7.32 4.37,5.66 5.93,4.9C6.5,4.63 7.13,4.5 7.77,4.5H8V2H7.77C6.84,2 5.93,2.19 5.1,2.58C2.79,3.7 1.34,6.06 1.37,8.64C1.39,10.15 1.95,11.57 2.86,12.71C3.74,13.8 4.87,14.59 5.97,15.35C7.21,16.21 8.54,17.13 9.3,18.29C9.93,19.24 9.56,20.09 9.75,20.85ZM20.84,5.25L19.5,3.91C18.72,3.13 17.59,2.91 16.54,3.25L14.46,3.89L12.1,6.25L16.5,10.65L18.86,8.29L19.5,6.21C19.84,5.16 19.62,4.03 18.84,3.25M10.03,8.32L11.5,9.79L6.5,14.79L3,16.79L4,15.28L5.03,13.32L10.03,8.32Z"/>
+    <!-- Lightning bolt (charging indicator) -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M17,11L14,17H16L15,21L20,14H17.5L19,11H17Z"/>
+</vector>
+
