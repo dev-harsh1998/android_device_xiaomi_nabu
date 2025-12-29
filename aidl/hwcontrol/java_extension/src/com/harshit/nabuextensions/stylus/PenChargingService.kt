@@ -167,7 +167,7 @@ class PenChargingService : Service() {
         if (status == null || !status.isConnected || !status.isCharging) {
             // Pen not connected or not charging - hide notification
             if (wasCharging) {
-                if (DEBUG) Log.d(TAG, "Pen stopped charging, hiding notification")
+                Log.i(TAG, "Pen disconnected or stopped charging")
                 hideNotification()
                 wasCharging = false
                 lastBatteryLevel = BATTERY_LEVEL_UNKNOWN
@@ -177,16 +177,20 @@ class PenChargingService : Service() {
 
         // Pen is connected and charging
         // Show notification if: just started charging OR battery level changed
-        val shouldUpdate = !wasCharging || status.batteryLevel != lastBatteryLevel
+        val justStarted = !wasCharging
+        val shouldUpdate = justStarted || status.batteryLevel != lastBatteryLevel
 
         if (DEBUG) {
             Log.d(TAG, "Pen charging: shouldUpdate=$shouldUpdate, " +
-                    "justStarted=${!wasCharging}, levelChanged=${status.batteryLevel != lastBatteryLevel}")
+                    "justStarted=$justStarted, levelChanged=${status.batteryLevel != lastBatteryLevel}")
         }
 
         wasCharging = true
 
         if (shouldUpdate) {
+            if (justStarted) {
+                Log.i(TAG, "Pen connected and charging at ${status.batteryLevel}%")
+            }
             lastBatteryLevel = status.batteryLevel
             showNotification(status.batteryLevel)
         }
@@ -224,14 +228,14 @@ class PenChargingService : Service() {
         private const val TAG = "PenChargingService"
         private const val CHANNEL_ID = "pen_charging_status"
         private const val NOTIFICATION_ID = 1001
-        private const val POLL_INTERVAL_MS = 10_000L // 10 seconds
+        private const val POLL_INTERVAL_MS = 7_000L // 7 seconds
         private const val BATTERY_LEVEL_UNKNOWN = Int.MIN_VALUE
 
         /**
          * Debug flag to enable verbose logging.
          * Set to true for development/debugging, false for production.
          */
-        var DEBUG = true
+        var DEBUG = false
             set(value) {
                 field = value
                 // Also propagate to PenChargingManager

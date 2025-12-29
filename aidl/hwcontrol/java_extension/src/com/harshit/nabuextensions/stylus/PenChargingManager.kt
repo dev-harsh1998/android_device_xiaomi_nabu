@@ -21,7 +21,7 @@ object PenChargingManager {
      * Debug flag to enable verbose logging.
      * Set to true for development/debugging, false for production.
      */
-    var DEBUG = true
+    var DEBUG = false
 
     /**
      * Data class representing pen charging status
@@ -46,6 +46,9 @@ object PenChargingManager {
     /**
      * Get current pen charging status
      * @return PenChargingStatus or null if unavailable
+     *
+     * Uses reverse_iout (charging current in mA) as the reliable real-time
+     * indicator - it's only > 0 when a pen is actively charging.
      */
     fun getStatus(): PenChargingStatus? {
         if (!isAvailable()) {
@@ -54,19 +57,21 @@ object PenChargingManager {
         }
 
         return try {
-            val hall3 = readSysfsInt("$IDT_PATH/reverse_chg_hall3") ?: 0
-            val hall4 = readSysfsInt("$IDT_PATH/reverse_chg_hall4") ?: 0
-            val chgMode = readSysfsInt("$IDT_PATH/reverse_chg_mode") ?: 0
+            // Primary indicator: actual charging current (mA)
+            // This is 0 when no pen is connected, > 0 when actively charging
+            val iout = readSysfsInt("$IDT_PATH/reverse_iout") ?: 0
+
+            // Battery level from pen (only valid when connected)
             val soc = readSysfsInt("$IDT_PATH/reverse_pen_soc") ?: -1
 
-            val isConnected = hall3 == 1 || hall4 == 1
-            val isCharging = chgMode == 1 && isConnected
+            // Pen is connected and charging if current is flowing
+            // Typical charging current is 100-500mA
+            val isCharging = iout > 0
+            val isConnected = isCharging // If current flows, pen must be connected
 
             if (DEBUG) {
-                Log.d(TAG, "getStatus() raw values: hall3=$hall3, hall4=$hall4, " +
-                        "chgMode=$chgMode, soc=$soc")
-                Log.d(TAG, "getStatus() computed: isConnected=$isConnected, " +
-                        "isCharging=$isCharging, batteryLevel=$soc")
+                Log.d(TAG, "getStatus(): iout=${iout}mA, soc=$soc%, " +
+                        "isConnected=$isConnected, isCharging=$isCharging")
             }
 
             PenChargingStatus(
