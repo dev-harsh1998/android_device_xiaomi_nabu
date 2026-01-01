@@ -1373,6 +1373,13 @@
         <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia5" value="1 1" />
     </path>
 
+    <!-- Low Latency Playback for Headphones -->
+    <path name="low-latency-playback headphones">
+        <ctl name="HPHL Volume" value="16" />
+        <ctl name="HPHR Volume" value="16" />
+        <ctl name="SLIMBUS_6_RX Audio Mixer MultiMedia5" value="1" />
+    </path>
+
     <!-- NEW: USB Low Latency Support (From Tavil) - CORRECTED -->
     <path name="low-latency-playback usb-headphones">
         <ctl name="USB_AUDIO_RX Audio Mixer MultiMedia5" value="1" />
@@ -1389,6 +1396,13 @@
 
     <path name="audio-ull-playback handset">
         <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia8" value="1 1" />
+    </path>
+
+    <!-- Ultra Low Latency Playback for Headphones -->
+    <path name="audio-ull-playback headphones">
+        <ctl name="HPHL Volume" value="16" />
+        <ctl name="HPHR Volume" value="16" />
+        <ctl name="SLIMBUS_6_RX Audio Mixer MultiMedia8" value="1" />
     </path>
 
     <!-- NEW: USB ULL Support (From Tavil) - CORRECTED -->
@@ -1783,6 +1797,22 @@
         <ctl name="MultiMedia10 Mixer SLIM_0_TX" value="1" />
     </path>
 
+    <!-- VoIP Recording with Speaker Microphone (uses dual-mic with fluence for better quality) -->
+    <path name="audio-record-voip speaker-mic">
+        <ctl name="MultiMedia10 Mixer SLIM_0_TX" value="1" />
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="ADC1 Volume" value="12" />
+        <ctl name="ADC3 Volume" value="12" />
+    </path>
+
+    <!-- VoIP Recording with Handset Microphone -->
+    <path name="audio-record-voip handset-mic">
+        <ctl name="MultiMedia10 Mixer SLIM_0_TX" value="1" />
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="ADC1 Volume" value="12" />
+        <ctl name="ADC3 Volume" value="12" />
+    </path>
+
     <path name="audio-record-voip headset-mic">
         <ctl name="MultiMedia10 Mixer SLIM_1_TX" value="1" />
     </path>
@@ -2084,12 +2114,29 @@
         <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia10" value="1 1" />
     </path>
 
+    <path name="audio-playback-voip earpiece">
+        <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia10" value="1 1" />
+        <!-- Enable hardware echo cancellation reference -->
+        <ctl name="AUDIO_REF_EC_UL10 MUX" value="QUAT_TDM_TX_0" />
+    </path>
+
     <path name="audio-playback-voip speaker">
         <ctl name="QUAT_TDM_RX_0 Audio Mixer MultiMedia10" value="1 1" />
+        <!-- Enable hardware echo cancellation reference for better AEC -->
+        <ctl name="AUDIO_REF_EC_UL10 MUX" value="QUAT_TDM_TX_0" />
         <ctl name="TL Noise Gate Config" value="16245" />
         <ctl name="TR Noise Gate Config" value="16245" />
         <ctl name="BL Noise Gate Config" value="16245" />
         <ctl name="BR Noise Gate Config" value="16245" />
+    </path>
+
+    <!-- VoIP Playback for Headphones -->
+    <path name="audio-playback-voip headphones">
+        <ctl name="HPHL Volume" value="18" />
+        <ctl name="HPHR Volume" value="18" />
+        <ctl name="SLIMBUS_6_RX Audio Mixer MultiMedia10" value="1" />
+        <!-- Enable hardware echo cancellation reference -->
+        <ctl name="AUDIO_REF_EC_UL10 MUX" value="SLIM_6_RX" />
     </path>
 
     <!-- NEW: USB VoIP Playback (From Tavil) -->
