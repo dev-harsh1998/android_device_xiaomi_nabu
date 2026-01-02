@@ -8,7 +8,7 @@ ro.miui.cust_variant                                                            
 ro.product.mod_device                                                                               u:object_r:build_prop:s0
 
 # Vendor init
-ro.product.marketname                                                                               u:object_r:build_prop:s0
+ro.product.marketname                                                                               u:object_r:exported_system_prop:s0
 
 # pen gen2
 persist.mi_pen.gen                                                                                  u:object_r:mi_pen_gen_prop:s0 exact string
