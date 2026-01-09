@@ -22,10 +22,9 @@
 // later when a module using the interface is updated, e.g., Mainline modules.
 
 package custom.hardware.hwcontrol;
-@Backing(type="int") @VintfStability
-enum HwType {
-  KEYBOARD,
-  STYLUS,
-  TAP2WAKE,
-  GAMEMODE,
+@VintfStability
+interface IHwControl {
+  int getHwState(in custom.hardware.hwcontrol.HwType hwType);
+  oneway void setHwState(in custom.hardware.hwcontrol.HwType hwType, int state);
 }
+

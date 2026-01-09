@@ -15,6 +15,6 @@ rust_binary {
         "libbinder_rs",
         "liblog_rust",
         "liblogger",
-        "custom.hardware.hwcontrol-V1-rust",
+        "custom.hardware.hwcontrol-V2-rust",
     ],
 }

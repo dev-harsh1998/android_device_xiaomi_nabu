@@ -19,6 +19,7 @@ object PreferenceManager {
     private const val PREF_STYLUS_GEN = "shared_stylus_gen"
     private const val PREF_KEYBOARD = "shared_keyboard"
     private const val PREF_TAP2WAKE = "shared_tap2wake"
+    private const val PREF_GAMEMODE = "shared_gamemode"
     
     // Preference keys
     const val KEY_STYLUS = "shared_stylus"
@@ -26,6 +27,7 @@ object PreferenceManager {
     const val KEY_STYLUS_GEN_PROP = "persist.mi_pen.gen"
     const val KEY_KEYBOARD = "shared_keyboard"
     const val KEY_TAP2WAKE = "shared_tap2wake"
+    const val KEY_GAMEMODE = "shared_gamemode"
     
     // Default values
     private const val DEFAULT_DISABLED = 0
@@ -85,6 +87,20 @@ object PreferenceManager {
      */
     fun setTap2WakeEnabled(context: Context, enabled: Int) {
         getPreferences(context, PREF_TAP2WAKE).edit().putInt(KEY_TAP2WAKE, enabled).apply()
+    }
+    
+    /**
+     * Get game mode enable/disable state
+     */
+    fun getGameModeEnabled(context: Context): Int {
+        return getPreferences(context, PREF_GAMEMODE).getInt(KEY_GAMEMODE, DEFAULT_DISABLED)
+    }
+    
+    /**
+     * Set game mode enable/disable state
+     */
+    fun setGameModeEnabled(context: Context, enabled: Int) {
+        getPreferences(context, PREF_GAMEMODE).edit().putInt(KEY_GAMEMODE, enabled).apply()
     }
     
     /**

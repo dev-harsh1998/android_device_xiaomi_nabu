@@ -38,4 +38,11 @@
     <string name="pen_charging_notification_title">Stylus Charging</string>
     <string name="pen_charging_notification_content">Battery: %d%%</string>
     <string name="pen_charging_notification_content_unknown">Charging…</string>
+
+    <!-- Game Mode -->
+    <string name="game_mode_title">Touchscreen Game Mode</string>
+    <string name="game_mode_summary">Switch touchscreen firmware to MIUI 12.5 for enhanced touch response</string>
+    <string name="game_mode_switch_title">Enable game mode</string>
+    <string name="game_mode_switch_summary">Activates MIUI 12.5 touchscreen firmware with lower touch latency. Requires screen off/on cycle to apply</string>
+    <string name="game_mode_warning_gen2_pen">Warning: Generation 2 stylus will not work while game mode is enabled. MIUI 12.5 firmware does not support Gen 2 pen.</string>
 </resources>

@@ -14,6 +14,7 @@ use log::{error, info};
 mod keyboard;
 mod pen;
 mod dt2w;
+mod game_mode;
 mod sysfs;
 mod err_mgr;
 
@@ -30,6 +31,7 @@ impl IHwControl for HwControl {
             HwType::TAP2WAKE => dt2w::set_tap_to_wake(enable),
             HwType::KEYBOARD => keyboard::set_keyboard(enable),
             HwType::STYLUS => pen::set_pen(enable),
+            HwType::GAMEMODE => game_mode::set_game_mode(enable),
             _ => {
                 error!("Invalid hardware type");
                 Err(false)
@@ -50,6 +52,7 @@ impl IHwControl for HwControl {
             HwType::TAP2WAKE => dt2w::get_tap_to_wake(),
             HwType::KEYBOARD => keyboard::get_keyboard(),
             HwType::STYLUS => pen::get_pen(),
+            HwType::GAMEMODE => game_mode::get_game_mode(),
             _ => {
                 error!("Invalid hardware type");
                 Err(false)

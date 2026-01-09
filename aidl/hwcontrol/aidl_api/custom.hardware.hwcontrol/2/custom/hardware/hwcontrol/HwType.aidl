@@ -29,3 +29,4 @@ enum HwType {
   TAP2WAKE,
   GAMEMODE,
 }
+

@@ -70,12 +70,24 @@ object PeripheralUtils {
     }
     
     /**
+     * Synchronize game mode hardware state with saved preferences
+     */
+    fun syncGameMode(context: Context) {
+        val enabled = PreferenceManager.getGameModeEnabled(context)
+        
+        Log.d(TAG, "Syncing game mode: enabled=$enabled")
+        
+        HwStateManager.setHwState(HwType.GAMEMODE, enabled)
+    }
+    
+    /**
      * Synchronize all peripheral hardware states
      */
     private fun syncAll(context: Context) {
         syncStylus(context)
         syncKeyboard(context)
         syncTap2Wake(context)
+        syncGameMode(context)
     }
 }
 
