@@ -15,3 +15,5 @@ persist.mi_pen.gen                                                              
 
 # Bootanimation
 ro.bootanim.set_orientation_4630946545580055169                                                     u:object_r:surfaceflinger_prop:s0 exact enum ORIENTATION_0 ORIENTATION_90 ORIENTATION_180 ORIENTATION_270
+ro.bootanim.set_orientation_4630946480857061761                                                     u:object_r:surfaceflinger_prop:s0 exact enum ORIENTATION_0 ORIENTATION_90 ORIENTATION_180 ORIENTATION_270
+debug.sf.ignore_hwc_physical_display_orientation                                                    u:object_r:surfaceflinger_prop:s0 exact bool
