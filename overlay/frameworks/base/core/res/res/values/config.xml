@@ -549,4 +549,20 @@
     <!-- Sets whether menu shortcuts should be displayed on panel menus when
          a keyboard is present. -->
     <bool name="config_showMenuShortcutsWhenKeyboardPresent">true</bool>
+
+    <!-- The list of packages to automatically opt in of fresh rate suppressing by small area
+         detection. Format of this array should be packageName:threshold and threshold value should
+         be between 0 to 1-->
+    <string-array name="config_smallAreaDetectionAllowlist" translatable="false">
+        <!-- Add packages:threshold here -->
+        <item>com.tencent.mm:0.07</item>
+        <item>com.facebook.katana:0.07</item>
+        <item>com.instagram.android:0.07</item>
+        <item>com.spotify.music:0.05</item>
+        <item>com.reddit.frontpage:0.07</item>
+        <item>com.zhiliaoapp.musically:0.07</item>
+        <item>com.bilibili.app.in:0.07</item>
+        <item>com.twitter.android:0.07</item>
+        <item>com.google.android.youtube:0.07</item>
+    </string-array>
 </resources>
