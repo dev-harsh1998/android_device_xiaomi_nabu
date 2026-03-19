@@ -37,6 +37,7 @@
     <string name="pen_charging_channel_description">Shows stylus battery status while charging</string>
     <string name="pen_charging_notification_title">Stylus Charging</string>
     <string name="pen_charging_notification_content">Battery: %d%%</string>
+    <string name="pen_charging_notification_content_full">Pen is completely charged</string>
     <string name="pen_charging_notification_content_unknown">Charging…</string>
 
     <!-- Game Mode -->
