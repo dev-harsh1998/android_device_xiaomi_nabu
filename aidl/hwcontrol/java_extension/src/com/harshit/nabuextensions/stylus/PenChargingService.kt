@@ -17,6 +17,7 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.os.PowerManager
+import android.os.SystemClock
 import android.util.Log
 import com.harshit.nabuextensions.R
 
@@ -36,6 +37,8 @@ class PenChargingService : Service() {
     private var isMonitoring = false
     private var lastBatteryLevel = BATTERY_LEVEL_UNKNOWN
     private var wasCharging = false
+    /** When we first saw 99% while charging; used to report 100% after 1 min at 99%. */
+    private var firstSeen99AtMs: Long? = null
 
     private val pollRunnable = object : Runnable {
         override fun run() {
@@ -152,6 +155,7 @@ class PenChargingService : Service() {
             hideNotification()
             wasCharging = false
             lastBatteryLevel = BATTERY_LEVEL_UNKNOWN
+            firstSeen99AtMs = null
             if (DEBUG) Log.d(TAG, "Monitoring stopped, state reset")
         }
     }
@@ -171,37 +175,54 @@ class PenChargingService : Service() {
                 hideNotification()
                 wasCharging = false
                 lastBatteryLevel = BATTERY_LEVEL_UNKNOWN
+                firstSeen99AtMs = null
             }
             return
         }
 
-        // Pen is connected and charging
-        // Show notification if: just started charging OR battery level changed
+        // Kernel reports 99% even when pen is fully charged. If we've seen 99% for >1 min
+        // while connected and charging, treat as fully charged (100%) for display.
+        // Clamp to valid range so bad sysfs values never show wrong percentages.
+        val rawLevel = when {
+            status.batteryLevel in 0..100 -> status.batteryLevel
+            status.batteryLevel == -1 -> -1
+            else -> -1 // invalid from driver; treat as unknown
+        }
+        val displayLevel = if (rawLevel == 99) {
+            val now = SystemClock.elapsedRealtime()
+            if (firstSeen99AtMs == null) firstSeen99AtMs = now
+            if (now - (firstSeen99AtMs ?: now) >= NINETY_NINE_TO_FULL_MS) 100 else 99
+        } else {
+            firstSeen99AtMs = null
+            rawLevel
+        }
+
+        // Show notification if: just started charging OR displayed battery level changed
         val justStarted = !wasCharging
-        val shouldUpdate = justStarted || status.batteryLevel != lastBatteryLevel
+        val shouldUpdate = justStarted || displayLevel != lastBatteryLevel
 
         if (DEBUG) {
-            Log.d(TAG, "Pen charging: shouldUpdate=$shouldUpdate, " +
-                    "justStarted=$justStarted, levelChanged=${status.batteryLevel != lastBatteryLevel}")
+            Log.d(TAG, "Pen charging: rawLevel=$rawLevel, displayLevel=$displayLevel, " +
+                    "shouldUpdate=$shouldUpdate, justStarted=$justStarted")
         }
 
         wasCharging = true
 
         if (shouldUpdate) {
             if (justStarted) {
-                Log.i(TAG, "Pen connected and charging at ${status.batteryLevel}%")
+                Log.i(TAG, if (displayLevel >= 0) "Pen connected and charging at $displayLevel%" else "Pen connected and charging (level unknown)")
             }
-            lastBatteryLevel = status.batteryLevel
-            showNotification(status.batteryLevel)
+            lastBatteryLevel = displayLevel
+            showNotification(displayLevel)
         }
     }
 
     private fun showNotification(batteryLevel: Int) {
         val title = getString(R.string.pen_charging_notification_title)
-        val content = if (batteryLevel >= 0) {
-            getString(R.string.pen_charging_notification_content, batteryLevel)
-        } else {
-            getString(R.string.pen_charging_notification_content_unknown)
+        val content = when {
+            batteryLevel >= 100 -> getString(R.string.pen_charging_notification_content_full)
+            batteryLevel >= 0 -> getString(R.string.pen_charging_notification_content, batteryLevel)
+            else -> getString(R.string.pen_charging_notification_content_unknown)
         }
 
         if (DEBUG) Log.d(TAG, "showNotification() - title=$title, content=$content")
@@ -229,6 +250,8 @@ class PenChargingService : Service() {
         private const val CHANNEL_ID = "pen_charging_status"
         private const val NOTIFICATION_ID = 1001
         private const val POLL_INTERVAL_MS = 7_000L // 7 seconds
+        /** After this long at 99% while charging, show 100% (kernel never reports 100%). */
+        private const val NINETY_NINE_TO_FULL_MS = 60_000L // 1 minute
         private const val BATTERY_LEVEL_UNKNOWN = Int.MIN_VALUE
 
         /**
