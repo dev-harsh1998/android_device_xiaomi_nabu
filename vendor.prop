@@ -229,6 +229,7 @@ ro.surface_flinger.supports_background_blur=1
 debug.sf.enable_advanced_sf_phase_offset=1
 debug.sf.enable_gl_backpressure=0
 debug.sf.enable_transaction_tracing=false
+debug.sf.hwc.min.duration=8400000
 debug.sf.high_fps_early_gl_phase_offset_ns=-4000000
 debug.sf.high_fps_early_phase_offset_ns=-4000000
 debug.sf.high_fps_late_app_phase_offset_ns=1000000
