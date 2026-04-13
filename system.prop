@@ -28,6 +28,9 @@ ro.netflix.bsp_rev=Q855-16947-1
 # SSR
 persist.vendor.ssr.restart_level=ALL_ENABLE
 
+# Baseband
+gsm.version.baseband?=Wi-Fi Only
+
 # LogSpamControl
 persist.log.tag.vendor.qti.bluetooth@1.0-ibs_handler=S
 persist.log.tag.ACDB-LOADER=S
