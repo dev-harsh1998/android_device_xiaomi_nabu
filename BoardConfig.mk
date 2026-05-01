@@ -79,7 +79,6 @@ HWUI_COMPILE_FOR_PERF := true
 TARGET_USES_VULKAN := true
 
 # Media
-TARGET_DISABLED_UBWC := true
 TARGET_USES_ION := true
 
 # Filesystem
