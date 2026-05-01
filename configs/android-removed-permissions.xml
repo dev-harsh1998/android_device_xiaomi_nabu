@@ -12,6 +12,7 @@
 -->
 
 <permissions>
+    <feature name="android.software.expanded_picture_in_picture" />
     <!-- Disable support for hardware we don't support -->
     <unavailable-feature name="android.software.telecom" />
     <unavailable-feature name="android.hardware.location.gps" />
