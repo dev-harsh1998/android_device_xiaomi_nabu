@@ -40,6 +40,8 @@ persist.log.tag.CamX=S
 persist.log.tag.a2dp_codec=S
 persist.log.tag.QC2Buf=W
 persist.log.tag.QC2V4l2Codec=E
+persist.log.tag.SDM=S
+persist.log.tag.QC2CODEC=S
 
 # Updater
 lineage.updater.uri=https://raw.githubusercontent.com/dev-harsh1998/ota/master/nb.json
