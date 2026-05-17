@@ -3,9 +3,13 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 //
+vintf_fragment {
+    name: "custom.hardware.hwcontrol.xml",
+    src: "custom.hardware.hwcontrol.xml",
+}
 rust_binary {
     name: "custom.hardware.hwcontrol-service",
-    vintf_fragments: ["custom.hardware.hwcontrol.xml"],
+    vintf_fragment_modules: ["custom.hardware.hwcontrol.xml"],
     init_rc: ["custom.hardware.hwcontrol.rc"],
     srcs: [
         "src/main.rs",
