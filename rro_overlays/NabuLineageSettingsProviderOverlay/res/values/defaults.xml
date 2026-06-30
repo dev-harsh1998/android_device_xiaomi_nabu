@@ -4,5 +4,6 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <fraction name="config_autoBrightnessAdjustmentMaxGamma">300%</fraction>
+    <!-- Default for Settings.Global.DISABLE_WINDOW_BLURS -->
+    <integer name="def_disable_window_blurs">1</integer>
 </resources>

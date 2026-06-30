@@ -4,5 +4,7 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
+    <integer name="max_depth_blur_radius">11</integer>
+
     <dimen name="max_depth_blur_radius_enhanced">15dp</dimen>
 </resources>

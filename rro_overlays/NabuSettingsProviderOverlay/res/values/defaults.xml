@@ -4,9 +4,15 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
+    <!-- Comma-separated list of bluetooth, wifi, and cell. -->
     <bool name="def_accelerometer_rotation">true</bool>
 
+    <!-- Default screen brightness, from 0 to 255.  102 is 40%. -->
     <bool name="def_screen_brightness_automatic_mode">true</bool>
 
+    <!-- Default for Settings.Secure.SHOW_IME_WITH_HARD_KEYBOARD -->
     <bool name="def_show_ime_with_hard_keyboard">true</bool>
+
+    <!-- Default for Settings.Global.DEVICE_NAME $1=MODEL-->
+    <string name="def_device_name_simple">Xiaomi Pad 5</string>
 </resources>

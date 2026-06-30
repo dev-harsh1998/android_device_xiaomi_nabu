@@ -4,29 +4,37 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.7</item>
+    <!-- The default height of the status bar used in {@link SystemBarUtils#getStatusBarHeight} to
+         calculate the status bar height. -->
+    <dimen name="status_bar_height_default">60px</dimen>
 
-    <item name="config_screenBrightnessDimFloat" type="dimen">0.005376344</item>
+    <!-- Height of the status bar in portrait.
+         Do not read this dimen directly. Use {@link SystemBarUtils#getStatusBarHeight} instead.
+         -->
+    <dimen name="status_bar_height_portrait">60px</dimen>
 
-    <item name="config_screenBrightnessSettingDefaultFloat" type="dimen">0.19981686981</item>
+    <!-- Height of the status bar in landscape.
+         Do not read this dimen directly. Use {@link SystemBarUtils#getStatusBarHeight} instead.
+         -->
+    <dimen name="status_bar_height_landscape">60px</dimen>
 
-    <item name="config_screenBrightnessSettingMaximumFloat" type="dimen">1.0</item>
+    <!-- Height of area above QQS where battery/time go.
+         Do not read this dimen directly. Use {@link SystemBarUtils#getQuickQsOffsetHeight} instead.
+         -->
+    <dimen name="quick_qs_offset_height">60px</dimen>
 
-    <item name="config_screenBrightnessSettingMinimumFloat" type="dimen">0.005376344</item>
+    <!-- Default radius of the software rounded corners. -->
+    <dimen name="rounded_corner_radius">46px</dimen>
 
-    <dimen name="notification_min_height">106.0dip</dimen>
+    <!-- Radius of the software rounded corners at the top of the display in its natural
+        orientation. If zero, the value of rounded_corner_radius is used. -->
+    <dimen name="rounded_corner_radius_top">46px</dimen>
 
-    <dimen name="quick_qs_offset_height">60.0px</dimen>
+    <!-- Radius of the software rounded corners at the bottom of the display in its natural
+        orientation. If zero, the value of rounded_corner_radius is used. -->
+    <dimen name="rounded_corner_radius_bottom">46px</dimen>
 
-    <dimen name="rounded_corner_radius">46.0px</dimen>
-
-    <dimen name="rounded_corner_radius_bottom">46.0px</dimen>
-
-    <dimen name="rounded_corner_radius_top">46.0px</dimen>
-
-    <dimen name="status_bar_height_default">60.0px</dimen>
-
-    <dimen name="status_bar_height_landscape">60.0px</dimen>
-
-    <dimen name="status_bar_height_portrait">60.0px</dimen>
+    <!-- Max height of a collapsed two-line notification -->
+    <!-- 20 * 2 (margins) + 24 * 2 (2 lines) = 88 (notification) -->
+    <dimen name="notification_min_height">106dp</dimen>
 </resources>
