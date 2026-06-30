@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.7</item>
+
+    <item name="config_screenBrightnessDimFloat" type="dimen">0.005376344</item>
+
+    <item name="config_screenBrightnessSettingDefaultFloat" type="dimen">0.19981686981</item>
+
+    <item name="config_screenBrightnessSettingMaximumFloat" type="dimen">1.0</item>
+
+    <item name="config_screenBrightnessSettingMinimumFloat" type="dimen">0.005376344</item>
+
+    <dimen name="notification_min_height">106.0dip</dimen>
+
+    <dimen name="quick_qs_offset_height">60.0px</dimen>
+
+    <dimen name="rounded_corner_radius">46.0px</dimen>
+
+    <dimen name="rounded_corner_radius_bottom">46.0px</dimen>
+
+    <dimen name="rounded_corner_radius_top">46.0px</dimen>
+
+    <dimen name="status_bar_height_default">60.0px</dimen>
+
+    <dimen name="status_bar_height_landscape">60.0px</dimen>
+
+    <dimen name="status_bar_height_portrait">60.0px</dimen>
+</resources>

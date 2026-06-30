@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <bool name="def_accelerometer_rotation">true</bool>
+
+    <bool name="def_screen_brightness_automatic_mode">true</bool>
+
+    <bool name="def_show_ime_with_hard_keyboard">true</bool>
+</resources>
