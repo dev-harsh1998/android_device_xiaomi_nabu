@@ -6,6 +6,7 @@
 vintf_fragment {
     name: "custom.hardware.hwcontrol.xml",
     src: "custom.hardware.hwcontrol.xml",
+    vendor: true,
 }
 rust_binary {
     name: "custom.hardware.hwcontrol-service",
